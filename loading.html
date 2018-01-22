@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RuneBook DEMO</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/chosen-js/chosen.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./my-chosen.css"> -->
+    <style>
+
+
+
+      body {
+        background-color: #1D2328;
+      }
+
+      .navbar {
+        -webkit-app-region: drag;
+        height: 39px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #CCA96B;
+      }
+
+      .fixed-bottom {
+        border: none;
+        border-top: 1px solid #CCA96B;
+        height: 39px;
+        margin: auto;
+      }
+      .navbar-brand {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .selectize-dropdown,
+      .selectize-input,
+      .selectize-input input {
+        background-color: #010A13;
+        color: #CCBE91;
+        font-size: 14px;
+      }
+
+      .selectize-input,
+      .selectize-control.single .selectize-input.input-active {
+        background: #0F1318;
+      }
+
+      .selectize-input {
+        border: 2px solid #9E8551;
+        border: 2px solid #08ACB0; /* arcane magic */
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+      }
+
+      .selectize-input.dropdown-active::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        background: transparent;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .selectize-input.full {
+        background-color: #0F1318;
+        background-color: #1D2328; /* arcane magic */
+      }
+
+      .selectize-input.focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+
+      .selectize-dropdown {
+        border: 1px solid #CCBE91;
+        background: #010A13;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+      }
+
+      .selectize-input.dropdown-active {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+      }
+
+      .selectize-dropdown .active {
+        background-color: #1E2328;
+        color: #F0E6D2;
+      }
+
+      .selectize-dropdown-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 200px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .lcu-champion-portrait {
+        border: 2px solid #9E8551;
+        border-radius: 2px;
+      }
+
+      .figure-caption {
+        color: #A09B8C;
+      }
+
+    </style>
+  </head>
+  <body>
+
+<nav class="navbar navbar-dark" style="background-color: #010A13;">
+    <span class="navbar-brand" href="#" style="color: #CCA96B">RuneBook DEMO</span>
+</nav>
+
+<div id="app" class="container">
+
+  <div class="row">
+    <div class="col">
+      
+      <div class="card bg-transparent text-white">
+        <!-- <div class="card-header">
+          <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+              <a class="nav-link active" style="background: #CCA96B;" href="#">Local</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Online</a>
+            </li>
+          </ul>
+        </div> -->
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-transparent">
+              <span class="text-muted">Example local page: </span>
+              <button disabled class="btn-set-page btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                title="Replace the current active page with this test page"
+                data-page='{"name":"Test page","primaryStyleId":8300,"subStyleId":8200,"selectedPerkIds":[8326,8313,8304,8347,8226,8234]}'
+              >SET</button>
+            </li>
+          </ul>
+      </div>
+
+    </div>
+  </div>
+  <br>
+  <div class="row">
+
+    <!-- <div class="col-3" id="lcu-champion-portrait">
+      <figure class="figure">
+        <img src="https://ddragon.leagueoflegends.com/cdn/8.1.1/img/champion/Ryze.png" class="figure-img lcu-champion-portrait" width="80" height="80" alt="champion-portrait-placeholder">
+        <figcaption class="figure-caption text-center">Ryze</figcaption>
+      </figure>
+    </div> -->
+    
+    <div class="col">
+      <label class="text-muted">Current page:</label>
+      <select id="lcu-pages-list" data-placeholder=" -" disabled>
+      </select>
+    </div>
+
+  </div>
+
+  <br>
+  <div style="color: #A09B8C;" class="small">
+    <p>Welcome Summoner!<br>The first demo version of <b style="color: #fff">RuneBook</b> is out!
+    RuneBook can synchronize with League Client. You can see the connection status in the bottom right of this window.
+    Hover over the badge to see the status description. The interface for now shows a button and a dropdown menu.
+    The latter is synchronized with your rune pages. It will always show the last selected rune page and it updates automatically
+    whenever you change something on the client. Also, you can select a different page from the dropdown, and the client will
+    instantly reflect the change. Instead, the SET button is made to try page insertions and deletions: when pressed,
+    the current selected rune page will be deleted, if applicable, and it will be replaced with a test page. Again,
+    all the changes are synchronized between RuneBook and LoL Client.</p>
+
+    <p>If you encounter any issue, please report them here: <button class="btn btn-warning btn-block" onclick="shell.openExternal('https://github.com/OrangeNote/RuneBook/issues/new')">Report issue</button></p>
+  </div>
+</div>
+
+<nav class="navbar navbar-dark fixed-bottom justify-content-between" style="background-color: #010A13;">
+    <span class="navbar-text small" style="color: #A09B8C;"><span>&#9998;</span> with <span style="color: #e25555;">&hearts;</span> by <a href="#" style="color: #FF9C45;">OrangeNote</a>.</span>
+    <a href="#" id="lcu-conn-status" class="badge badge-pill badge-light" data-toggle="tooltip" data-placement="bottom" title="RuneBook is trying to detect your League Client. Make sure it's open!">IDLE</a>
+</nav>
+
+<script src="renderer.js"></script>
+</body>
+</html>

@@ -4,11 +4,13 @@ window.Popper = require('popper.js')
 window.Bootstrap = require('bootstrap')
 require('chosen-js')
 
-const {shell} = require('electron');
+const { shell } = require('electron');
 
 const renderer = require('electron').ipcRenderer;
 const app = require('./app');
 
-renderer.on('readyinit', function() {
-  app.init();
+window.logger = require('./logger')
+
+renderer.on('ready', function() {
+	app.start()
 });

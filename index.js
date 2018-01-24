@@ -42,6 +42,6 @@ el_app.on('activate', () => {
 el_app.on('ready', () => {
 	mainWindow = createMainWindow();
 	mainWindow.webContents.on('did-finish-load', () => {
-		mainWindow.webContents.send('readyinit', {});
+		mainWindow.webContents.send('ready');
 	});
 });

@@ -9,11 +9,9 @@
     "name": "OrangeNote",
     "url": "https://github.com/OrangeNote"
   },
-
   "build": {
     "appId": "orangenote.runebook"
   },
-
   "scripts": {
     "test": "xo",
     "start": "electron .",
@@ -26,13 +24,17 @@
     "cheerio": "^1.0.0-rc.2",
     "chosen-js": "^1.8.2",
     "electron-debug": "^1.0.0",
+    "freezer-js": "^0.13.0",
     "jquery": "^3.3.0",
-    "lcu-connector": "^1.0.0",
+    "lcu-connector": "^1.0.1",
     "popper.js": "^1.12.9",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
+    "riot": "^3.8.1",
     "selectize": "^0.12.4",
-    "tether": "^1.4.3"
+    "tether": "^1.4.3",
+    "winston": "3.0.0-rc0",
+    "ws": "^4.0.0"
   },
   "devDependencies": {
     "devtron": "^1.1.0",

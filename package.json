@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "xo",
-    "start": "electron .",
+    "start": "electron ./src/main.js",
     "build": "electron-packager . --out=dist --asar --overwrite --all",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mw"

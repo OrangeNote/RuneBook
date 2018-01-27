@@ -4,16 +4,21 @@
 </head>
 <body>
 
-  <runebook></runebook>
+  <runebook>
+  	<select-page></select-page>
+  </runebook>
 
   <script>
 
     var riot = require('riot');
-
     var freezer = require('./src/state');
-    var reactions = require('./src/reactions');
+    var _ = require('lodash');
+    
+    require('./src/app');
 
-    var runebook = require('./tags/runebook.tag');
+    require('./tags/runebook.tag');
+    require('./tags/select-page.tag');
+    
     riot.mount('runebook', { freezer });
 
   </script>

@@ -1,10 +1,12 @@
 var freezer = require('./state');
 
+var prev_page = freezer.get().current_page;
+
 freezer.on('current_page:update', (page_id) => {
 
 	freezer.get().set({ status: 'updating' });
 
-	var prev_page = freezer.get().current_page;
+	prev_page = prev_page || freezer.get().current_page;
 	freezer.get().set({ current_page: page_id })
 
 	setTimeout(() => {
@@ -14,6 +16,7 @@ freezer.on('current_page:update', (page_id) => {
 				current_page: prev_page,
 				status: 'error'
 			});
+			prev_page = null;
 		}
 		else {
 			freezer.get().set({

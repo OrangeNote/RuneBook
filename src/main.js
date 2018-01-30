@@ -9,8 +9,11 @@ let win
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
+    title: 'RuneBook',
     width: 450,
     height: 670,
+    frame: false,
+    titleBarStyle: "hiddenInset",
   })
 
   // and load the index.html of the app.

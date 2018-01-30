@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./semantic/dist/semantic.css">
 </head>
 <body>
 
-  <runebook>
-  	<select-page></select-page>
-  </runebook>
+  <runebook></runebook>
 
   <script>
+    
+    window.$ = window.jQuery = require('jquery');
+  </script>
+
+  <script src="semantic/dist/semantic.min.js"></script>
+  <script type="text/javascript">
+    require('./semantic/dist/semantic.min.js');
 
     var riot = require('riot');
     var freezer = require('./src/state');
     var _ = require('lodash');
-    
+
     require('./src/app');
 
     require('./tags/runebook.tag');

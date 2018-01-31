@@ -11,8 +11,7 @@ var state = {
 	online: false,
 	champion_select: false,
 	champion: {
-		name: null,
-		id: null,
+		id: null
 	}
 };
 

@@ -27,6 +27,11 @@ freezer.on('current_page:update', (page_id) => {
 	}, 1000);
 });
 
+freezer.on('champion:choose', (data) => {
+	var champion = freezer.get().champion;
+	champion.set({ id: data });
+});
+
 // setTimeout(function() {
 // 	freezer.get().set({ current_page: 3 })
 // }, 15000);

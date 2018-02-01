@@ -24,6 +24,7 @@
     "cheerio": "^1.0.0-rc.2",
     "chosen-js": "^1.8.2",
     "electron-debug": "^1.0.0",
+    "electron-store": "^1.3.0",
     "freezer-js": "^0.13.0",
     "jquery": "^3.3.0",
     "lcu-connector": "^1.0.1",

@@ -34,14 +34,16 @@ freezer.on('champion:choose', (data) => {
 
 const LCUConnector = require('lcu-connector');
 const connector = new LCUConnector();
+const api = require('./lcu-api');
 
 connector.on('connect', (data) => {
-    console.log(data);
-    freezer.get().set({ connection: data });
+    console.log("client found");
+    api.bind(data);
 });
 
 connector.on('disconnect', () => {
-	freezer.get().set({ connection: null });
+	console.log("client closed");
+	api.destroy();
 });
 
 // Start listening for the LCU client

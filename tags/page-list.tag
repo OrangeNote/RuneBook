@@ -27,7 +27,7 @@
       var champion = opts.freezer.get().champion.id;
       this.update({
         champion: champion,
-        data: store.get(`local.${champion}`),
+        data: store.get(`local.${champion}`) || {pages: []} ,
       });
     });
 

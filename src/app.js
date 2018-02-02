@@ -32,6 +32,17 @@ freezer.on('champion:choose', (data) => {
 	champion.set({ id: data });
 });
 
-// setTimeout(function() {
-// 	freezer.get().set({ current_page: 3 })
-// }, 15000);
+const LCUConnector = require('lcu-connector');
+const connector = new LCUConnector();
+
+connector.on('connect', (data) => {
+    console.log(data);
+    freezer.get().set({ connection: data });
+});
+
+connector.on('disconnect', () => {
+	freezer.get().set({ connection: null });
+});
+
+// Start listening for the LCU client
+connector.start();

@@ -12,7 +12,8 @@ var state = {
 	champion_select: false,
 	champion: {
 		id: null
-	}
+	},
+	connection: null,
 };
 
 module.exports = new Freezer(state);

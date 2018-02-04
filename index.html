@@ -32,7 +32,7 @@
     require('./tags/page-list.tag');
     require('./tags/connection-status.tag');
     
-    riot.mount('runebook', { freezer });
+    riot.mount('runebook', freezer.get());
 
   </script>
 

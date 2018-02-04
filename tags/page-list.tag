@@ -23,11 +23,9 @@
 
     this.data = {pages: {}};
 
-    opts.freezer.get().champion.getListener().on('update', () => {
-      var champion = opts.freezer.get().champion.id;
+    freezer.on('update', () => {
       this.update({
-        champion: champion,
-        data: store.get(`local.${champion}`) || {pages: []} ,
+        data: store.get(`local.${opts.champion}`) || {pages: []} ,
       });
     });
 
@@ -36,23 +34,23 @@
       var key = $(evt.target).data("key");
       console.log(key);
 
-      if(store.get(`local.${this.champion}.fav`) == key) {
-        store.set(`local.${this.champion}.fav`, null);
+      if(store.get(`local.${opts.champion}.fav`) == key) {
+        store.set(`local.${opts.champion}.fav`, null);
       }
-      else store.set(`local.${this.champion}.fav`, key)
+      else store.set(`local.${opts.champion}.fav`, key)
 
-      this.update({ data: store.get(`local.${this.champion}`) });
+      this.update({ data: store.get(`local.${opts.champion}`) });
     }
 
     deletePage(evt) {
       var key = $(evt.target).data("key");
-      store.delete(`local.${this.champion}.pages.${key}`);
+      store.delete(`local.${opts.champion}.pages.${key}`);
 
-      if(store.get(`local.${this.champion}.fav`) == key) {
-        store.set(`local.${this.champion}.fav`, null);
+      if(store.get(`local.${opts.champion}.fav`) == key) {
+        store.set(`local.${opts.champion}.fav`, null);
       }
       
-      this.update({ data: store.get(`local.${this.champion}`) });
+      this.update({ data: store.get(`local.${opts.champion}`) });
     }
   
   </script>

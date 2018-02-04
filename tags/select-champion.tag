@@ -4,7 +4,7 @@
       <div class="row">
         <div class="six wide column">
           <img class="ui image circular middle aligned" width="100px" height="100px" style="display: inline;"
-            src={champion ? "https://ddragon.leagueoflegends.com/cdn/8.2.1/img/champion/" + champion + ".png" : "./img/unknown.png"}>
+            src={opts.champion.id ? "https://ddragon.leagueoflegends.com/cdn/8.2.1/img/champion/" + opts.champion.id + ".png" : "./img/unknown.png"}>
         </div>
         <div class="six wide column middle aligned">
           <div class="ui search selection dropdown" onchange={chooseChampion}>
@@ -54,12 +54,8 @@
     chooseChampion(evt) {
       evt.preventUpdate = true;
       var data = $('.ui.dropdown').dropdown('get value');
-      if(data) opts.freezer.emit('champion:choose', data);
+      if(data) freezer.emit('champion:choose', data);
     }
-
-    opts.freezer.get().champion.getListener().on('update', () => {
-      this.update({ champion: opts.freezer.get().champion.id });
-    });
 
   </script>
 

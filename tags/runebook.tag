@@ -5,7 +5,17 @@
     </div>
   </div>
 
-  <select-champion freezer={opts.freezer}></select-champion>
+  <select-champion champion={champion}></select-champion>
 
-  <page-list freezer={opts.freezer}></page-list>
+  <page-list champion={champion.id}></page-list>
+
+  <script>
+
+  	this.champion = opts.champion;
+
+  	freezer.on('update', () => {
+		this.update(freezer.get());
+	});
+
+  </script>
 </runebook>

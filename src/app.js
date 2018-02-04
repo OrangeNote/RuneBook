@@ -1,35 +1,44 @@
+var Store = require('electron-store');
+var store = new Store();
+
 var freezer = require('./state');
 
-var prev_page = freezer.get().current_page;
+var request = require('request');
 
-freezer.on('current_page:update', (page_id) => {
-
-	freezer.get().set({ status: 'updating' });
-
-	prev_page = prev_page || freezer.get().current_page;
-	freezer.get().set({ current_page: page_id })
-
-	setTimeout(() => {
-
-		if(true) {
-			freezer.get().set({
-				current_page: prev_page,
-				status: 'error'
-			});
-			prev_page = null;
-		}
-		else {
-			freezer.get().set({
-				current_page: page_id,
-				status: 'idle'
-			});
-		}
-	}, 1000);
+request('https://ddragon.leagueoflegends.com/api/versions.json', function (error, response, data) {
+	if(!error && response && response.statusCode == 200) {
+		freezer.emit("version:set", JSON.parse(data)[0]);
+	}
+	else throw Error("Couldn't get ddragon api version");
 });
 
-freezer.on('champion:choose', (data) => {
-	var champion = freezer.get().champion;
-	champion.set({ id: data });
+freezer.on('champion:choose', (champion) => {
+	var state = freezer.get();
+
+	state.current.set({ champion, champ_data: store.get(`local.${champion}`) || {pages: {}} });
+});
+
+freezer.on('page:fav', (champion, page) => {
+	var state = freezer.get();
+
+	if(store.get(`local.${champion}.fav`) == page) {
+		store.set(`local.${champion}.fav`, null);
+	}
+	else store.set(`local.${champion}.fav`, page);
+
+	state.current.champ_data.set(store.get(`local.${champion}`));
+});
+
+freezer.on('page:delete', (champion, page) => {
+	var state = freezer.get();
+
+	store.delete(`local.${champion}.pages.${page}`);
+
+	if(store.get(`local.${champion}.fav`) == page) {
+		store.set(`local.${champion}.fav`, null);
+	}
+
+	state.current.champ_data.set(store.get(`local.${champion}`));
 });
 
 const LCUConnector = require('lcu-connector');

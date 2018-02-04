@@ -5,17 +5,17 @@
     </div>
   </div>
 
-  <select-champion champion={champion}></select-champion>
+  <select-champion champion={current.champion}></select-champion>
 
-  <page-list champion={champion.id}></page-list>
+  <page-list current={current}></page-list>
 
   <script>
 
-  	this.champion = opts.champion;
+    this.current = opts.current;
 
-  	freezer.on('update', () => {
-		this.update(freezer.get());
-	});
+    freezer.on('update', () => {
+    this.update(freezer.get());
+  });
 
   </script>
 </runebook>

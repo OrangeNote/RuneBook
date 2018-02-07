@@ -13,6 +13,10 @@ var state = {
 			pages: {},
 		},
 	},
+
+	lastUploadedPage: {
+		page: null,
+	}
 };
 
 module.exports = new Freezer(state);

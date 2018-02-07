@@ -2,8 +2,8 @@
   <div class="ui middle aligned divided list">
     <div class="item" each={ page, key in opts.current.champ_data.pages }>
       <div class="right floated content" data-key={ key }>
-        <div class="ui icon button disabled">
-          <i class="upload icon"></i>
+        <div class="ui icon button" data-key={key} onclick={ uploadPage }>
+          <i class="upload icon" data-key={key}></i>
         </div>
         <div class="ui icon button" onclick={ setFav } data-key={key}>
           <i class={ key == opts.current.champ_data.fav ? "heart icon" : "empty heart icon" } data-key={key}></i>
@@ -33,6 +33,13 @@
 
       var page = $(evt.target).data("key");
       freezer.emit("page:delete", opts.current.champion, page);
+    }
+
+    uploadPage(evt) {
+      evt.preventUpdate = true;
+
+      var page = $(evt.target).data("key");
+      freezer.emit("page:upload", opts.current.champion, page);
     }
   
   </script>

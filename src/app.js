@@ -41,6 +41,18 @@ freezer.on('page:delete', (champion, page) => {
 	state.current.champ_data.set(store.get(`local.${champion}`));
 });
 
+freezer.on('page:upload', (champion, page) => {
+	var state = freezer.get();
+
+	page_data = store.get(`local.${champion}.pages.${page}`);
+	page_data.name = page;
+	page_data.current = true;
+
+	api.postPage(page_data).then((res) => {
+		if(res) state.lastUploadedPage.set({ page });
+	});
+});
+
 const LCUConnector = require('lcu-connector');
 const connector = new LCUConnector();
 const api = require('./lcu-api');

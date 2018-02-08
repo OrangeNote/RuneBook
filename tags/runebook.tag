@@ -7,11 +7,14 @@
 
   <select-champion champion={current.champion}></select-champion>
 
-  <page-list current={current}></page-list>
+  <page-list current={current} lastuploadedpage={lastuploadedpage}></page-list>
+  <connection-status connection={connection}></connection-status>
 
   <script>
 
     this.current = opts.current;
+    this.lastuploadedpage = opts.lastuploadedpage;
+    this.connection = opts.connection;
 
     freezer.on('update', () => {
     this.update(freezer.get());

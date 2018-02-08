@@ -4,7 +4,9 @@ var state = {
 	status: "idle",
 	online: false,
 	champion_select: false,
-	connection: null,
+	connection: {
+		page: null,
+	},
 
 	current: {
 		champion: null,
@@ -14,8 +16,9 @@ var state = {
 		},
 	},
 
-	lastUploadedPage: {
+	lastuploadedpage: {
 		page: null,
+		valid: false,
 	}
 };
 

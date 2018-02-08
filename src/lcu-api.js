@@ -22,7 +22,11 @@ function bind(data) {
 			console.log(e);
 		}
 		if(res[0] === 0) console.log("connected", res);
-		if(res[1] === "OnJsonApiEvent") console.log(res[2]);
+		if(res[1] == "OnJsonApiEvent") {
+			var evt = res[2];
+			console.log(`${evt.uri}:${evt.eventType}`);
+			freezer.emit(`${evt.uri}:${evt.eventType}`, evt.data);
+		}
 	});
 
 	ws.on('open', () => {
@@ -34,11 +38,11 @@ function destroy() {
 	ws = null;
 }
 
-function postPage(page) {
+function post(endpoint, body) {
 	return new Promise(resolve => {	
 		
 		var options = {
-			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}/lol-perks/v1/pages/`,
+			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
 			auth: {
 				"user": conn_data.username,
 				"pass": conn_data.password
@@ -47,7 +51,7 @@ function postPage(page) {
 				'Accept': 'application/json'
 			},
 			json: true,
-			body: page,
+			body: body,
 			rejectUnauthorized: false
 		};
 
@@ -62,4 +66,4 @@ function postPage(page) {
 	});
 }
 
-module.exports = { bind, destroy, postPage };
+module.exports = { bind, destroy, post };

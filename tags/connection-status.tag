@@ -1,5 +1,5 @@
 <connection-status>
-	<span>{ status }</span>
+	<span>{ opts.connection.page ? opts.connection.page.name : "" }</span>
 
 
 	<script>

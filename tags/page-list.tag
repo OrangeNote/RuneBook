@@ -2,15 +2,19 @@
   <div class="ui middle aligned divided list">
     <div class="item" each={ page, key in opts.current.champ_data.pages }>
       <div class="right floated content" data-key={ key }>
+        
         <div class="ui icon button" data-key={key} onclick={ uploadPage }>
-          <i class="upload icon" data-key={key}></i>
+          <i class={ opts.lastuploadedpage.page == key ? (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon") : "upload icon" } data-key={key}></i>
         </div>
+        
         <div class="ui icon button" onclick={ setFav } data-key={key}>
           <i class={ key == opts.current.champ_data.fav ? "heart icon" : "empty heart icon" } data-key={key}></i>
         </div>
+        
         <div class="ui icon button" data-key={key} onclick={ deletePage }>
           <i class="remove icon" data-key={key}></i>
         </div>
+      
       </div>
       <div class="middle aligned content">
         {key}
@@ -20,7 +24,6 @@
   </div>
 
   <script>
-
     setFav(evt) {
       evt.preventUpdate = true;
       

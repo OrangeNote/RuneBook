@@ -24,7 +24,7 @@ function bind(data) {
 		if(res[0] === 0) console.log("connected", res);
 		if(res[1] == "OnJsonApiEvent") {
 			var evt = res[2];
-			console.log(`${evt.uri}:${evt.eventType}`);
+			//console.log(`${evt.uri}:${evt.eventType}`);
 			freezer.emit(`${evt.uri}:${evt.eventType}`, evt.data);
 		}
 	});

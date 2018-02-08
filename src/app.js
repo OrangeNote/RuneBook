@@ -51,10 +51,23 @@ freezer.on('page:upload', (champion, page) => {
 	api.post("/lol-perks/v1/pages/", page_data).then((res) => {
 		if(res) {
 			state.lastuploadedpage.set({ page, valid: res.isValid === true });
-			if(res.isValid === false) console.log("Error: page incomplete or malformed.")
+			if(res.isValid === false) console.log("Warning: page incomplete or malformed.")
 		}
 		else console.log("Error: no response after page upload request.")
 	});
+});
+
+freezer.on('currentpage:download', () => {
+	var state = freezer.get();
+
+	var champion = state.current.champion;
+	var pages = store.get(`local.${champion}.pages`) || {};
+
+	var page = state.connection.page;
+	pages[page.name] = page;
+
+	store.set(`local.${champion}.pages`, pages);
+	state.current.champ_data.set(store.get(`local.${champion}`));
 });
 
 freezer.on('/lol-perks/v1/currentpage:Update', (page) => {
@@ -62,7 +75,7 @@ freezer.on('/lol-perks/v1/currentpage:Update', (page) => {
 
 	console.log("currentpage:Update", page.name);
 	state.connection.set({ page });
-	state.lastuploadedpage.set({ page: null, valid: false })
+	state.lastuploadedpage.set({ page: null, valid: false });
 });
 
 const LCUConnector = require('lcu-connector');

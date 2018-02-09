@@ -135,6 +135,7 @@ connector.on('connect', (data) => {
 connector.on('disconnect', () => {
 	console.log("client closed");
 	api.destroy();
+	freezer.get().session.set({ connected: false, state: "" })
 });
 
 // Start listening for the LCU client

@@ -1,18 +1,14 @@
 <connection-status>
-	<div class="ui container">
-		<hr>
-		<button class={opts.connection.page ? "ui button" : "ui button disabled"} onclick={ downloadCurrentPage }>Download</button>
-		<span>Current page: { opts.connection.page ? opts.connection.page.name : "" }</span>
-		<br>
-		<span>{ opts.session.connected ? "ONLINE" : opts.session.state }</span>
-	</div>
+  <div class="ui bottom right attached label">{ connectionStatusText() }</div>
 
-	<script>
+  <script>
+    
+    connectionStatusText() {
+      if(opts.session.connected) return "Connected";
+      if(opts.session.state == "IN_PROGRESS") return "Logging in...";
+      if(opts.session.state == "LOGGING_OUT") return "Logging out...";
+      return "Disconnected";
+    }
 
-		downloadCurrentPage(evt) {
-			evt.preventUpdate = true;
-			freezer.emit("currentpage:download");
-		}
-
-	</script>
+  </script>
 </connection-status>

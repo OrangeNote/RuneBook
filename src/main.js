@@ -10,8 +10,8 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
     title: 'RuneBook',
-    width: 450,
-    height: 670,
+    width: 768,
+    height: 768,
     frame: false,
     titleBarStyle: "hiddenInset",
   })

@@ -3,7 +3,7 @@ var Freezer = require('freezer-js');
 var state = {
 	session: {
 		connected: false,
-		state: "OFFLINE"
+		state: ""
 
 	},
 	champion_select: false,

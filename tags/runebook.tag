@@ -1,14 +1,33 @@
 <runebook>
-  <div class="ui secondary pointing menu">
-    <div class="ui menu header item">
-        RuneBook
+  <header>
+    <div class="ui secondary pointing menu">
+      <div class="ui menu header item">
+          RuneBook
+      </div>
     </div>
-  </div>
+  </header>
 
-  <select-champion champion={current.champion}></select-champion>
+  <main>
+    <select-champion champion={current.champion}></select-champion>
+    <page-list current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></page-list>
+    <current-page connection={connection} session={session}></current-page>
+  </main>
+  
+  <footer>
+    <connection-status session={session}></connection-status>
+  </footer>
 
-  <page-list current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></page-list>
-  <connection-status connection={connection} session={session}></connection-status>
+  <style>
+    runebook {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+  </style>
 
   <script>
 

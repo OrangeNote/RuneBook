@@ -1,8 +1,10 @@
 <connection-status>
 	<div class="ui container">
 		<hr>
+		<button class={opts.connection.page ? "ui button" : "ui button disabled"} onclick={ downloadCurrentPage }>Download</button>
 		<span>Current page: { opts.connection.page ? opts.connection.page.name : "" }</span>
-		<button class="ui button" onclick={ downloadCurrentPage }>Download</button>
+		<br>
+		<span>{ opts.session.connected ? "ONLINE" : opts.session.state }</span>
 	</div>
 
 	<script>

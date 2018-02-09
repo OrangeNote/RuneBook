@@ -21,7 +21,10 @@ function bind(data) {
 		} catch(e) {
 			console.log(e);
 		}
-		if(res[0] === 0) console.log("connected", res);
+		if(res[0] === 0) {
+			console.log("connected", res);
+			freezer.emit(`api:connected`);
+		}
 		if(res[1] == "OnJsonApiEvent") {
 			var evt = res[2];
 			//console.log(`${evt.uri}:${evt.eventType}`);
@@ -66,4 +69,31 @@ function post(endpoint, body) {
 	});
 }
 
-module.exports = { bind, destroy, post };
+function get(endpoint) {
+	return new Promise(resolve => {	
+		
+		var options = {
+			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
+			auth: {
+				"user": conn_data.username,
+				"pass": conn_data.password
+			},
+			headers: {
+				'Accept': 'application/json'
+			},
+			json: true,
+			rejectUnauthorized: false
+		};
+
+		request.get(options, (error, response, data) => {
+			if (error || response.statusCode != 200) {
+				resolve();
+				return;
+			}
+
+			resolve(data);
+		});
+	});
+}
+
+module.exports = { bind, destroy, post, get };

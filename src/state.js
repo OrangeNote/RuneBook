@@ -1,8 +1,11 @@
 var Freezer = require('freezer-js');
 
 var state = {
-	status: "idle",
-	online: false,
+	session: {
+		connected: false,
+		state: "OFFLINE"
+
+	},
 	champion_select: false,
 	connection: {
 		page: null,

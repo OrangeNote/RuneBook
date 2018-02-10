@@ -1,11 +1,21 @@
 <page-list>
   <div class="ui container">
-    <div if={ !_.isEmpty(opts.current.champ_data.pages.toJS()) } class="ui horizontal divider">Local pages</div>
+    
+    <div if={ opts.current.champion } class="ui horizontal divider">Local pages</div>
+    
+    <h3 if={ opts.current.champion && _.isEmpty(opts.current.champ_data.pages.toJS()) } class="ui center aligned icon header">
+      <i class="sticky note outline icon"></i>
+      <div class="content">
+        You don't seem to have any pages for this champion.
+        <div class="sub header">Click the button below to import from your current page.</div>
+      </div>
+    </h3>
+
     <div class="ui middle aligned relaxed divided list">
       <div class="item" each={ page, key in opts.current.champ_data.pages }>
         <div class="right floated content" data-key={ key }>
           
-          <div class={ opts.connection.page ? "ui icon button" : "ui icon button disabled" } data-key={key} onclick={ uploadPage }>
+          <div class={ opts.connection.page && opts.connection.page.isEditable ? "ui icon button" : "ui icon button disabled" } data-key={key} onclick={ uploadPage }>
             <i class={ opts.lastuploadedpage.page == key ? (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon") : "upload icon" } data-key={key}></i>
           </div>
           
@@ -14,7 +24,7 @@
           </div>
           
           <div class="ui icon button" data-key={key} onclick={ deletePage }>
-            <i class="remove icon" data-key={key}></i>
+            <i class="trash icon" data-key={key}></i>
           </div>
         
         </div>

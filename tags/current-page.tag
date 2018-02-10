@@ -7,13 +7,13 @@
       		<div class="item">
       			<div class="right floated content" data-key={ key }>
 
-					<button class={opts.connection.page ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage }>
+					<button class={ opts.current.champion ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage }>
 						<i class="download icon"></i>
 					</button>
 				</div>
 				<img each={ rune, index in opts.connection.page.selectedPerkIds } class="ui mini circular image" src=./resources/runesReforged/perk/{rune || "qm"}.png>
 				<div class="content">
-					<i class={ opts.connection.page.isValid ? "" : "warning sign icon" }></i> {opts.connection.page.name}
+					<i class={ !opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "warning sign icon") }></i> {opts.connection.page.name}
 				</div>
 			</div>
 		</div>

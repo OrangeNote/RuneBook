@@ -69,6 +69,34 @@ function post(endpoint, body) {
 	});
 }
 
+function put(endpoint, body) {
+	return new Promise(resolve => {	
+		
+		var options = {
+			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
+			auth: {
+				"user": conn_data.username,
+				"pass": conn_data.password
+			},
+			headers: {
+				'Accept': 'application/json'
+			},
+			json: true,
+			body: body,
+			rejectUnauthorized: false
+		};
+
+		request.put(options, (error, response, data) => {
+			if (error || response.statusCode != 200) {
+				resolve();
+				return;
+			}
+
+			resolve(data);
+		});
+	});
+}
+
 function get(endpoint) {
 	return new Promise(resolve => {	
 		
@@ -96,4 +124,31 @@ function get(endpoint) {
 	});
 }
 
-module.exports = { bind, destroy, post, get };
+function del(endpoint) {
+	return new Promise(resolve => {	
+		
+		var options = {
+			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
+			auth: {
+				"user": conn_data.username,
+				"pass": conn_data.password
+			},
+			headers: {
+				'Accept': 'application/json'
+			},
+			json: true,
+			rejectUnauthorized: false
+		};
+
+		request.delete(options, (error, response, data) => {
+			if (error || response.statusCode != 200) {
+				resolve();
+				return;
+			}
+
+			resolve(data);
+		});
+	});
+}
+
+module.exports = { bind, destroy, post, get, put, del };

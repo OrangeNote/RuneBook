@@ -67,10 +67,20 @@ freezer.on('page:upload', (champion, page) => {
 	page_data.name = page;
 	page_data.current = true;
 
-	api.post("/lol-perks/v1/pages/", page_data).then((res) => {
-		if(res) {
-			freezer.get().lastuploadedpage.set({ page, valid: res.isValid === true });
+	var state = freezer.get();
+	console.log("page.id, page.isEditable", state.connection.page.id, state.connection.page.isEditable);
+	if(state.connection.page.id && state.connection.page.isEditable) {
+		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
+			console.log("api delete current page", res);
+		});
 
+		api.post("/lol-perks/v1/pages/", page_data).then((res) => {
+			if(!res) {
+				console.log("Error: no response after page upload request.");
+				return;
+			}
+
+			freezer.get().lastuploadedpage.set({ page, valid: res.isValid === true });
 			/*
 			 * If the page created is invalid, mark it as such in the store.
 			 * This behaviour is not predictable (a page can become invalid at any time),
@@ -89,9 +99,8 @@ freezer.on('page:upload', (champion, page) => {
 				store.set(`local.${champion}.pages.${page}`, res);
 				freezer.get().current.champ_data.set(store.get(`local.${champion}`));
 			}
-		}
-		else console.log("Error: no response after page upload request.")
-	});
+		});
+	}
 });
 
 freezer.on('currentpage:download', () => {

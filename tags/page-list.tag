@@ -28,7 +28,7 @@
           </div>
         
         </div>
-        <img each={ rune, index in page.selectedPerkIds } class="ui mini circular image" src=./resources/runesReforged/perk/{rune || "qm"}.png>
+        <img each={ rune, index in page.selectedPerkIds } class="ui mini circular image" src=./img/runesReforged/perk/{rune || "qm"}.png>
         <div class="content">
           <i class={ page.isValid ? "" : "warning sign icon" }></i> {key}
           

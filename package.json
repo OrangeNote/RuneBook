@@ -35,7 +35,7 @@
     "riot": "^3.8.1",
     "select2": "^4.0.6-rc.1",
     "selectize": "^0.12.4",
-    "semantic-ui": "^2.2.13",
+    "semantic-ui-css": "^2.2.14",
     "tether": "^1.4.3",
     "winston": "3.0.0-rc0",
     "ws": "^4.0.0"

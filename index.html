@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./semantic/dist/semantic.css">
+  <link rel="stylesheet" type="text/css" href="./node_modules/semantic-ui-css/semantic.min.css">
 </head>
 <body>
 
@@ -19,9 +19,8 @@
     window.$ = window.jQuery = require('jquery');
   </script>
 
-  <script src="semantic/dist/semantic.min.js"></script>
+  <script src="./node_modules/semantic-ui-css/semantic.min.js"></script>
   <script type="text/javascript">
-    require('./semantic/dist/semantic.min.js');
 
     var riot = require('riot');
     var freezer = require('./src/state');

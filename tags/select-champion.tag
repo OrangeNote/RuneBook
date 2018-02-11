@@ -60,7 +60,15 @@
           source: ddres,
           duration: 0,
           searchDelay: 0,
+          showNoResults: false,
+          maxResults: 14,
+          searchFullText: true,
           selectFirstResult: true,
+          searchFields: ['title', 'info'],
+          regExp: {
+            escape     : /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,
+            beginsWith : '(?:\\s|^)'
+          },
 
           onSelect: (data) => {
             if(data) freezer.emit('champion:choose', data.id);
@@ -111,8 +119,10 @@
 
       $.each(ddres.data, function(index, item) {
         res.push({ id: item.id, title: item.name });
+        if(item.name == "Blitzcrank") res[res.length - 1].info = "22";
+        if(item.name == "Warwick") res[res.length - 1].info = "urf";
       });
-      console.log(res)
+
       return res;
     }
 

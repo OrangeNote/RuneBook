@@ -11,7 +11,7 @@
 						<i class="download icon"></i>
 					</button>
 				</div>
-				<img each={ rune, index in opts.connection.page.selectedPerkIds } class="ui mini circular image" src=./img/runesReforged/perk/{rune || "qm"}.png>
+				<img each={ index in [0,1,2,3,4,5] } class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page.selectedPerkIds[index] || "qm"}.png>
 				<div class="content">
 					<i class={ !opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "warning sign icon") }></i> {opts.connection.page.name}
 				</div>

@@ -1,5 +1,5 @@
 <runebook>
-  <header>
+  <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
           RuneBook

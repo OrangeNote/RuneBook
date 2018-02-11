@@ -2,19 +2,32 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 
+require('electron-debug')({showDevTools: true});
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
 function createWindow () {
-  // Create the browser window.
-  win = new BrowserWindow({
+
+  var options = {
     title: 'RuneBook',
     width: 768,
     height: 768,
-    frame: false,
-    titleBarStyle: "hiddenInset",
-  })
+    maximizable: false,
+  }
+
+  if (process.platform == 'darwin') {
+    options.frame = false
+    options.titleBarStyle =  "hiddenInset"
+  }
+
+  // Create the browser window.
+  win = new BrowserWindow(options)
+
+  win.setResizable(false);
+  win.setFullScreenable(false);
+  win.setMenu(null);
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -24,7 +37,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {

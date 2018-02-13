@@ -8,6 +8,8 @@
           <div class="column">
             <img class="ui tiny image circular"
               src={opts.champion ? `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${this.opts.champion}.png` : "./img/unknown.png"}>
+            <img class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src="./img/ring.png">
+            <!-- <img class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png"> -->
           </div>
           
           <div class="column middle aligned">
@@ -40,6 +42,20 @@
 
     </div>
   </div>
+  
+  <style>
+    .tiny-ring {
+      width: 84px;
+      height: 84px;
+    }
+
+    .tiny-spin {
+      width: 100px;
+      height: 100px;
+      animation: spin 1.5s linear infinite;
+  }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
+  </style>
 
   <script>
 

@@ -30,7 +30,7 @@
         </div>
         <img each={ index in [0,1,2,3,4,5] } class="ui mini circular image" src=./img/runesReforged/perk/{page.selectedPerkIds[index] || "qm"}.png>
         <div class="content">
-          <i class={ page.isValid ? "" : "warning sign icon" }></i> {key}
+          <i class={ page.isValid ? "" : "red warning sign icon" }></i> {key}
           
         </div>
       </div>

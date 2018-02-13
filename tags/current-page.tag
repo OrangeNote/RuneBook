@@ -13,7 +13,7 @@
 				</div>
 				<img each={ index in [0,1,2,3,4,5] } class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page.selectedPerkIds[index] || "qm"}.png>
 				<div class="content">
-					<i class={ !opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "warning sign icon") }></i> {opts.connection.page.name}
+					<i class={ !opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon") }></i> {opts.connection.page.name}
 				</div>
 			</div>
 		</div>

@@ -16,7 +16,7 @@
         <div class="right floated content" data-key={ key }>
           
           <div class={ opts.connection.page && opts.connection.page.isEditable ? "ui icon button" : "ui icon button disabled" } data-key={key} onclick={ uploadPage }>
-            <i class={ opts.lastuploadedpage.page == key ? (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon") : "upload icon" } data-key={key}></i>
+            <i class={ opts.lastuploadedpage.page == key && opts.lastuploadedpage.champion == opts.current.champion ? (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon") : "upload icon" } data-key={key}></i>
           </div>
           
           <div class="ui icon button" onclick={ setFav } data-key={key}>

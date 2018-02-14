@@ -20,6 +20,7 @@ var state = {
 	},
 
 	lastuploadedpage: {
+		champion: null,
 		page: null,
 		valid: false,
 	}

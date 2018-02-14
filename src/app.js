@@ -27,7 +27,7 @@ freezer.on('api:connected', () => {
 				return;
 			}
 			freezer.get().connection.set({ page });
-			freezer.get().lastuploadedpage.set({ page: null, valid: false });
+			freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
 		})
 	});
 })
@@ -80,7 +80,7 @@ freezer.on('page:upload', (champion, page) => {
 				return;
 			}
 
-			freezer.get().lastuploadedpage.set({ page, valid: res.isValid === true });
+			freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
 			/*
 			 * If the page created is invalid, mark it as such in the store.
 			 * This behaviour is not predictable (a page can become invalid at any time),
@@ -129,7 +129,7 @@ freezer.on('/lol-perks/v1/currentpage:Update', (page) => {
 
 	console.log("currentpage:Update", page.name);
 	state.connection.set({ page });
-	freezer.get().lastuploadedpage.set({ page: null, valid: false });
+	freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
 });
 
 const LCUConnector = require('lcu-connector');

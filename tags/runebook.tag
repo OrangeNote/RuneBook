@@ -10,10 +10,12 @@
   <main>
     <select-champion champion={current.champion}></select-champion>
     <page-list current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></page-list>
-    <current-page connection={connection} session={session} current={current}></current-page>
   </main>
   
   <footer>
+    <div style="margin-bottom: 20px">
+      <current-page connection={connection} session={session} current={current}></current-page>
+    </div>
     <connection-status session={session}></connection-status>
   </footer>
 

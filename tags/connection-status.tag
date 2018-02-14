@@ -1,5 +1,5 @@
 <connection-status>
-  <div class="ui bottom right attached label">{ connectionStatusText() }</div>
+  <div class="ui top right attached label">{ connectionStatusText() }</div>
 
   <script>
     

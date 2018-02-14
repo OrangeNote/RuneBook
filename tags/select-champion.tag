@@ -6,10 +6,10 @@
         <div class="row">
           
           <div class="column">
-            <img class="ui tiny image circular"
+            <img draggable="false" class="ui tiny image circular"
               src={opts.champion ? `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${this.opts.champion}.png` : "./img/unknown.png"}>
-            <img class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src="./img/ring.png">
-            <!-- <img class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png"> -->
+            <img draggable="false" class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src="./img/ring.png">
+            <!-- <img draggable="false" class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png"> -->
           </div>
           
           <div class="column middle aligned">

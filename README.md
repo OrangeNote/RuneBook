@@ -1,7 +1,8 @@
 # RuneBook
 📖 RuneBook is an arcane app for LoL that automatically manages your rune pages 📜
 
-![RuneBook logo](https://github.com/OrangeNote/RuneBook/raw/master/docs/kennen_demo.gif)
+![Kennen demo](https://github.com/OrangeNote/RuneBook/raw/master/docs/kennen_demo.gif)  
+![Tab demo](https://github.com/OrangeNote/RuneBook/raw/master/docs/tab_demo.png)  
 > *The runes decide my path.* - Ryze, the Rune Mage
 
 Greetings, Summoner!

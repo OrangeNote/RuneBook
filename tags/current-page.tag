@@ -11,7 +11,7 @@
 				<div class="item">
 					<div class="right floated content" data-key={ key }>
 
-						<button class={ opts.current.champion && opts.tab.active == "local" ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage }>
+						<button class={ (opts.current.champion && opts.connection.page && opts.tab.active == "local") ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage }>
 							<i class="download icon"></i>
 						</button>
 					</div>

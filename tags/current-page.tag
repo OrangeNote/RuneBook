@@ -1,9 +1,13 @@
 <current-page>
 	
 	<div class="ui container">
-		<div class="ui horizontal divider" if={ opts.connection.page }>Current page</div>
-		<div class="ui segment">
-			<div class="ui middle aligned relaxed divided list" if={ opts.connection.page }>
+		<div class="ui horizontal divider">Current page</div>
+		<div class={ opts.connection.page ? "ui segment" : "ui segment disabled" }>
+			<!-- <h4 class="ui center aligned header" if={ !opts.connection.page }>
+				Current page is not available.
+				<div class="sub header">Please connect to LoL Client.</div>
+			</h4> -->
+			<div class="ui middle aligned relaxed divided list">
 				<div class="item">
 					<div class="right floated content" data-key={ key }>
 
@@ -11,9 +15,9 @@
 							<i class="download icon"></i>
 						</button>
 					</div>
-					<img each={ index in [0,1,2,3,4,5] } draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page.selectedPerkIds[index] || "qm"}.png>
+					<img each={ index in [0,1,2,3,4,5] } draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page && opts.connection.page.selectedPerkIds[index] || "qm"}.png>
 					<div class="content">
-						<i class={ !opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon") }></i> {opts.connection.page.name}
+						<i class={ opts.connection.page ? (!opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
 					</div>
 				</div>
 			</div>

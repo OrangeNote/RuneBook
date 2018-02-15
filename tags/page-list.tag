@@ -22,9 +22,9 @@
     </div>
 
     <div class="ui bottom attached tab segment active" data-tab="tab-local">
-      <div class={ opts.current.champion && !_.isEmpty(opts.current.champ_data.pages.toJS()) ? "ui one column centered grid" : "ui one column middle aligned centered grid" } style="min-height: 384px">
+      <div class={ opts.current.champion && !_.isEmpty(opts.current.champ_data.pages.toJS()) ? "ui one column centered grid" : "ui one column middle aligned centered grid" } style="height: 384px">
         <div class="row">
-          <div class="column">
+          <div class="column" style={ opts.current.champion ? "height: 100%;" : "" }>
             
             <h1 if={ !opts.current.champion } class="ui center aligned icon header">
               <i class="open book icon"></i>
@@ -42,7 +42,7 @@
               </div>
             </h2>
 
-            <div class="ui middle aligned relaxed divided list">
+            <div if={ opts.current.champion } class="ui middle aligned relaxed divided list" style="height: 100%; overflow-y: auto;">
               <div class="item" each={ page, key in opts.current.champ_data.pages }>
                 <div class="right floated content" data-key={ key }>
                   
@@ -79,7 +79,7 @@
 
   <script>
 
-    this.on("update", () => {
+    this.on("mount", () => {
       $('.pointing.menu .item').tab();
     });
 

@@ -72,33 +72,33 @@ freezer.on('page:upload', (champion, page) => {
 	if(state.connection.page.id && state.connection.page.isEditable) {
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
 			console.log("api delete current page", res);
-		});
 
-		api.post("/lol-perks/v1/pages/", page_data).then((res) => {
-			if(!res) {
-				console.log("Error: no response after page upload request.");
-				return;
-			}
+			api.post("/lol-perks/v1/pages/", page_data).then((res) => {
+				if(!res) {
+					console.log("Error: no response after page upload request.");
+					return;
+				}
 
-			freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
-			/*
-			 * If the page created is invalid, mark it as such in the store.
-			 * This behaviour is not predictable (a page can become invalid at any time),
-			 * so we want to make sure to notify users as soon as we get this info from lcu.
-			 */
-			if(res.isValid === false) {
-				console.log("Warning: page incomplete or malformed.");
-				store.set(`local.${champion}.pages.${page}.isValid`, false);
-				freezer.get().current.champ_data.set(store.get(`local.${champion}`));
-			}
-			/*
-			 * If the page created is valid, but we have an invalid copy in the store,
-			 * then replace the local page with the updated one.
-			 */
-			else if(store.get(`local.${champion}.pages.${page}.isValid`) === false) {
-				store.set(`local.${champion}.pages.${page}`, res);
-				freezer.get().current.champ_data.set(store.get(`local.${champion}`));
-			}
+				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
+				/*
+				 * If the page created is invalid, mark it as such in the store.
+				 * This behaviour is not predictable (a page can become invalid at any time),
+				 * so we want to make sure to notify users as soon as we get this info from lcu.
+				 */
+				if(res.isValid === false) {
+					console.log("Warning: page incomplete or malformed.");
+					store.set(`local.${champion}.pages.${page}.isValid`, false);
+					freezer.get().current.champ_data.set(store.get(`local.${champion}`));
+				}
+				/*
+				 * If the page created is valid, but we have an invalid copy in the store,
+				 * then replace the local page with the updated one.
+				 */
+				else if(store.get(`local.${champion}.pages.${page}.isValid`) === false) {
+					store.set(`local.${champion}.pages.${page}`, res);
+					freezer.get().current.champ_data.set(store.get(`local.${champion}`));
+				}
+			});
 		});
 	}
 });

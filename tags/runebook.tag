@@ -9,7 +9,7 @@
 
   <main>
     <select-champion champion={current.champion}></select-champion>
-    <page-list current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></page-list>
+    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></chapters-segment>
   </main>
   
   <footer>

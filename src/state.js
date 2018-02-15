@@ -19,6 +19,11 @@ var state = {
 		},
 	},
 
+	tab: {
+		active: "local",
+		loaded: true,
+	},
+
 	lastuploadedpage: {
 		champion: null,
 		page: null,

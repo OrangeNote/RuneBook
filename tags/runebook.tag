@@ -9,12 +9,12 @@
 
   <main>
     <select-champion champion={current.champion}></select-champion>
-    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection}></chapters-segment>
+    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab}></chapters-segment>
   </main>
   
   <footer>
     <div style="margin-bottom: 20px">
-      <current-page connection={connection} session={session} current={current}></current-page>
+      <current-page connection={connection} session={session} current={current} tab={tab}></current-page>
     </div>
     <connection-status session={session}></connection-status>
   </footer>
@@ -37,6 +37,7 @@
     this.lastuploadedpage = opts.lastuploadedpage;
     this.connection = opts.connection;
     this.session = opts.session;
+    this.tab = opts.tab;
 
     freezer.on('update', () => {
     this.update(freezer.get());

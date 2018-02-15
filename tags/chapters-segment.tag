@@ -4,24 +4,24 @@
     <div class="ui horizontal divider">Chapters</div>
 
     <div class="ui top attached pointing small borderless menu">
-      <a class="item active" data-tab="tab-local">
+      <a class={ opts.tab.active == "local" ? "item active" : "item" } data-tab="local" onclick={ switchTab }>
         Local pages
       </a>
       <div class="vertical divider"></div>
-      <a class="item" data-tab="tab-runeforge">
-        Work in progress
+      <a class={ opts.tab.active == "runeforge" ? "item active" : "item" } data-tab="runeforge" onclick={ switchTab }>
+        Rune Forge
       </a>
-      <a class="item floated right" data-tab="tab-generic">
+<!--       <a class="item floated right" data-tab="tab-generic">
         Generic pages
-      </a>
+      </a> -->
 
     </div>
 
-    <div class="ui bottom attached tab segment" data-tab="tab-generic">
+<!--     <div class="ui bottom attached tab segment" data-tab="tab-generic">
       Generic pages
-    </div>
+    </div> -->
 
-    <div class="ui bottom attached tab segment active" data-tab="tab-local">
+    <div class={ opts.tab.loaded ? "ui bottom attached tab segment active" : "ui bottom attached tab segment active loading" }>
       <div class={ opts.current.champion && !_.isEmpty(opts.current.champ_data.pages.toJS()) ? "ui one column centered grid" : "ui one column middle aligned centered grid" } style="height: 384px">
         <div class="row">
           <div class="column" style={ opts.current.champion && !_.isEmpty(opts.current.champ_data.pages.toJS()) ? "height: 100%;" : "" }>
@@ -34,24 +34,23 @@
               </div>
             </h1>
 
-            <page-list current={opts.current} lastuploadedpage={opts.lastuploadedpage} connection={opts.connection}></page-list>
+            <page-list current={opts.current} lastuploadedpage={opts.lastuploadedpage} connection={opts.connection} tab={opts.tab}></page-list>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <div class="ui bottom attached tab segment" data-tab="tab-runeforge">
-      Work in progress!
     </div>
     
   </div>
 
   <script>
 
-    this.on("mount", () => {
-      $('.pointing.menu .item').tab();
-    });
+    switchTab(evt) {
+      evt.preventUpdate = true;
+
+      var tab = $(evt.target).data("tab");
+      freezer.emit("tab:switch", tab);
+    }
   
   </script>
 

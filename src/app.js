@@ -32,11 +32,70 @@ freezer.on('api:connected', () => {
 	});
 })
 
+var fs = require('fs');
+var runeforge;
+fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
+  if (err) throw err;
+  runeforge = JSON.parse(data);
+});
+
 freezer.on('champion:choose', (champion) => {
+
+	freezer.get().tab.set({ active: freezer.get().tab.active, loaded: false });
+
+	getPages(freezer.get().tab.active, champion, (res) => {
+		freezer.get().current.set({ champion, champ_data: res || {pages: {}} });
+		freezer.get().tab.set({ loaded: true });
+	});
+});
+
+freezer.on("tab:switch", (tab) => {
+	freezer.get().tab.set({ active: tab, loaded: tab == "local" || !freezer.get().current.champion });
+
 	var state = freezer.get();
 
-	state.current.set({ champion, champ_data: store.get(`local.${champion}`) || {pages: {}} });
-});
+	getPages(state.tab.active, state.current.champion, (res) => {
+		freezer.get().current.set({ champion: freezer.get().current.champion, champ_data: res || {pages: {}} });
+		freezer.get().tab.set({ loaded: true });
+	});
+})
+
+function getPages(tab, champion, callback) {
+	if(tab == "local") {
+		callback(store.get(`local.${champion}`));
+	}
+	else if(tab == "runeforge") {
+		setTimeout(() => {
+			var res = {pages: {}};
+			_.forOwn(runeforge, function(value, key) {
+				var sep = value.loadout_champion_grid.split("/");
+				sep = sep[sep.length - 1].split(".")[0];
+				if(champion == sep) {
+					res.pages[`${value.loadout_champion_name} ${value.loadout_id}`] = {
+						"current": true,
+						"isActive": false,
+						"isDeletable": true,
+						"isEditable": true,
+						"isValid": false,
+						"name": `${value.loadout_champion_name} ${value.loadout_id}`,
+						"order": 1,
+						"primaryStyleId": -1,
+						"selectedPerkIds": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"subStyleId": -1
+					};
+				}
+			});
+			callback(res);
+		}, 300);
+	}
+}
 
 freezer.on('page:fav', (champion, page) => {
 	var state = freezer.get();

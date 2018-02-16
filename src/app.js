@@ -47,7 +47,7 @@ loadPlugins();
 freezer.on('champion:choose', (champion) => {
 
 	freezer.get().tab.set({ active: freezer.get().tab.active, loaded: false });
-
+	freezer.get().current.set({ champion }); // update champ portrait before the data response
 	var state = freezer.get();
 
 	plugins[state.tab.active].getPages(champion, (res) => {

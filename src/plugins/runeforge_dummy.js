@@ -6,13 +6,14 @@ fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
 });
 
 var plugin = {
-	name: "Rune Forge",
+	name: "Dummy Rune Forge",
 	active: true,
 
 	getPages(champion, callback) {
 		setTimeout(() => {
 			var res = {pages: {}};
-			_.forOwn(runeforge, function(value, key) {
+			for(key in runeforge) {
+				var value = runeforge[key];
 				var sep = value.loadout_champion_grid.split("/");
 				sep = sep[sep.length - 1].split(".")[0];
 				if(champion == sep) {
@@ -24,19 +25,19 @@ var plugin = {
 						"isValid": true,
 						"name": `${value.loadout_champion_name} ${value.loadout_id}`,
 						"order": 1,
-						"primaryStyleId": -1,
+						"primaryStyleId": 8000,
 						"selectedPerkIds": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
+							8021,
+							9111,
+							9103,
+							8014,
+							8313,
+							8321
 						],
-						"subStyleId": -1
+						"subStyleId": 8300
 					};
 				}
-			});
+			}
 			callback(res);
 		}, 300);
 	}

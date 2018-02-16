@@ -32,6 +32,17 @@ freezer.on('api:connected', () => {
 	});
 })
 
+window.plugins = require('./plugins');
+console.log("plugins", plugins);
+(function() {
+	var remote = {}, local = {}
+	Object.keys(plugins).forEach((key) => {
+		if(plugins[key].local === true) local[key] = {name: plugins[key].name};
+		else remote[key] = {name: plugins[key].name};
+	});
+	freezer.get().plugins.set({ local, remote });
+})()
+
 var fs = require('fs');
 var runeforge;
 fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {

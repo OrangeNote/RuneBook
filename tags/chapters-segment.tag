@@ -4,22 +4,18 @@
     <div class="ui horizontal divider">Chapters</div>
 
     <div class="ui top attached pointing small borderless menu">
-      <a class={ opts.tab.active == "local" ? "item active" : "item" } data-tab="local" onclick={ switchTab }>
-        Local pages
-      </a>
-      <div class="vertical divider"></div>
-      <a class={ opts.tab.active == "runeforge" ? "item active" : "item" } data-tab="runeforge" onclick={ switchTab }>
-        Rune Forge
-      </a>
-<!--       <a class="item floated right" data-tab="tab-generic">
-        Generic pages
-      </a> -->
+      <virtual each={ val, key in opts.plugins.local }>
+        <a class={ opts.tab.active == key ? "item active" : "item" } data-tab={key} onclick={ switchTab }>
+          {val.name}
+        </a>
+      </virtual>
+      <virtual each={ val, key in opts.plugins.remote }>
+        <a class={ opts.tab.active == key ? "item active" : "item" } data-tab={key} onclick={ switchTab }>
+          {val.name}
+        </a>
+      </virtual>
 
     </div>
-
-<!--     <div class="ui bottom attached tab segment" data-tab="tab-generic">
-      Generic pages
-    </div> -->
 
     <div class={ opts.tab.loaded ? "ui bottom attached tab segment active" : "ui bottom attached tab segment active loading" }>
       <div class={ opts.current.champion && !_.isEmpty(opts.current.champ_data.pages.toJS()) ? "ui one column centered grid" : "ui one column middle aligned centered grid" } style="height: 384px">

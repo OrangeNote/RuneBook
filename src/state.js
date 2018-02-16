@@ -28,7 +28,9 @@ var state = {
 		champion: null,
 		page: null,
 		valid: false,
-	}
+	},
+
+	plugins: {}
 };
 
 module.exports = new Freezer(state);

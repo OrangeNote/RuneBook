@@ -103,24 +103,12 @@ freezer.on('page:upload', (champion, page) => {
 				console.log("post res", res);
 
 				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
-				/*
-				 * If the page created is invalid, mark it as such in the store.
-				 * This behaviour is not predictable (a page can become invalid at any time),
-				 * so we want to make sure to notify users as soon as we get this info from lcu.
-				 */
-				if(res.isValid === false) {
-					console.log("Warning: page incomplete or malformed.");
-					store.set(`local.${champion}.pages.${page}.isValid`, false);
-					freezer.get().current.champ_data.set(store.get(`local.${champion}`));
-				}
-				/*
-				 * If the page created is valid, but we have an invalid copy in the store,
-				 * then replace the local page with the updated one.
-				 */
-				else if(store.get(`local.${champion}.pages.${page}.isValid`) === false) {
-					store.set(`local.${champion}.pages.${page}`, res);
-					freezer.get().current.champ_data.set(store.get(`local.${champion}`));
-				}
+				
+				var state = freezer.get();
+				if(plugins[state.tab.active].local) plugins[state.tab.active].confirmPageValidity(champion, page, res);
+				plugins[state.tab.active].getPages(champion, (res) => {
+					state.current.champ_data.set(res)
+				});
 			});
 		});
 	}

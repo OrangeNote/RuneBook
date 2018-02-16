@@ -21,7 +21,7 @@ var plugin = {
 						"isActive": false,
 						"isDeletable": true,
 						"isEditable": true,
-						"isValid": false,
+						"isValid": true,
 						"name": `${value.loadout_champion_name} ${value.loadout_id}`,
 						"order": 1,
 						"primaryStyleId": -1,

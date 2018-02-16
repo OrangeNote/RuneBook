@@ -28,33 +28,29 @@ freezer.on('api:connected', () => {
 			}
 			freezer.get().connection.set({ page });
 			freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
-		})
+		});
 	});
-})
+});
 
-window.plugins = require('./plugins');
+var plugins = require('./plugins');
 console.log("plugins", plugins);
-(function() {
-	var remote = {}, local = {}
+function loadPlugins() {
+	var remote = {}, local = {};
 	Object.keys(plugins).forEach((key) => {
 		if(plugins[key].local === true) local[key] = {name: plugins[key].name};
 		else remote[key] = {name: plugins[key].name};
 	});
 	freezer.get().plugins.set({ local, remote });
-})()
-
-var fs = require('fs');
-var runeforge;
-fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
-  if (err) throw err;
-  runeforge = JSON.parse(data);
-});
+}
+loadPlugins();
 
 freezer.on('champion:choose', (champion) => {
 
 	freezer.get().tab.set({ active: freezer.get().tab.active, loaded: false });
 
-	getPages(freezer.get().tab.active, champion, (res) => {
+	var state = freezer.get();
+
+	plugins[state.tab.active].getPages(champion, (res) => {
 		freezer.get().current.set({ champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
 	});
@@ -65,79 +61,35 @@ freezer.on("tab:switch", (tab) => {
 
 	var state = freezer.get();
 
-	getPages(state.tab.active, state.current.champion, (res) => {
+	plugins[state.tab.active].getPages(state.current.champion, (res) => {
 		freezer.get().current.set({ champion: freezer.get().current.champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
 	});
-})
-
-function getPages(tab, champion, callback) {
-	if(tab == "local") {
-		callback(store.get(`local.${champion}`));
-	}
-	else if(tab == "runeforge") {
-		setTimeout(() => {
-			var res = {pages: {}};
-			_.forOwn(runeforge, function(value, key) {
-				var sep = value.loadout_champion_grid.split("/");
-				sep = sep[sep.length - 1].split(".")[0];
-				if(champion == sep) {
-					res.pages[`${value.loadout_champion_name} ${value.loadout_id}`] = {
-						"current": true,
-						"isActive": false,
-						"isDeletable": true,
-						"isEditable": true,
-						"isValid": false,
-						"name": `${value.loadout_champion_name} ${value.loadout_id}`,
-						"order": 1,
-						"primaryStyleId": -1,
-						"selectedPerkIds": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"subStyleId": -1
-					};
-				}
-			});
-			callback(res);
-		}, 300);
-	}
-}
+});
 
 freezer.on('page:fav', (champion, page) => {
 	var state = freezer.get();
-
-	if(store.get(`local.${champion}.fav`) == page) {
-		store.set(`local.${champion}.fav`, null);
-	}
-	else store.set(`local.${champion}.fav`, page);
-
-	state.current.champ_data.set(store.get(`local.${champion}`));
+	plugins[state.tab.active].favPage(champion, page);
+	plugins[state.tab.active].getPages(champion, (res) => {
+		state.current.champ_data.set(res);	
+	});
 });
 
 freezer.on('page:delete', (champion, page) => {
 	var state = freezer.get();
-
-	store.delete(`local.${champion}.pages.${page}`);
-
-	if(store.get(`local.${champion}.fav`) == page) {
-		store.set(`local.${champion}.fav`, null);
-	}
-
-	state.current.champ_data.set(store.get(`local.${champion}`));
+	plugins[state.tab.active].deletePage(champion, page);
+	plugins[state.tab.active].getPages(champion, (res) => {
+		state.current.champ_data.set(res);	
+	});
 });
 
 freezer.on('page:upload', (champion, page) => {
+	var state = freezer.get();
 
-	page_data = store.get(`local.${champion}.pages.${page}`);
+	page_data = state.current.champ_data.pages[page];
 	page_data.name = page;
 	page_data.current = true;
 
-	var state = freezer.get();
 	console.log("page.id, page.isEditable", state.connection.page.id, state.connection.page.isEditable);
 	if(state.connection.page.id && state.connection.page.isEditable) {
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
@@ -148,6 +100,7 @@ freezer.on('page:upload', (champion, page) => {
 					console.log("Error: no response after page upload request.");
 					return;
 				}
+				console.log("post res", res);
 
 				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
 				/*
@@ -177,13 +130,12 @@ freezer.on('currentpage:download', () => {
 	var state = freezer.get();
 
 	var champion = state.current.champion;
-	var pages = store.get(`local.${champion}.pages`) || {};
-
 	var page = state.connection.page;
-	pages[page.name] = page;
 
-	store.set(`local.${champion}.pages`, pages);
-	state.current.champ_data.set(store.get(`local.${champion}`));
+	plugins[state.tab.active].setPage(champion, page);
+	plugins[state.tab.active].getPages(champion, (res) => {
+		state.current.champ_data.set(res);	
+	});
 });
 
 freezer.on('/lol-login/v1/session:Update', (session) => {

@@ -14,7 +14,7 @@
   
   <footer>
     <div style="margin-bottom: 20px">
-      <current-page connection={connection} session={session} current={current} tab={tab}></current-page>
+      <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins}></current-page>
     </div>
     <connection-status session={session}></connection-status>
   </footer>

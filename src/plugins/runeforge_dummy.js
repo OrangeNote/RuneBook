@@ -7,7 +7,7 @@ fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
 
 var plugin = {
 	name: "Dummy Rune Forge",
-	active: true,
+	active: false,
 
 	getPages(champion, callback) {
 		setTimeout(() => {

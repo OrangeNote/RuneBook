@@ -105,10 +105,12 @@ freezer.on('page:upload', (champion, page) => {
 				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
 				
 				var state = freezer.get();
-				if(plugins[state.tab.active].local) plugins[state.tab.active].confirmPageValidity(champion, page, res);
-				plugins[state.tab.active].getPages(champion, (res) => {
-					state.current.champ_data.set(res)
-				});
+				if(plugins[state.tab.active].local) {
+					plugins[state.tab.active].confirmPageValidity(champion, page, res);
+					plugins[state.tab.active].getPages(champion, (res) => {
+						state.current.champ_data.set(res)
+					});
+				}
 			});
 		});
 	}

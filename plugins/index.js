@@ -19,4 +19,4 @@ collectExports = function(file) {
   }
 };
 
-fs.readdirSync('./src/plugins').forEach(collectExports);
+fs.readdirSync('./plugins').forEach(collectExports);

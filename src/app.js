@@ -32,7 +32,7 @@ freezer.on('api:connected', () => {
 	});
 });
 
-var plugins = require('./plugins');
+var plugins = require('../plugins');
 console.log("plugins", plugins);
 function loadPlugins() {
 	var remote = {}, local = {};

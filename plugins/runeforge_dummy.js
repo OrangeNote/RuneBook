@@ -1,9 +1,4 @@
-var fs = require('fs');
-var runeforge;
-fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
-  if (err) throw err;
-  runeforge = JSON.parse(data);
-});
+var fs, runeforge;
 
 var plugin = {
 	name: "Dummy Rune Forge",
@@ -41,6 +36,14 @@ var plugin = {
 			callback(res);
 		}, 300);
 	}
+};
+
+if(plugin.active) {
+	fs = require('fs');
+	fs.readFile('./resources/runeforge.json', 'utf8', function (err, data) {
+	  if (err) throw err;
+	  runeforge = JSON.parse(data);
+	});
 }
 
 module.exports = { plugin };

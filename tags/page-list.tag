@@ -36,21 +36,22 @@
     setFav(evt) {
       evt.preventUpdate = true;
       
-      var page = $(evt.target).data("key");
+      var page = $(evt.target).attr("data-key");
       freezer.emit("page:fav", opts.current.champion, page);
     }
 
     deletePage(evt) {
       evt.preventUpdate = true;
 
-      var page = $(evt.target).data("key");
+      var page = $(evt.target).attr("data-key");
       freezer.emit("page:delete", opts.current.champion, page);
     }
 
     uploadPage(evt) {
       evt.preventUpdate = true;
 
-      var page = $(evt.target).data("key");
+      var page = $(evt.target).attr("data-key");
+      console.log("DEV page key", page);
       freezer.emit("page:upload", opts.current.champion, page);
     }
 

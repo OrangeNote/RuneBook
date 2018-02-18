@@ -85,7 +85,9 @@ freezer.on('page:delete', (champion, page) => {
 
 freezer.on('page:upload', (champion, page) => {
 	var state = freezer.get();
-
+	console.log("DEV page", page);
+	console.log("DEV page data", state.current.champ_data.pages[page]);
+	console.log("DEV state pages", state.current.champ_data.pages);
 	page_data = state.current.champ_data.pages[page];
 	page_data.name = page;
 	page_data.current = true;

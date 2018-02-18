@@ -44,7 +44,7 @@
     switchTab(evt) {
       evt.preventUpdate = true;
 
-      var tab = $(evt.target).data("tab");
+      var tab = $(evt.target).attr("data-tab");
       freezer.emit("tab:switch", tab);
     }
   

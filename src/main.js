@@ -15,6 +15,7 @@ function createWindow () {
     width: 768,
     height: 768,
     maximizable: false,
+    useContentSize: true,
   }
 
   if (process.platform == 'darwin') {

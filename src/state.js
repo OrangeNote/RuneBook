@@ -28,6 +28,7 @@ var state = {
 		champion: null,
 		page: null,
 		valid: false,
+		loading: false
 	},
 
 	plugins: {}

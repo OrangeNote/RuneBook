@@ -94,23 +94,33 @@ freezer.on('page:upload', (champion, page) => {
 
 	console.log("page.id, page.isEditable", state.connection.page.id, state.connection.page.isEditable);
 	if(state.connection.page.id && state.connection.page.isEditable) {
+		freezer.off('/lol-perks/v1/currentpage:Update');
+		freezer.get().lastuploadedpage.set({ champion, page, loading: true });
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
 			console.log("api delete current page", res);
 
 			api.post("/lol-perks/v1/pages/", page_data).then((res) => {
 				if(!res) {
 					console.log("Error: no response after page upload request.");
+					api.get("/lol-perks/v1/currentpage").then((res) => {
+						handleCurrentPageUpdate(res);
+						freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
+					});
 					return;
 				}
 				console.log("post res", res);
-
-				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true });
+				api.get("/lol-perks/v1/currentpage").then((res) => {
+					handleCurrentPageUpdate(res);
+					freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
+				});
+				freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
+				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true, loading: false });
 				
 				var state = freezer.get();
 				if(plugins[state.tab.active].local) {
 					plugins[state.tab.active].confirmPageValidity(champion, page, res);
 					plugins[state.tab.active].getPages(champion, (res) => {
-						state.current.champ_data.set(res)
+						state.current.champ_data.set(res);
 					});
 				}
 			});
@@ -138,13 +148,15 @@ freezer.on('/lol-login/v1/session:Update', (session) => {
 	freezer.get().connection.set({ page: null });
 })
 
-freezer.on('/lol-perks/v1/currentpage:Update', (page) => {
+function handleCurrentPageUpdate(page) {
 	var state = freezer.get();
 
 	console.log("currentpage:Update", page.name);
 	state.connection.set({ page });
-	freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
-});
+	if(page.name != freezer.get().lastuploadedpage.page) freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
+}
+
+freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
 
 const LCUConnector = require('lcu-connector');
 const connector = new LCUConnector();

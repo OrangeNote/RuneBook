@@ -51,6 +51,7 @@ freezer.on('champion:choose', (champion) => {
 	var state = freezer.get();
 
 	plugins[state.tab.active].getPages(champion, (res) => {
+		if(freezer.get().tab.active != state.tab.active) return;
 		freezer.get().current.set({ champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
 	});
@@ -62,6 +63,7 @@ freezer.on("tab:switch", (tab) => {
 	var state = freezer.get();
 
 	plugins[state.tab.active].getPages(state.current.champion, (res) => {
+		if(freezer.get().tab.active != state.tab.active) return;
 		freezer.get().current.set({ champion: freezer.get().current.champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
 	});

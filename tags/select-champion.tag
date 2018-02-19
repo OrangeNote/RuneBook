@@ -20,9 +20,9 @@
               <div class="default text">Champion name...</div>
             </div> -->
 
-            <div class="ui search fluid">
+            <div class="ui search loading disabled fluid">
               <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="Champion name..." onClick="this.select();">
+                <input disabled class="prompt" type="text" placeholder="Champion name..." onClick="this.select();">
                 <i class="search icon"></i>
               </div>
               <div class="results"></div>
@@ -72,7 +72,11 @@
         
         ddres = handleDDRes2(JSON.parse(ddres));
 
-        $('.ui.search').search({
+        var search_el = $('.ui.search');
+        search_el.removeClass("loading");
+        $('input', search_el).prop("disabled", false);
+
+        search_el.search({
           source: ddres,
           duration: 0,
           searchDelay: 0,

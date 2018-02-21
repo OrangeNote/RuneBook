@@ -77,7 +77,9 @@ var perksMap = {
 	"Minion Dematerializer":8316,
 	"Cosmic Insight":8347,
 	"Approach Velocity":8410,
-	"Celestial Body":8339
+	"Celestial Body":8339,
+	"Bone Plating":8473,
+	"Time Warp Tonic":8352
 };
 
 function exctractPage(html) {

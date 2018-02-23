@@ -31,6 +31,11 @@ var state = {
 		loading: false
 	},
 
+	lastbookmarkedpage: {
+		champion: null,
+		page: null
+	},
+
 	plugins: {}
 };
 

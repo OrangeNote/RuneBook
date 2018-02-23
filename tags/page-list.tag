@@ -40,7 +40,7 @@
         </div>
 
         <div if={ opts.plugins.remote[opts.tab.active] && opts.plugins.remote[opts.tab.active].bookmarks } class="ui icon button" data-key={key} onclick={ bookmarkPage }>
-          <i class="bookmark icon" data-key={key}></i>
+          <i class={opts.lastbookmarkedpage.page == key && opts.lastbookmarkedpage.champion == opts.current.champion ? "checkmark icon" : "bookmark icon"} data-key={key}></i>
         </div>
       
       </div>

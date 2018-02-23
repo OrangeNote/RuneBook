@@ -9,7 +9,7 @@
 
   <main>
     <select-champion champion={current.champion}></select-champion>
-    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins}></chapters-segment>
+    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins} lastbookmarkedpage={lastbookmarkedpage}></chapters-segment>
   </main>
   
   <footer>
@@ -39,6 +39,7 @@
     this.session = opts.session;
     this.tab = opts.tab;
     this.plugins = opts.plugins;
+    this.lastbookmarkedpage = opts.lastbookmarkedpage;
 
     freezer.on('update', () => {
     this.update(freezer.get());

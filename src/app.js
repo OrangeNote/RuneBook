@@ -93,13 +93,14 @@ freezer.on('page:unlinkbookmark', (champion, page) => {
 	});
 });
 
-freezer.on('page:bookmark', (champion, page) => {
+freezer.on('page:bookmark', (champion, pagename) => {
 	var state = freezer.get();
 
-	page = state.current.champ_data.pages[page];
+	page = state.current.champ_data.pages[pagename];
 	console.log(page)
 
 	plugins["local"].setPage(champion, page);
+	freezer.get().lastbookmarkedpage.set({ champion, page: pagename });
 });
 
 freezer.on('page:syncbookmark', (champion, page) => {

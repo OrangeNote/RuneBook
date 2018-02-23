@@ -3,9 +3,6 @@ var runeforge;
 var connected = false;
 
 function connect(callback) {
-	var r = Math.random();
-	console.log(r);
-	if(r < 0.8) return callback(false);
 	request.post("http://runeforge.gg/all-loadouts-data.json", (error, response, data) => {
 		if(!error && response.statusCode == 200) {
 			runeforge = JSON.parse(data);

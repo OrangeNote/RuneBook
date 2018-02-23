@@ -82,7 +82,7 @@
           searchDelay: 0,
           showNoResults: false,
           maxResults: 14,
-          searchFullText: true,
+          fullTextSearch: true,
           selectFirstResult: true,
           searchFields: ['title', 'info'],
           regExp: {

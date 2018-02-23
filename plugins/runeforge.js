@@ -91,8 +91,14 @@ var perksMap = {
 	"Time Warp Tonic":8352
 };
 
-function exctractPage(html) {
+function exctractPage(html, pageUrl) {
+	console.log(pageUrl)
 	var $ = cheerio.load(html);
+
+	if(typeof pageUrl === "undefined") {
+		pageUrl = $("link[rel='canonical']").attr("href");
+	}
+
 	var path = $("div.rune-paths").first();
 
 	var name = $(".loadout-title").text();
@@ -102,7 +108,8 @@ function exctractPage(html) {
 			"name": name,
 			"primaryStyleId": -1,
 			"selectedPerkIds": [0, 0, 0, 0, 0, 0],
-			"subStyleId": -1
+			"subStyleId": -1,
+			"bookmark": { "src": pageUrl, "remote": { "name": plugin.name, "id": plugin.id } }
 		};
 
 	var data = [];
@@ -137,17 +144,25 @@ function _getPages(champion, callback) {
 	}
 	var callCount = 0;
 	for(var i = 0; i < pageUrls.length; i++) {
-		$.post(pageUrls[i], (html) => {
-			var page = exctractPage(html);
-			res.pages[page.name] = page;
-			if(++callCount == pageUrls.length) callback(res);
+
+		request.post(pageUrls[i], (error, response, html) => {
+			if(!error && response.statusCode == 200) {
+				var page = exctractPage(html);
+				res.pages[page.name] = page;
+				if(++callCount == pageUrls.length) callback(res);
+			}
+			else {
+				throw Error("rune page not loaded");
+			}
 		});
 	}
 }
 
 var plugin = {
+	id: "runeforge",
 	name: "Rune Forge",
 	active: true,
+	bookmarks: true,
 
 	getPages(champion, callback) {
 		if(!connected) connect((res) => {
@@ -155,6 +170,17 @@ var plugin = {
 			_getPages(champion, callback);
 		});
 		else _getPages(champion, callback);
+	},
+
+	syncBookmark(url, callback) {
+		request.post(url, (error, response, html) => {
+			if(!error && response.statusCode == 200) {
+				callback(exctractPage(html, url));
+			}
+			else {
+				throw Error("rune page not loaded");
+			}
+		});
 	}
 }
 

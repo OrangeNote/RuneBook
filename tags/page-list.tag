@@ -28,11 +28,19 @@
         </div>
         
         <div if={ opts.plugins.local[opts.tab.active] } class="ui icon button" onclick={ setFav } data-key={key}>
-          <i class={ key == opts.current.champ_data.fav ? "heart icon" : "empty heart icon" } data-key={key}></i>
+          <i class={ key == opts.current.champ_data.fav ? "heart icon" : "heart outline icon" } data-key={key}></i>
         </div>
         
-        <div if={ opts.plugins.local[opts.tab.active] } class="ui icon button" data-key={key} onclick={ deletePage }>
-          <i class="trash icon" data-key={key}></i>
+        <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={"Sync from " + page.bookmark.remote.name} data-position="top right" data-inverted="" onclick={ syncBookmark }>
+          <i class="sync alternate icon" data-key={key}></i>
+        </div>
+
+        <div if={ opts.plugins.local[opts.tab.active] } class="ui icon circular red button" data-key={key} onclick={ page.bookmark ? unlinkBookmark : deletePage }>
+          <i class={page.bookmark ? "unlink icon" : "trash icon"} data-key={key}></i>
+        </div>
+
+        <div if={ opts.plugins.remote[opts.tab.active] && opts.plugins.remote[opts.tab.active].bookmarks } class="ui icon button" data-key={key} onclick={ bookmarkPage }>
+          <i class="bookmark icon" data-key={key}></i>
         </div>
       
       </div>
@@ -63,7 +71,29 @@
       evt.preventUpdate = true;
 
       var page = $(evt.target).attr("data-key");
+      console.log(page)
       freezer.emit("page:delete", opts.current.champion, page);
+    }
+
+    unlinkBookmark(evt) {
+      evt.preventUpdate = true;
+
+      var page = $(evt.target).attr("data-key");
+      freezer.emit("page:unlinkbookmark", opts.current.champion, page);
+    }
+
+    syncBookmark(evt) {
+      evt.preventUpdate = true;
+
+      var page = $(evt.target).attr("data-key");
+      freezer.emit("page:syncbookmark", opts.current.champion, page);
+    }
+
+    bookmarkPage(evt) {
+      evt.preventUpdate = true;
+
+      var page = $(evt.target).attr("data-key");
+      freezer.emit("page:bookmark", opts.current.champion, page);
     }
 
     uploadPage(evt) {

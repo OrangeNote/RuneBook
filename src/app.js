@@ -38,7 +38,7 @@ function loadPlugins() {
 	var remote = {}, local = {};
 	Object.keys(plugins).forEach((key) => {
 		if(plugins[key].local === true) local[key] = {name: plugins[key].name};
-		else remote[key] = {name: plugins[key].name};
+		else remote[key] = {name: plugins[key].name, bookmarks: plugins[key].bookmarks || false};
 	});
 	freezer.get().plugins.set({ local, remote });
 }
@@ -82,6 +82,37 @@ freezer.on('page:delete', (champion, page) => {
 	plugins[state.tab.active].deletePage(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {
 		state.current.champ_data.set(res);	
+	});
+});
+
+freezer.on('page:unlinkbookmark', (champion, page) => {
+	var state = freezer.get();
+	plugins[state.tab.active].unlinkBookmark(champion, page);
+	plugins[state.tab.active].getPages(champion, (res) => {
+		state.current.champ_data.set(res);	
+	});
+});
+
+freezer.on('page:bookmark', (champion, page) => {
+	var state = freezer.get();
+
+	page = state.current.champ_data.pages[page];
+	console.log(page)
+
+	plugins["local"].setPage(champion, page);
+});
+
+freezer.on('page:syncbookmark', (champion, page) => {
+	var state = freezer.get();
+
+	page = state.current.champ_data.pages[page];
+	console.log(page)
+
+	plugins[page.bookmark.remote.id].syncBookmark(page.bookmark.src, (_page) => {
+		plugins[state.tab.active].setPage(champion, _page);
+		plugins[state.tab.active].getPages(champion, (res) => {
+			state.current.champ_data.set(res);	
+		});
 	});
 });
 

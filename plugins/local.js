@@ -19,10 +19,17 @@ var plugin = {
 	},
 
 	deletePage(champion, page) {
+		console.log(champion, page)
+		page = page.replace(/\./g, '\\.');
 		store.delete(`local.${champion}.pages.${page}`);
 		if(store.get(`local.${champion}.fav`) == page) {
 			store.set(`local.${champion}.fav`, null);
 		}
+	},
+
+	unlinkBookmark(champion, page) {
+		page = page.replace(/\./g, '\\.');
+		store.delete(`local.${champion}.pages.${page}.bookmark`);
 	},
 
 	setPage(champion, page) {
@@ -32,6 +39,7 @@ var plugin = {
 	},
 
 	confirmPageValidity(champion, page, res) {
+		page = page.replace(/\./g, '\\.');
 		/*
 		 * If the page returned is invalid, mark it as such in the store.
 		 * This behaviour is not predictable (a page can become invalid at any time),

@@ -41,114 +41,34 @@ function destroy() {
 	ws = null;
 }
 
-function post(endpoint, body) {
-	return new Promise(resolve => {	
-		
-		var options = {
-			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
-			auth: {
-				"user": conn_data.username,
-				"pass": conn_data.password
-			},
-			headers: {
-				'Accept': 'application/json'
-			},
-			json: true,
-			body: body,
-			rejectUnauthorized: false
-		};
+var methods = {};
+["post", "put", "get", "del"].forEach(function(method) {
+	methods[method] = function(endpoint, body) {
+		return new Promise(resolve => {	
+			var options = {
+				url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
+				auth: {
+					"user": conn_data.username,
+					"pass": conn_data.password
+				},
+				headers: {
+					'Accept': 'application/json'
+				},
+				json: true,
+				body: body,
+				rejectUnauthorized: false
+			};
 
-		request.post(options, (error, response, data) => {
-			if (error || response.statusCode != 200) {
-				resolve();
-				return;
-			}
+			request[method](options, (error, response, data) => {
+				if (error || response.statusCode != 200) {
+					resolve();
+					return;
+				}
 
-			resolve(data);
+				resolve(data);
+			});
 		});
-	});
-}
+	};
+});
 
-function put(endpoint, body) {
-	return new Promise(resolve => {	
-		
-		var options = {
-			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
-			auth: {
-				"user": conn_data.username,
-				"pass": conn_data.password
-			},
-			headers: {
-				'Accept': 'application/json'
-			},
-			json: true,
-			body: body,
-			rejectUnauthorized: false
-		};
-
-		request.put(options, (error, response, data) => {
-			if (error || response.statusCode != 200) {
-				resolve();
-				return;
-			}
-
-			resolve(data);
-		});
-	});
-}
-
-function get(endpoint) {
-	return new Promise(resolve => {	
-		
-		var options = {
-			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
-			auth: {
-				"user": conn_data.username,
-				"pass": conn_data.password
-			},
-			headers: {
-				'Accept': 'application/json'
-			},
-			json: true,
-			rejectUnauthorized: false
-		};
-
-		request.get(options, (error, response, data) => {
-			if (error || response.statusCode != 200) {
-				resolve();
-				return;
-			}
-
-			resolve(data);
-		});
-	});
-}
-
-function del(endpoint) {
-	return new Promise(resolve => {	
-		
-		var options = {
-			url: `${conn_data.protocol}://${conn_data.address}:${conn_data.port}${endpoint}`,
-			auth: {
-				"user": conn_data.username,
-				"pass": conn_data.password
-			},
-			headers: {
-				'Accept': 'application/json'
-			},
-			json: true,
-			rejectUnauthorized: false
-		};
-
-		request.delete(options, (error, response, data) => {
-			if (error || response.statusCode != 200) {
-				resolve();
-				return;
-			}
-
-			resolve(data);
-		});
-	});
-}
-
-module.exports = { bind, destroy, post, get, put, del };
+module.exports = Object.assign({bind, destroy}, methods);

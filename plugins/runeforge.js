@@ -1,12 +1,24 @@
 var request = require('request');
 var runeforge;
+var connected = false;
 
-request.post("http://runeforge.gg/all-loadouts-data.json", (error, response, data) => {
-	if (error || response.statusCode != 200) {
-		console.log("runeforge json not loaded");
-	}
-	runeforge = JSON.parse(data);
-});
+function connect(callback) {
+	var r = Math.random();
+	console.log(r);
+	if(r < 0.8) return callback(false);
+	request.post("http://runeforge.gg/all-loadouts-data.json", (error, response, data) => {
+		if(!error && response.statusCode == 200) {
+			runeforge = JSON.parse(data);
+			callback(true);
+		}
+		else {
+			callback(false);
+			throw Error("runeforge json not loaded");
+		}
+	});
+}
+
+connect((res) => { connected = res; });
 
 var cheerio = require('cheerio');
 
@@ -111,32 +123,41 @@ function exctractPage(html) {
 	return page;
 }
 
+function _getPages(champion, callback) {
+	var res = {pages: {}};
+
+	if(!runeforge) return callback(res);
+
+	var pageUrls = [];
+
+	for(var i = 0; i < runeforge.length; i++) {
+		var pageData = runeforge[i];
+		var sep = pageData.loadout_champion_grid.split("/");
+		sep = sep[sep.length - 1].split(".")[0];
+		if(champion == sep) {
+			pageUrls.push(pageData.loadout_url);
+		}
+	}
+	var callCount = 0;
+	for(var i = 0; i < pageUrls.length; i++) {
+		$.post(pageUrls[i], (html) => {
+			var page = exctractPage(html);
+			res.pages[page.name] = page;
+			if(++callCount == pageUrls.length) callback(res);
+		});
+	}
+}
+
 var plugin = {
 	name: "Rune Forge",
 	active: true,
 
 	getPages(champion, callback) {
-		var res = {pages: {}};
-
-		var pageUrls = [];
-
-		for(var i = 0; i < runeforge.length; i++) {
-			var pageData = runeforge[i];
-			var sep = pageData.loadout_champion_grid.split("/");
-			sep = sep[sep.length - 1].split(".")[0];
-			if(champion == sep) {
-				pageUrls.push(pageData.loadout_url);
-			}
-		}
-		var callCount = 0;
-		for(var i = 0; i < pageUrls.length; i++) {
-			$.post(pageUrls[i], (html) => {
-				var page = exctractPage(html);
-				res.pages[page.name] = page;
-				if(++callCount == pageUrls.length) callback(res);
-			});
-		}
-		
+		if(!connected) connect((res) => {
+			connected = res;
+			_getPages(champion, callback);
+		});
+		else _getPages(champion, callback);
 	}
 }
 

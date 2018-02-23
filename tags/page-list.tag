@@ -1,10 +1,22 @@
 <page-list>
   <h2 if={ opts.current.champion && _.isEmpty(opts.current.champ_data.pages.toJS()) } class="ui center aligned icon header">
-    <i class="sticky note outline icon"></i>
-    <div class="content">
-      You don't seem to have any pages for this champion.
-      <div class="sub header">Click the button below to import from your current page.</div>
-    </div>
+    <virtual if={ opts.plugins.local[opts.tab.active] }>
+      <i class="sticky note outline icon"></i>
+      <div class="content">
+        You don't seem to have any pages for this champion.
+        <div class="sub header">Click the button below to import from your current page.</div>
+      </div>
+    </virtual>
+    <virtual if={ !opts.plugins.local[opts.tab.active] }>
+      <i class="frown outline icon"></i>
+      <div class="content">
+        Couldn't find rune pages for this champion.
+        <div class="sub header">No pages found or service temporarily unavailable.<br>
+        If the error persists, please
+        <a href="https://github.com/OrangeNote/RuneBook/issues">send an issue on GitHub.</a>
+        </div>
+      </div>
+    </virtual>
   </h2>
 
   <div if={ opts.current.champion } class="ui middle aligned relaxed divided list" style="height: 100%; overflow-y: auto;">
@@ -32,6 +44,13 @@
   </div>
 
   <script>
+    
+    var shell = require('electron').shell;
+    //open links externally by default
+    $(document).on('click', 'a[href^="http"]', function(event) {
+        event.preventDefault();
+        shell.openExternal(this.href);
+    });
 
     setFav(evt) {
       evt.preventUpdate = true;

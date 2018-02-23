@@ -31,11 +31,11 @@
           <i class={ key == opts.current.champ_data.fav ? "heart icon" : "heart outline icon" } data-key={key}></i>
         </div>
         
-        <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={"Sync from " + page.bookmark.remote.name} data-position="top right" data-inverted="" onclick={ syncBookmark }>
+        <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={"Sync from " + page.bookmark.remote.name} data-position="left center" data-inverted="" onclick={ syncBookmark }>
           <i class="sync alternate icon" data-key={key}></i>
         </div>
 
-        <div if={ opts.plugins.local[opts.tab.active] } class="ui icon circular red button" data-key={key} onclick={ page.bookmark ? unlinkBookmark : deletePage }>
+        <div if={ opts.plugins.local[opts.tab.active] } class="ui icon button {red: !page.bookmark}" data-key={key} data-tooltip={page.bookmark ? "Unlink this page" : ""} data-position="left center" data-inverted="" onclick={ page.bookmark ? unlinkBookmark : deletePage }>
           <i class={page.bookmark ? "unlink icon" : "trash icon"} data-key={key}></i>
         </div>
 

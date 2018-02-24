@@ -58,6 +58,7 @@ function exctractPage(html, champion, rec, callback, pageType) {
 		var els = $(`li[class!='selected-role'] a[href^='/champion/${champion}']`);
 		console.log("IF REC TRUE")
 		console.log("ELS length", els.length)
+		if(els.length == 0) return callback(pages);
 		els.each(function(index) {
 			console.log(url + "/champion/" + champion + "/" + $(this).text().trim())
 			request.get(url + "/champion/" + champion + "/" + $(this).text().trim(), (error, response, _html) => {

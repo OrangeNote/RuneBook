@@ -96,6 +96,7 @@ freezer.on("tab:switch", (tab) => {
 
 	state = freezer.get();
 
+	if(!state.current.champion) return;
 	plugins[state.tab.active].getPages(state.current.champion, (res) => {
 		if(freezer.get().tab.active != state.tab.active) return;
 		freezer.get().current.set({ champion: freezer.get().current.champion, champ_data: res || {pages: {}} });

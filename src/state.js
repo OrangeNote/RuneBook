@@ -36,6 +36,12 @@ var state = {
 		page: null
 	},
 
+	lastsyncedpage: {
+		champion: null,
+		page: null,
+		loading: false
+	},
+
 	plugins: {}
 };
 

@@ -38,7 +38,11 @@ function loadPlugins() {
 	var remote = {}, local = {};
 	Object.keys(plugins).forEach((key) => {
 		if(plugins[key].local === true) local[key] = {name: plugins[key].name};
-		else remote[key] = {name: plugins[key].name, bookmarks: plugins[key].bookmarks || false};
+		else remote[key] = {
+			name: plugins[key].name,
+			bookmarks: plugins[key].bookmarks || false,
+			cache: {}
+		};
 	});
 	freezer.get().plugins.set({ local, remote });
 }
@@ -46,26 +50,60 @@ loadPlugins();
 
 freezer.on('champion:choose', (champion) => {
 
+	var state = freezer.get();
+
+	var plugin = state.tab.active;
+
+	// Check if champion is already been cached before asking the remote plugin
+	if(state.plugins.remote[plugin] && state.plugins.remote[plugin].cache[champion]) {
+		freezer.get().current.set({ champion, champ_data: state.plugins.remote[plugin].cache[champion] || {pages: {}} });
+		console.log("CACHE HIT!");
+		return;
+	}
+
 	freezer.get().tab.set({ active: freezer.get().tab.active, loaded: false });
 	freezer.get().current.set({ champion }); // update champ portrait before the data response
-	var state = freezer.get();
+
+	state = freezer.get();
 
 	plugins[state.tab.active].getPages(champion, (res) => {
 		if(freezer.get().tab.active != state.tab.active) return;
 		freezer.get().current.set({ champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
+
+		// Cache results obtained from a remote source
+		if(freezer.get().plugins.remote[plugin])
+			freezer.get().plugins.remote[plugin].cache.set(champion, res);
 	});
 });
 
 freezer.on("tab:switch", (tab) => {
-	freezer.get().tab.set({ active: tab, loaded: tab == "local" || !freezer.get().current.champion });
+	freezer.get().tab.set({ active: tab, loaded: true });
 
 	var state = freezer.get();
+
+	var plugin = state.tab.active;
+	var champion = freezer.get().current.champion;
+
+	// Check if champion is already been cached before asking the remote plugin
+	if(state.plugins.remote[plugin] && state.plugins.remote[plugin].cache[champion]) {
+		freezer.get().current.set({ champion, champ_data: state.plugins.remote[plugin].cache[champion] || {pages: {}} });
+		console.log("CACHE HIT!");
+		return;
+	}
+
+	freezer.get().tab.set({ active: tab, loaded: tab == "local" || !freezer.get().current.champion });
+
+	state = freezer.get();
 
 	plugins[state.tab.active].getPages(state.current.champion, (res) => {
 		if(freezer.get().tab.active != state.tab.active) return;
 		freezer.get().current.set({ champion: freezer.get().current.champion, champ_data: res || {pages: {}} });
 		freezer.get().tab.set({ loaded: true });
+
+		// Cache results obtained from a remote source
+		if(freezer.get().plugins.remote[plugin])
+			freezer.get().plugins.remote[plugin].cache.set(champion, res);
 	});
 });
 
@@ -101,9 +139,12 @@ freezer.on('page:bookmark', (champion, pagename) => {
 
 	plugins["local"].setPage(champion, page);
 	freezer.get().lastbookmarkedpage.set({ champion, page: pagename });
+	freezer.get().lastsyncedpage.set({ champion: null, page: null, loading: false });
 });
 
 freezer.on('page:syncbookmark', (champion, page) => {
+	freezer.get().lastsyncedpage.set({champion, page, loading: true});
+
 	var state = freezer.get();
 
 	page = state.current.champ_data.pages[page];
@@ -112,7 +153,8 @@ freezer.on('page:syncbookmark', (champion, page) => {
 	plugins[page.bookmark.remote.id].syncBookmark(page.bookmark.src, (_page) => {
 		plugins[state.tab.active].setPage(champion, _page);
 		plugins[state.tab.active].getPages(champion, (res) => {
-			state.current.champ_data.set(res);	
+			state.current.champ_data.set(res);
+			freezer.get().lastsyncedpage.set({champion, _page, loading: false});
 		});
 	});
 });

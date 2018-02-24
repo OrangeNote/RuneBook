@@ -172,10 +172,10 @@ var plugin = {
 		else _getPages(champion, callback);
 	},
 
-	syncBookmark(url, callback) {
-		request.post(url, (error, response, html) => {
+	syncBookmark(bookmark, callback) {
+		request.post(bookmark.src, (error, response, html) => {
 			if(!error && response.statusCode == 200) {
-				callback(exctractPage(html, url));
+				callback(exctractPage(html, bookmark.src));
 			}
 			else {
 				throw Error("rune page not loaded");

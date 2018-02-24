@@ -150,7 +150,7 @@ freezer.on('page:syncbookmark', (champion, page) => {
 	page = state.current.champ_data.pages[page];
 	console.log(page)
 
-	plugins[page.bookmark.remote.id].syncBookmark(page.bookmark.src, (_page) => {
+	plugins[page.bookmark.remote.id].syncBookmark(page.bookmark, (_page) => {
 		plugins[state.tab.active].setPage(champion, _page);
 		plugins[state.tab.active].getPages(champion, (res) => {
 			state.current.champ_data.set(res);

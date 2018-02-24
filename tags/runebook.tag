@@ -2,7 +2,7 @@
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
-          RuneBook
+          RuneBook (v{window.require('electron').remote.app.getVersion()})
       </div>
     </div>
   </header>

@@ -1,13 +1,16 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, shell} = require('electron')
 const {autoUpdater} = require("electron-updater")
 const path = require('path')
 const url = require('url')
+const request = require('request')
 
 require('electron-debug')({enabled: true});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+
+var latestv = null;
 
 function createWindow () {
 
@@ -59,11 +62,29 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', function() {
   createWindow();
-  if (process.platform !== 'darwin') {
-    win.webContents.on("did-finish-load", () => {
+  win.webContents.on("did-finish-load", () => {
+    if (process.platform !== 'darwin') {
       autoUpdater.checkForUpdates();
-    });
-  }
+    }
+    else {
+      request({
+        url: 'https://api.github.com/repos/OrangeNote/RuneBook/releases/latest',
+        headers: {
+          'User-Agent': 'request'
+        }
+      },
+      function (error, response, data) {
+        if(!error && response && response.statusCode == 200) {
+          data = JSON.parse(data);
+          latestv = data.tag_name.substring(1);
+          if(latestv !== app.getVersion()) {
+            win.webContents.send('update:ready');
+          }
+        }
+        else throw Error("github api error");
+      })
+    }
+  });
 })
 
 // Quit when all windows are closed.
@@ -93,5 +114,10 @@ autoUpdater.on('update-downloaded', (info) => {
 
 // when receiving a quitAndInstall signal, quit and install the new version ;)
 ipcMain.on("update:do", (event, arg) => {
-  autoUpdater.quitAndInstall();
+  if (process.platform !== 'darwin') {
+    autoUpdater.quitAndInstall();
+  }
+  else {
+    shell.openExternal(`https://github.com/OrangeNote/RuneBook/releases/download/v${latestv}/RuneBook-${latestv}-mac.zip`)
+  }
 })

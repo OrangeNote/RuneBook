@@ -1,5 +1,5 @@
 title: RuneBook
 description: 📖 RuneBook is an arcane app for LoL that automatically manages your rune pages 📜
-show_downloads: true
+show_downloads: false
 theme: jekyll-theme-cayman
 exclude: index.html

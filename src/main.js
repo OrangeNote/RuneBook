@@ -93,6 +93,5 @@ autoUpdater.on('update-downloaded', (info) => {
 
 // when receiving a quitAndInstall signal, quit and install the new version ;)
 ipcMain.on("update:do", (event, arg) => {
-  console.log("UPDATE DO")
-  //autoUpdater.quitAndInstall();
+  autoUpdater.quitAndInstall();
 })

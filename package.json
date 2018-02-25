@@ -15,9 +15,9 @@
     "start": "electron ./src/main.js",
     "build": "electron-packager . --out=dist --asar --overwrite --all",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mw",
-    "dist": "electron-builder --mac",
-    "dist:win": "electron-builder --win -p always"
+    "dist": "electron-builder -mw -p always",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",

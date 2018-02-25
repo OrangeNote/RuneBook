@@ -1,30 +1,30 @@
 {
   "name": "RuneBook",
   "productName": "RuneBook",
-  "version": "1.3.0",
+  "version": "1.4.0-rc1",
   "description": "An automatic rune pages manager for League of Legends",
   "main": "./src/main.js",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/OrangeNote/RuneBook",
   "author": {
     "name": "OrangeNote",
     "url": "https://github.com/OrangeNote"
-  },
-  "build": {
-    "appId": "orangenote.runebook"
   },
   "scripts": {
     "test": "xo",
     "start": "electron ./src/main.js",
     "build": "electron-packager . --out=dist --asar --overwrite --all",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mw"
+    "dist": "electron-builder -mw -p always",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "electron-debug": "^1.5.0",
     "electron-is-dev": "^0.3.0",
     "electron-store": "^1.3.0",
+    "electron-updater": "^2.20.1",
     "freezer-js": "^0.13.0",
     "jquery": "^3.3.0",
     "lcu-connector": "^1.0.1",

@@ -4,3 +4,4 @@ colors.txt
 yarn-error.log
 resources/
 logs/
+electron-builder.yml

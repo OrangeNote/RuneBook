@@ -42,7 +42,9 @@ var state = {
 		loading: false
 	},
 
-	plugins: {}
+	plugins: {},
+
+	updateready: false
 };
 
 module.exports = new Freezer(state);

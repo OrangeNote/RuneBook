@@ -5,6 +5,16 @@ var freezer = require('./state');
 
 var request = require('request');
 
+var {ipcRenderer} = require('electron');
+ipcRenderer.on('update:ready', (event, arg) => {
+	console.log("UPDATE RECIEVED FROM MAIN PROCESS")
+	freezer.get().set("updateready", true);
+});
+
+freezer.on("update:do", () => {
+	ipcRenderer.send('update:do');
+})
+
 request('https://ddragon.leagueoflegends.com/api/versions.json', function (error, response, data) {
 	if(!error && response && response.statusCode == 200) {
 		freezer.emit("version:set", JSON.parse(data)[0]);

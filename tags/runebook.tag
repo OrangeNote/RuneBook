@@ -2,7 +2,8 @@
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
-          RuneBook (v{window.require('electron').remote.app.getVersion()})
+          <update-button updateready={updateready}></update-button>
+          &nbsp;RuneBook
       </div>
     </div>
   </header>
@@ -41,9 +42,10 @@
     this.plugins = opts.plugins;
     this.lastbookmarkedpage = opts.lastbookmarkedpage;
     this.lastsyncedpage = opts.lastsyncedpage;
+    this.updateready = opts.updateready;
 
     freezer.on('update', () => {
-    this.update(freezer.get());
+      this.update(freezer.get());
   });
 
   </script>

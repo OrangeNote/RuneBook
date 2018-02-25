@@ -31,6 +31,10 @@ function createWindow () {
   win.setFullScreenable(false);
   win.setMenu(null);
 
+  win.webContents.on("did-finish-load", () => {
+
+  })
+
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: `${__dirname}/../index.html`,
@@ -55,7 +59,11 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', function() {
   createWindow();
-  autoUpdater.checkForUpdates();
+  if (process.platform !== 'darwin') {
+    win.webContents.on("did-finish-load", () => {
+      autoUpdater.checkForUpdates();
+    });
+  }
 })
 
 // Quit when all windows are closed.
@@ -71,7 +79,7 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (win === null) {
-    createWindow()
+    createWindow();
   }
 })
 
@@ -80,11 +88,11 @@ app.on('activate', () => {
 
 // when the update has been downloaded and is ready to be installed, notify the BrowserWindow
 autoUpdater.on('update-downloaded', (info) => {
-    //win.webContents.send('updateReady')
-    autoUpdater.quitAndInstall();
+  win.webContents.send('update:ready');
 });
 
-// // when receiving a quitAndInstall signal, quit and install the new version ;)
-// ipcMain.on("quitAndInstall", (event, arg) => {
-//     autoUpdater.quitAndInstall();
-// })
+// when receiving a quitAndInstall signal, quit and install the new version ;)
+ipcMain.on("update:do", (event, arg) => {
+  console.log("UPDATE DO")
+  //autoUpdater.quitAndInstall();
+})

@@ -1,0 +1,35 @@
+/*-------------------------------------------------------------*/
+/*TYPOGRAPHY*/
+/*                                      |*/
+$font-stack:                             'Lato', sans-serif  !important;
+$font-size-base:                         14px;
+
+/*-------------------------------------------------------------*/
+/*BUTTONS*/
+/*                                      |*/
+$but-min-width:                          87px;
+$but-height:                             50px;
+/*-------------------------------------------------------------*/
+/*INPUTS*/
+/*                                      |*/   
+$input-height:                           40px;
+$input-height-l:                         49px;
+$input-border-width:                     2px;
+$block-textarea-resize:                  true;
+
+$input-colour-state:   					 $gray-ccc !default;
+$input-colour-hover:					 $gray-999 !default;
+$input-colour-focus:					 $gray-666 !default;
+
+$input-border-state:					 $gray-ccc !default;
+$input-border-hover:					 $gray-999 !default;
+$input-border-focus:					 $brand-primary !default;
+
+/*-------------------------------------------------------------*/
+/*SCAFFOLDING*/
+/*                                      |*/
+$body-background:                       linear-gradient($gray-dark, $gray-dark);
+$text-color:                             $gray-dark;
+
+$hr-height:								 2px;
+$hr-colour:								 $brand-primary  !important;

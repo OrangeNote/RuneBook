@@ -1,0 +1,12 @@
+/*############################*/
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-family: $font-stack;
+}
+body {
+    color: #fff;
+    background: $body-background;
+    overflow: hidden;
+}

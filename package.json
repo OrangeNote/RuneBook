@@ -27,7 +27,7 @@
     "electron-updater": "^2.20.1",
     "freezer-js": "^0.13.0",
     "jquery": "^3.3.0",
-    "lcu-connector": "^1.0.1",
+    "lcu-connector": "^1.0.2",
     "lodash": "^4.17.4",
     "popper.js": "^1.12.9",
     "request": "^2.83.0",

@@ -23,10 +23,11 @@ request('https://ddragon.leagueoflegends.com/api/versions.json', function (error
 });
 
 freezer.on('version:set', (ver) => {
-	request('http://ddragon.leagueoflegends.com/cdn/'+ver+'/data/en_US/champion.json', function(error, response, data) {
+	request(`http://ddragon.leagueoflegends.com/cdn/${ver}/data/en_US/champion.json`, function(error, response, data) {
 		if(!error && response && response.statusCode == 200){
 			store.set('championsInfo', JSON.parse(data).data);
 		}
+		else throw Error("Couldn't get champion info from DDragon API");
 	});
 });
 

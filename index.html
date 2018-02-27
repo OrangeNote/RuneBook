@@ -15,12 +15,24 @@
   <runebook></runebook>
 
   <script>
-    
+
     window.$ = window.jQuery = require('jquery');
   </script>
 
   <script src="./node_modules/semantic-ui-css/semantic.min.js"></script>
   <script type="text/javascript">
+
+    var path = require('path');
+    var fs = require('fs');
+
+    function addDarkStyle() {
+      var styleTag = document.createElement('style');
+      styleTag.type = 'text/css';
+      styleTag.id = 'darkstyle';
+      styleTag.appendChild(document.createTextNode(fs.readFileSync(path.join(__dirname, 'style', 'darkmode.css'), { encoding: 'utf8' })));
+
+      document.getElementsByTagName('head')[0].appendChild(styleTag);
+    }
 
     var riot = require('riot');
     var freezer = require('./src/state');
@@ -35,9 +47,23 @@
     require('./tags/current-page.tag');
     require('./tags/connection-status.tag');
     require('./tags/update-button.tag');
-    
+
     riot.mount('runebook', freezer.get());
 
+    var Store = require('electron-store');
+    var store = new Store();
+
+    if (store.get('local.settings.darkmode')) {
+      addDarkStyle();
+    }
+
+    freezer.on('settings:toggledarkupdate', function (dark) {
+      if (dark) {
+        addDarkStyle();
+      } else {
+        document.getElementById('darkstyle').remove();
+      }
+    });
   </script>
 
 </body>

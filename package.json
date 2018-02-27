@@ -14,6 +14,7 @@
     "test": "xo",
     "start": "electron ./src/main.js",
     "build": "electron-packager . --out=dist --asar --overwrite --all",
+    "build:mac": "electron-packager . --out=dist --asar --overwrite --mac",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mw -p always",
     "dist:mac": "electron-builder --mac",

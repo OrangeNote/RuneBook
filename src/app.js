@@ -1,11 +1,8 @@
-var Store = require('electron-store');
-var store = new Store();
-
 var freezer = require('./state');
 
 var request = require('request');
-
 var {ipcRenderer} = require('electron');
+
 ipcRenderer.on('update:ready', (event, arg) => {
 	console.log("UPDATE RECIEVED FROM MAIN PROCESS")
 	freezer.get().set("updateready", true);
@@ -57,6 +54,10 @@ function loadPlugins() {
 	freezer.get().plugins.set({ local, remote });
 }
 loadPlugins();
+
+freezer.on('settings:toggledark', () => {
+	freezer.emit('settings:toggledarkupdate', plugins['local'].toggleDarkMode());
+});
 
 freezer.on('champion:choose', (champion) => {
 
@@ -122,7 +123,7 @@ freezer.on('page:fav', (champion, page) => {
 	var state = freezer.get();
 	plugins[state.tab.active].favPage(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {
-		state.current.champ_data.set(res);	
+		state.current.champ_data.set(res);
 	});
 });
 
@@ -130,7 +131,7 @@ freezer.on('page:delete', (champion, page) => {
 	var state = freezer.get();
 	plugins[state.tab.active].deletePage(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {
-		state.current.champ_data.set(res);	
+		state.current.champ_data.set(res);
 	});
 });
 
@@ -138,7 +139,7 @@ freezer.on('page:unlinkbookmark', (champion, page) => {
 	var state = freezer.get();
 	plugins[state.tab.active].unlinkBookmark(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {
-		state.current.champ_data.set(res);	
+		state.current.champ_data.set(res);
 	});
 });
 
@@ -202,7 +203,7 @@ freezer.on('page:upload', (champion, page) => {
 				});
 				freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
 				freezer.get().lastuploadedpage.set({ champion, page, valid: res.isValid === true, loading: false });
-				
+
 				var state = freezer.get();
 				if(plugins[state.tab.active].local) {
 					plugins[state.tab.active].confirmPageValidity(champion, page, res);
@@ -223,7 +224,7 @@ freezer.on('currentpage:download', () => {
 
 	plugins[state.tab.active].setPage(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {
-		state.current.champ_data.set(res);	
+		state.current.champ_data.set(res);
 	});
 });
 

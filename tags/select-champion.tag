@@ -1,19 +1,19 @@
 <select-champion>
   <div class="ui container">
     <div class="ui basic segment">
-      
+
       <div class="ui equal width grid">
         <div class="row">
-          
+
           <div class="column">
             <img draggable="false" class="ui tiny image circular"
               src={opts.champion ? `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${this.opts.champion}.png` : "./img/unknown.png"}>
             <img draggable="false" class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src="./img/ring.png">
             <!-- <img draggable="false" class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png"> -->
           </div>
-          
+
           <div class="column middle aligned">
-            
+
             <!-- <div class="ui search selection disabled dropdown" onchange={chooseChampion}>
               <input type="hidden" name="champion" class="myselect">
               <i class="dropdown icon"></i>
@@ -28,21 +28,27 @@
               <div class="results"></div>
             </div>
 
+            <br/>
+            <center>
+              <div class="ui checkbox disabled" data-tooltip="Work in progress!" data-position="bottom right" data-inverted="">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <label>Auto select <i class="help circle icon"></i></label>
+              </div>
+            </center>
+
           </div>
 
           <div class="column middle aligned right aligned">
-            <div class="ui checkbox disabled" data-tooltip="Work in progress!" data-position="bottom right" data-inverted="">
-              <input type="checkbox" tabindex="0" class="hidden">
-              <label>Auto select <i class="help circle icon"></i></label>
+            <div class="ui" data-tooltip="Click to toggle Dark Mode" data-position="bottom right" data-inverted="" onClick="freezer.emit('settings:toggledark')">
+              <label>Toggle Dark Mode <i class="moon icon"></i></label>
             </div>
           </div>
-
         </div>
       </div>
 
     </div>
   </div>
-  
+
   <style>
     .tiny-ring {
       width: 84px;
@@ -69,7 +75,7 @@
       var request = require(`request`);
       request.get(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`, (error, response, ddres) => {
         if (error || response.statusCode != 200) return;
-        
+
         ddres = handleDDRes2(JSON.parse(ddres));
 
         var search_el = $('.ui.search');

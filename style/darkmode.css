@@ -1,0 +1,73 @@
+body {
+  background: #333 !important;
+  color: #fff !important
+}
+
+.ui.secondary.pointing.menu .header.item {
+  color: #fff !important;
+}
+
+.ui.attached.menu:not(.tabular) {
+  border: 1px solid #555;
+}
+
+.ui.horizontal.divider {
+  color: #fff;
+}
+
+.ui.menu {
+  background: #333;
+}
+
+.ui.menu .item {
+  background: #333;
+  color: rgba(255,255,255,.95);
+}
+
+.ui.menu a.item:hover, .ui.menu a.item.active:hover {
+  color: rgba(255,255,255,.7);
+}
+
+.ui.menu .item.active {
+  background: #444;
+  color: rgba(255,255,255,.95);
+}
+
+.ui.pointing.menu .active.item:after {
+  background: #444;
+  border-color: #555;
+}
+
+.ui.pointing.menu .active.item:hover:after {
+  background: #333;
+  border-color: #555;
+}
+
+.ui.segment {
+  background: #333;
+}
+
+.ui.attached.segment {
+  border-color: #555;
+}
+
+.column .ui.center.aligned.header {
+  color: #fff !important;
+}
+
+.column .ui.center.aligned.header > .content > .sub.header {
+  color: #fff !important;
+}
+
+.ui.top.right.attached.label {
+  background: #444;
+  color: #fff;
+}
+
+.column.middle.aligned .checkbox > label {
+  color: #fff;
+}
+
+.column.middle.aligned .checkbox.disabled > label {
+  color: #eee;
+}

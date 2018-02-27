@@ -56,6 +56,12 @@ var plugin = {
 		else if(store.get(`local.${champion}.pages.${page}.isValid`) === false) {
 			store.set(`local.${champion}.pages.${page}`, res);
 		}
+	},
+
+	toggleDarkMode() {
+		var dark = !store.get("local.settings.darkmode");
+		store.set("local.settings.darkmode", dark);
+		return dark;
 	}
 }
 

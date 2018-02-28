@@ -1,7 +1,7 @@
 var isDev = require('electron-is-dev');
 
 if (!isDev) {
-  var plugins = ["local", "runeforge", "championgg"];
+  var plugins = ["local", "runeforge", "championgg", "runeslol"];
 
   var __hasProp = {}.hasOwnProperty;
 
@@ -18,7 +18,7 @@ if (!isDev) {
 else {
   console.log("isDev: dynamic plugins loader")
   var collectExports, fs, path,
-  fs = require('fs');    
+  fs = require('fs');
   path = require('path');
 
   var __hasProp = {}.hasOwnProperty;

@@ -1,0 +1,79 @@
+@import "darkmode.colors.scss";
+
+body {
+  background: $primary !important;
+  color: $white !important
+}
+
+.ui.secondary.pointing.menu .header.item {
+  color: $white !important;
+}
+
+.ui.attached.menu:not(.tabular) {
+  border: 1px solid $tertiary;
+}
+
+.ui.horizontal.divider {
+  color: $white;
+}
+
+.ui.menu {
+  background: $primary;
+
+  .item {
+    background: $primary;
+    color: $white;
+
+    &.active {
+      background: $secondary;
+      color: rgba(255,255,255,.95);
+    }
+  }
+
+  a.item:hover, a.item.active:hover {
+    color: transparentize($white, .7);
+  }
+
+  &.pointing .active.item {
+    &:after {
+      background: $secondary;
+      border-color: $tertiary;
+    }
+
+    &:hover:after {
+      background: $primary;
+      border-color: $tertiary;
+    }
+  }
+}
+
+.ui.segment {
+  background: $primary;
+
+  &.attached {
+    border-color: $tertiary;
+  }
+}
+
+.column .ui.center.aligned.header {
+  color: $white !important;
+
+  & > .content > .sub.header {
+    color: $white !important;
+  }
+}
+
+.ui.top.right.attached.label {
+  background: $secondary;
+  color: $white;
+}
+
+.column.middle.aligned {
+  .checkbox > label {
+    color: $white;
+  }
+
+  .checkbox.disabled > label {
+    color: transparentize($white, .7);
+  }
+}

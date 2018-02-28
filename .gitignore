@@ -5,3 +5,5 @@ yarn-error.log
 resources/
 logs/
 electron-builder.yml
+.sass-cache/
+package-lock.json

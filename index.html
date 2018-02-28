@@ -29,7 +29,7 @@
       var styleTag = document.createElement('style');
       styleTag.type = 'text/css';
       styleTag.id = 'darkstyle';
-      styleTag.appendChild(document.createTextNode(fs.readFileSync(path.join(__dirname, 'style', 'darkmode.css'), { encoding: 'utf8' })));
+      styleTag.appendChild(document.createTextNode(fs.readFileSync(path.join(__dirname, 'styles', 'css', 'dark.css'), { encoding: 'utf8' })));
 
       document.getElementsByTagName('head')[0].appendChild(styleTag);
     }

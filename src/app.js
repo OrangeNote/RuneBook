@@ -7,7 +7,7 @@ var request = require('request');
 
 var {ipcRenderer} = require('electron');
 ipcRenderer.on('update:ready', (event, arg) => {
-	console.log("UPDATE RECIEVED FROM MAIN PROCESS")
+	console.log("UPDATE RECEIVED FROM MAIN PROCESS")
 	freezer.get().set("updateready", true);
 });
 
@@ -28,17 +28,10 @@ freezer.on('api:connected', () => {
 			console.log("no session response");
 			return;
 		}
-		console.log("session success");
+		console.log("session success", res);
 		freezer.get().session.set({ connected: res.connected, state: res.state });
 
-		api.get("/lol-perks/v1/currentpage").then((page) => {
-			if(!page) {
-				console.log("Error: current page initialization failed");
-				return;
-			}
-			freezer.get().connection.set({ page });
-			freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
-		});
+		updateConnectionData();
 	});
 });
 
@@ -180,7 +173,7 @@ freezer.on('page:upload', (champion, page) => {
 	page_data.current = true;
 
 	console.log("page.id, page.isEditable", state.connection.page.id, state.connection.page.isEditable);
-	if(state.connection.page.id && state.connection.page.isEditable) {
+	if(state.connection.page.id && state.connection.page.isEditable && state.connection.summonerLevel >= 15) {
 		freezer.off('/lol-perks/v1/currentpage:Update');
 		freezer.get().lastuploadedpage.set({ champion, page, loading: true });
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
@@ -232,7 +225,12 @@ freezer.on('/lol-login/v1/session:Update', (session) => {
 	console.log("session", session.connected, session.state);
 
 	state.session.set({ connected: session.connected, state: session.state });
-	freezer.get().connection.set({ page: null });
+	if(!session.connected) {
+		freezer.get().connection.set({ page: null, summonerLevel: 0 });
+	}
+	else {
+		updateConnectionData();
+	}
 })
 
 function handleCurrentPageUpdate(page) {
@@ -241,6 +239,25 @@ function handleCurrentPageUpdate(page) {
 	console.log("currentpage:Update", page.name);
 	state.connection.set({ page });
 	if(page.name != freezer.get().lastuploadedpage.page) freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
+}
+
+function updateConnectionData() {
+	api.get("/lol-perks/v1/currentpage").then((page) => {
+		if(!page) {
+			console.log("Error: current page initialization failed");
+			return;
+		}
+		freezer.get().connection.set({ page });
+		freezer.get().lastuploadedpage.set({ champion: null, page: null, valid: false });
+	});
+
+	api.get("/lol-summoner/v1/current-summoner").then((summoner) => {
+		if(!summoner) {
+			console.log("no summoner response");
+			return;
+		}
+		freezer.get().connection.set("summonerLevel", summoner.summonerLevel);
+	});
 }
 
 freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);

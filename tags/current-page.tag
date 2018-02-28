@@ -17,7 +17,7 @@
 					</div>
 					<img each={ index in [0,1,2,3,4,5] } draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page && opts.connection.page.selectedPerkIds[index] || "qm"}.png>
 					<div class="content">
-						<i class={ opts.connection.page ? (!opts.connection.page.isEditable ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
+						<i class={ opts.connection.page ? (!opts.connection.page.isEditable || opts.connection.summonerLevel < 15 ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
 					</div>
 				</div>
 			</div>

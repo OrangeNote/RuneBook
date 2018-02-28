@@ -9,6 +9,7 @@ var state = {
 	champion_select: false,
 	connection: {
 		page: null,
+		summonerLevel: 0
 	},
 
 	current: {

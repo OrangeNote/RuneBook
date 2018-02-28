@@ -1,0 +1,10 @@
+header{
+    background: $brand-primary !important;
+}
+
+.ui.secondary.pointing.menu .header.item {
+    color: $brand-text !important;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: $font-stack;
+}

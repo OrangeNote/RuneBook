@@ -14,11 +14,6 @@ module.exports = function(grunt) {
     }
   });
 
-
-  // Default task(s).
-
-    grunt.loadNpmTasks('grunt-contrib-sass');
-
-    grunt.registerTask('default', ['sass']);
-
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.registerTask('default', ['sass']);
 };

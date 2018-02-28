@@ -1,0 +1,22 @@
+{
+	"appId": "com.orangenote.runebook",
+	"mac": {
+		"target": [
+			{
+				"target": "zip"
+			}
+		]
+	},
+	"win": {
+		"target": [
+			{
+
+				"arch": ["x64", "ia32"]
+			}
+		]
+	},
+	"publish": {
+		"provider": "github",
+		"owner": "OrangeNote"
+	}
+}

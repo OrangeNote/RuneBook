@@ -3,6 +3,7 @@ const {autoUpdater} = require("electron-updater")
 const path = require('path')
 const url = require('url')
 const request = require('request')
+const isDev = require('electron-is-dev')
 
 require('electron-debug')({enabled: true});
 
@@ -63,6 +64,7 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
   win.webContents.on("did-finish-load", () => {
+    if(isDev) return;
     if (process.platform !== 'darwin') {
       autoUpdater.checkForUpdates();
     }

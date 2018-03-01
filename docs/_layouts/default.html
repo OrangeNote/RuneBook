@@ -27,7 +27,8 @@
           </div>
 
           <nav>
-            <a href="{{ site.github.repository_url }}">GitHub</a>
+            {% if site.footer-links.discord %}<a href="https://discord.gg/{{ site.footer-links.discord }}"><i class="svg-icon discord"></i></a>{% endif %}
+            <a href="{{ site.github.repository_url }}"><i class="svg-icon github"></i></a>
           </nav>
         </header>
       </div>

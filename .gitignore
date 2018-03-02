@@ -6,3 +6,4 @@ resources/
 logs/
 electron-builder.json
 docs/_site
+.vscode/launch.json

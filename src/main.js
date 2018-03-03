@@ -19,8 +19,10 @@ function createWindow () {
     title: 'RuneBook',
     width: 768,
     height: 768,
+    minWidth: 768,
+    minHeight: 768,
     maximizable: false,
-    useContentSize: true,
+    useContentSize: true
   }
 
   if (process.platform == 'darwin') {
@@ -31,7 +33,7 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow(options)
 
-  win.setResizable(false);
+  win.setResizable(true);
   win.setFullScreenable(false);
   win.setMenu(null);
 

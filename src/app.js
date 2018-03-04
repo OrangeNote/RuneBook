@@ -1,7 +1,10 @@
-var Store = require('electron-store');
-var store = new Store();
-
+var settings = require('./settings');
 var freezer = require('./state');
+
+freezer.get().configfile.set({
+	name: settings.get("config.name") + settings.get("config.ext"),
+	cwd: settings.get("config.cwd")
+});
 
 var request = require('request');
 
@@ -11,9 +14,22 @@ ipcRenderer.on('update:ready', (event, arg) => {
 	freezer.get().set("updateready", true);
 });
 
+var path = require('path');
+
+freezer.on("configfile:change", (newPath) => {
+
+	settings.set({
+		config: {
+			name: path.basename(newPath, path.extname(newPath)),
+			cwd: path.dirname(newPath),
+			ext: path.extname(newPath)
+		}
+	});
+});
+
 freezer.on("update:do", () => {
 	ipcRenderer.send('update:do');
-})
+});
 
 request('https://ddragon.leagueoflegends.com/api/versions.json', function (error, response, data) {
 	if(!error && response && response.statusCode == 200) {

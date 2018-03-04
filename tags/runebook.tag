@@ -7,7 +7,7 @@
           <div>
             <!-- <connection-status session={session}></connection-status> -->
             <i class="link cog icon" style="position: absolute; top: 32%; right: 1%;" onclick="$('.ui.modal').modal('show')"></i>
-            <settings-panel></settings-panel>
+            <settings-panel configfile={configfile}></settings-panel>
           </div>
       </div>
     </div>
@@ -47,6 +47,7 @@
     this.lastbookmarkedpage = opts.lastbookmarkedpage;
     this.lastsyncedpage = opts.lastsyncedpage;
     this.updateready = opts.updateready;
+    this.configfile = opts.configfile;
 
     freezer.on('update', () => {
       this.update(freezer.get());

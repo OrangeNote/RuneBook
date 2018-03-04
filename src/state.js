@@ -45,7 +45,12 @@ var state = {
 
 	plugins: {},
 
-	updateready: false
+	updateready: false,
+
+	configfile: {
+		name: "config.json",
+		cwd: "[default path]"
+	}
 };
 
 module.exports = new Freezer(state);

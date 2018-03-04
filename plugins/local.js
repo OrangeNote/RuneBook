@@ -1,5 +1,13 @@
 var Store = require('electron-store');
-var store = new Store();
+var settings = require('../src/settings');
+
+var configPath = settings.get("config.cwd");
+var configName = settings.get("config.name");
+
+console.log("configName", configName);
+console.log("configPath", configPath);
+
+var store = new Store({cwd: configPath, name: configName});
 
 var plugin = {
 	name: "Local pages",

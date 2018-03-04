@@ -2,12 +2,12 @@
 	
 	<div class="ui container">
 		<div class="ui horizontal divider">Current page</div>
-		<div class={ opts.connection.page ? "ui segment" : "ui segment disabled" }>
-			<!-- <h4 class="ui center aligned header" if={ !opts.connection.page }>
+		<div class="ui segment">
+			<h4 class="ui center aligned header" if={ !opts.connection.page }>
 				Current page is not available.
-				<div class="sub header">Please connect to LoL Client.</div>
-			</h4> -->
-			<div class="ui middle aligned relaxed divided list">
+				<div class="sub header">Please log in to the League Client to access your rune pages.</div>
+			</h4>
+			<div if={ opts.connection.page } class="ui middle aligned relaxed divided list">
 				<div class="item">
 					<div class="right floated content" data-key={ key }>
 

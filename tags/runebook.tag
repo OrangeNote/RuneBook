@@ -4,6 +4,11 @@
       <div class="ui menu header item">
           <update-button updateready={updateready}></update-button>
           &nbsp;RuneBook
+          <div>
+            <!-- <connection-status session={session}></connection-status> -->
+            <i class="link cog icon" style="position: absolute; top: 32%; right: 1%;" onclick="$('.ui.modal').modal('show')"></i>
+            <settings-panel></settings-panel>
+          </div>
       </div>
     </div>
   </header>
@@ -17,7 +22,6 @@
     <div style="margin-bottom: 20px">
       <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins}></current-page>
     </div>
-    <connection-status session={session}></connection-status>
   </footer>
 
   <style>

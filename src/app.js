@@ -38,6 +38,15 @@ request('https://ddragon.leagueoflegends.com/api/versions.json', function (error
 	else throw Error("Couldn't get ddragon api version");
 });
 
+freezer.on('version:set', (ver) => {
+	request(`http://ddragon.leagueoflegends.com/cdn/${ver}/data/en_US/champion.json`, function(error, response, data) {
+		if(!error && response && response.statusCode == 200){
+			store.set('championsInfo', JSON.parse(data).data);
+		}
+		else throw Error("Couldn't get champion info from DDragon API");
+	});
+});
+
 freezer.on('api:connected', () => {
 	api.get("/lol-login/v1/session").then((res) => {
 		if(!res) {

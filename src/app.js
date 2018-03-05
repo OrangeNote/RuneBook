@@ -38,6 +38,14 @@ request('https://ddragon.leagueoflegends.com/api/versions.json', function (error
 	else throw Error("Couldn't get ddragon api version");
 });
 
+freezer.on('version:set', (ver) => {
+	request('http://ddragon.leagueoflegends.com/cdn/'+ver+'/data/en_US/champion.json', function(error, response, data) {
+		if(!error && response && response.statusCode == 200){
+			freezer.get().set('championsinfo', JSON.parse(data).data);
+		}
+	});
+});
+
 freezer.on('api:connected', () => {
 	api.get("/lol-login/v1/session").then((res) => {
 		if(!res) {
@@ -277,6 +285,41 @@ function updateConnectionData() {
 }
 
 freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
+
+freezer.on('/lol-champ-select/v1/session:Delete', () => {
+	freezer.get().set("champselect", false);
+});
+
+freezer.on('/lol-champ-select/v1/session:Update', (data) => {
+	console.log(data)
+	if(data.actions[0][0].completed === false) freezer.get().set("champselect", true);
+	else freezer.get().set("champselect", false);
+	if(freezer.get().autochamp === false) return;
+	var champions = freezer.get().championsinfo;
+	var champion = Object.keys(champions).find((el) => champions[el].key == data.actions[0][0].championId);
+	console.log(champion)
+	freezer.emit('champion:choose', champion);
+	freezer.get().tab.set("active", "local");
+});
+
+freezer.on("autochamp:enable", () => {
+	freezer.get().set("autochamp", true);
+
+	// Check if a champ was already selected in client
+	api.get("/lol-champ-select/v1/session").then((data) => {
+		if(!data) return;
+		if(data.actions[0][0].completed === false) freezer.get().set("champselect", true);
+		var champions = freezer.get().championsinfo;
+		var champion = Object.keys(champions).find((el) => champions[el].key == data.actions[0][0].championId);
+		console.log(champion)
+		freezer.emit('champion:choose', champion);
+		freezer.get().tab.set("active", "local");
+	});
+});
+
+freezer.on("autochamp:disable", () => {
+	freezer.get().set("autochamp", false);
+});
 
 const LCUConnector = require('lcu-connector');
 const connector = new LCUConnector();

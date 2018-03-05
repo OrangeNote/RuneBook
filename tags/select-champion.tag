@@ -8,8 +8,8 @@
           <div class="column">
             <img draggable="false" class="ui tiny image circular"
               src={opts.champion ? `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${this.opts.champion}.png` : "./img/unknown.png"}>
-            <img draggable="false" class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src="./img/ring.png">
-            <!-- <img draggable="false" class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png"> -->
+            <img draggable="false" class="ui tiny-ring image circular" style="position: absolute; top: -2px; left: 12px;" src={opts.autochamp ? "./img/ring_active.png" : "./img/ring.png"}>
+            <img if={ opts.autochamp && opts.champselect } draggable="false" class="ui tiny-spin image circular" style="position: absolute; top: -10px; left: 4px;" src="./img/ring_spinner.png">
           </div>
           
           <div class="column middle aligned">
@@ -31,7 +31,7 @@
           </div>
 
           <div class="column middle aligned right aligned">
-            <div class="ui checkbox disabled" data-tooltip="Work in progress!" data-position="bottom right" data-inverted="">
+            <div class="ui checkbox">
               <input type="checkbox" tabindex="0" class="hidden">
               <label>Auto select <i class="help circle icon"></i></label>
             </div>
@@ -52,18 +52,29 @@
     .tiny-spin {
       width: 100px;
       height: 100px;
-      animation: spin 1.5s linear infinite;
+      animation: spin 1.6s linear infinite;
   }
   @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
   </style>
 
   <script>
 
+    freezer.on("champion:choose", (champion) => {
+      $('.ui.search').search("set value", champion);
+    })
+
     freezer.on("version:set", (version) => {
       this.version = version;
 
       $('.ui.checkbox')
-        .checkbox()
+        .checkbox({
+          onChecked: () => {
+            freezer.emit("autochamp:enable");
+          },
+          onUnchecked: () => {
+            freezer.emit("autochamp:disable");
+          }
+        })
       ;
 
       var request = require(`request`);

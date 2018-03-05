@@ -6,7 +6,7 @@ var state = {
 		state: ""
 
 	},
-	champion_select: false,
+
 	connection: {
 		page: null,
 		summonerLevel: 0
@@ -50,7 +50,12 @@ var state = {
 	configfile: {
 		name: "config.json",
 		cwd: "[default path]"
-	}
+	},
+
+	championsinfo: {},
+
+	champselect: false,
+	autochamp: false
 };
 
 module.exports = new Freezer(state);

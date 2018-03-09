@@ -30,10 +30,10 @@
 
           </div>
 
-          <div class="column middle aligned right aligned">
+          <div class="column middle aligned">
             <div class="ui checkbox">
               <input type="checkbox" tabindex="0" class="hidden">
-              <label>Auto select <i class="help circle icon"></i></label>
+              <label>Auto select <i class="help circle icon" id="toot"></i></label>
             </div>
           </div>
 
@@ -43,6 +43,8 @@
     </div>
   </div>
   
+  <div class="ui popup" style="width: 250px;">Automatically chooses champion when you're in champion select</div>
+
   <style>
     .tiny-ring {
       width: 84px;
@@ -65,6 +67,11 @@
 
     freezer.on("version:set", (version) => {
       this.version = version;
+
+      $("#toot").popup({
+        position: "bottom right",
+        popup: '.ui.popup'
+      });
 
       $('.ui.checkbox')
         .checkbox({

@@ -142,6 +142,9 @@ function _getPages(champion, callback) {
 			pageUrls.push(pageData.loadout_url);
 		}
 	}
+
+	if(pageUrls.length === 0) return callback(res);
+
 	var callCount = 0;
 	for(var i = 0; i < pageUrls.length; i++) {
 

@@ -179,10 +179,14 @@ freezer.on('page:syncbookmark', (champion, page) => {
 	console.log(page)
 
 	plugins[page.bookmark.remote.id].syncBookmark(page.bookmark, (_page) => {
+		if(!_page) {
+			freezer.get().lastsyncedpage.set({champion: null, page: null, loading: false});
+			return;
+		}
 		plugins[state.tab.active].setPage(champion, _page);
 		plugins[state.tab.active].getPages(champion, (res) => {
 			state.current.champ_data.set(res);
-			freezer.get().lastsyncedpage.set({champion, _page, loading: false});
+			freezer.get().lastsyncedpage.set({champion, page: _page.name, loading: false});
 		});
 	});
 });

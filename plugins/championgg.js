@@ -90,6 +90,7 @@ function _getPages(champion, callback) {
 			});
 		}
 		else {
+			callback(res);
 			throw Error("rune page not loaded");
 		}
 	});

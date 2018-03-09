@@ -155,6 +155,7 @@ function _getPages(champion, callback) {
 				if(++callCount == pageUrls.length) callback(res);
 			}
 			else {
+				callback(res);
 				throw Error("rune page not loaded");
 			}
 		});
@@ -181,6 +182,7 @@ var plugin = {
 				callback(exctractPage(html, bookmark.src));
 			}
 			else {
+				callback();
 				throw Error("rune page not loaded");
 			}
 		});

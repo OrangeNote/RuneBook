@@ -11,7 +11,7 @@ var stylesMap = {
 	"icon-i":8300
 };
 
-function exctractPage(html, champion, rec, callback, pageType) {
+function extractPage(html, champion, rec, callback, pageType) {
 	var $ = cheerio.load(html);
 
 	var pages = [];
@@ -49,7 +49,7 @@ function exctractPage(html, champion, rec, callback, pageType) {
 			return;
 		}
 		else runecount++;
-		
+
 		pages[pages.length - 1].selectedPerkIds[runecount % 6] = rune;
 	});
 
@@ -63,7 +63,7 @@ function exctractPage(html, champion, rec, callback, pageType) {
 			console.log(url + "/champion/" + champion + "/" + $(this).text().trim())
 			request.get(url + "/champion/" + champion + "/" + $(this).text().trim(), (error, response, _html) => {
 				if(!error && response.statusCode == 200) {
-					var newPages = exctractPage(_html, champion, false);
+					var newPages = extractPage(_html, champion, false);
 					pages = pages.concat(newPages);
 					console.log("newPages", newPages)
 					if(++reqCount == els.length) callback(pages);
@@ -81,7 +81,7 @@ function _getPages(champion, callback) {
 	console.log(champUrl)
 	request.get(champUrl, (error, response, html) => {
 		if(!error && response.statusCode == 200) {
-			exctractPage(html, champion, true, (pages) => {
+			extractPage(html, champion, true, (pages) => {
 				pages.forEach((page) => {
 					res.pages[page.name] = page;
 				});
@@ -109,7 +109,7 @@ var plugin = {
 	syncBookmark(bookmark, callback) {
 		request.get(bookmark.src, (error, response, html) => {
 			if(!error && response.statusCode == 200) {
-				callback(exctractPage(html, bookmark.meta.champion, false, null, bookmark.meta.pageType));
+				callback(extractPage(html, bookmark.meta.champion, false, null, bookmark.meta.pageType));
 			}
 			else {
 				throw Error("rune page not loaded");

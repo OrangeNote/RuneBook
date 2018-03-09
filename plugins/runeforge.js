@@ -91,7 +91,7 @@ var perksMap = {
 	"Time Warp Tonic":8352
 };
 
-function exctractPage(html, pageUrl) {
+function extractPage(html, pageUrl) {
 	console.log(pageUrl)
 	var $ = cheerio.load(html);
 
@@ -150,7 +150,7 @@ function _getPages(champion, callback) {
 
 		request.post(pageUrls[i], (error, response, html) => {
 			if(!error && response.statusCode == 200) {
-				var page = exctractPage(html);
+				var page = extractPage(html);
 				res.pages[page.name] = page;
 				if(++callCount == pageUrls.length) callback(res);
 			}
@@ -179,7 +179,7 @@ var plugin = {
 	syncBookmark(bookmark, callback) {
 		request.post(bookmark.src, (error, response, html) => {
 			if(!error && response.statusCode == 200) {
-				callback(exctractPage(html, bookmark.src));
+				callback(extractPage(html, bookmark.src));
 			}
 			else {
 				callback();

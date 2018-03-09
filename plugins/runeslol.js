@@ -171,6 +171,7 @@ function _getPages(champion, callback) {
 			}
 		}
 		else {
+			callback(res);
 			throw Error("failed to load main page for " + champion);
 		}
 	});	

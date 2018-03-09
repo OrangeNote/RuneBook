@@ -20,7 +20,7 @@
   
   <footer>
     <div style="margin-bottom: 20px">
-      <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins}></current-page>
+      <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins} tooltips={tooltips}></current-page>
     </div>
   </footer>
 

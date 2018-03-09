@@ -15,7 +15,7 @@
 
   <main>
     <select-champion champion={current.champion} autochamp={autochamp} champselect={champselect}></select-champion>
-    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins} lastbookmarkedpage={lastbookmarkedpage} lastsyncedpage={lastsyncedpage}></chapters-segment>
+    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins} lastbookmarkedpage={lastbookmarkedpage} lastsyncedpage={lastsyncedpage} tooltips={tooltips}></chapters-segment>
   </main>
   
   <footer>
@@ -50,6 +50,7 @@
     this.configfile = opts.configfile;
     this.autochamp = opts.autochamp;
     this.champselect = opts.champselect;
+    this.tooltips = opts.tooltips;
 
     freezer.on('update', () => {
       this.update(freezer.get());

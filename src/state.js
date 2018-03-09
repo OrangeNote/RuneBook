@@ -55,7 +55,11 @@ var state = {
 	championsinfo: {},
 
 	champselect: false,
-	autochamp: false
+	autochamp: false,
+
+	tooltips: {
+		rune: null
+	}
 };
 
 module.exports = new Freezer(state);

@@ -30,7 +30,7 @@
               </div>
             </h1>
 
-            <page-list current={opts.current} lastuploadedpage={opts.lastuploadedpage} connection={opts.connection} tab={opts.tab} plugins={opts.plugins} lastbookmarkedpage={opts.lastbookmarkedpage} lastsyncedpage={opts.lastsyncedpage}></page-list>
+            <page-list current={opts.current} lastuploadedpage={opts.lastuploadedpage} connection={opts.connection} tab={opts.tab} plugins={opts.plugins} lastbookmarkedpage={opts.lastbookmarkedpage} lastsyncedpage={opts.lastsyncedpage} tooltips={opts.tooltips}></page-list>
           </div>
         </div>
       </div>

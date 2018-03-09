@@ -48,14 +48,13 @@ freezer.on('version:set', (ver) => {
 
 freezer.on('api:connected', () => {
 	api.get("/lol-login/v1/session").then((res) => {
+		updateConnectionData();
 		if(!res) {
 			console.log("no session response");
 			return;
 		}
 		console.log("session success", res);
 		freezer.get().session.set({ connected: res.connected, state: res.state });
-
-		updateConnectionData();
 	});
 });
 
@@ -281,6 +280,11 @@ function updateConnectionData() {
 			return;
 		}
 		freezer.get().connection.set("summonerLevel", summoner.summonerLevel);
+	});
+
+	api.get("/lol-perks/v1/perks").then((data) => {
+		if(!data) return;
+		freezer.get().tooltips.set("rune", data);
 	});
 }
 

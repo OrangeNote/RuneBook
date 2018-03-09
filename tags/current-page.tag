@@ -15,8 +15,16 @@
 							<i class="download icon"></i>
 						</button>
 					</div>
-					<img each={ index in [0,1,2,3,4,5] } draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page && opts.connection.page.selectedPerkIds[index] || "qm"}.png>
-					<div class="content">
+
+					<div class="ui image">
+						<div each={ index in [0,1,2,3,4,5] } class="ui circular icon button" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
+						data-tooltip={findTooltip(index)} data-position="right center">
+							<img draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{opts.connection.page && opts.connection.page.selectedPerkIds[index] || "qm"}.png>
+						</div>
+					</div>
+
+					
+					<div class="middle aligned content">
 						<i class={ opts.connection.page ? (!opts.connection.page.isEditable || opts.connection.summonerLevel < 15 ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
 					</div>
 				</div>
@@ -26,6 +34,11 @@
 
 	<script>
 
+		findTooltip(index) {
+			if(!opts.tooltips.rune) return;
+			var tooltip = opts.tooltips.rune.find((el) => el.id === opts.connection.page.selectedPerkIds[index]);
+			return tooltip.name;
+		}
 		downloadCurrentPage(evt) {
 			evt.preventUpdate = true;
 			freezer.emit("currentpage:download");

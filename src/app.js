@@ -291,15 +291,16 @@ freezer.on('/lol-champ-select/v1/session:Delete', () => {
 });
 
 freezer.on('/lol-champ-select/v1/session:Update', (data) => {
-	console.log(data)
-	if(data.actions[0][0].completed === false) freezer.get().set("champselect", true);
+	console.log(data);
+	var action = data.actions[0].find((el) => data.localPlayerCellId === el.actorCellId);
+	if(action.completed === false) freezer.get().set("champselect", true);
 	else freezer.get().set("champselect", false);
 	if(freezer.get().autochamp === false) return;
 	var champions = freezer.get().championsinfo;
-	var champion = Object.keys(champions).find((el) => champions[el].key == data.actions[0][0].championId);
+	var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 	console.log(champion)
+	if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
 	freezer.emit('champion:choose', champion);
-	freezer.get().tab.set("active", "local");
 });
 
 freezer.on("autochamp:enable", () => {
@@ -308,12 +309,13 @@ freezer.on("autochamp:enable", () => {
 	// Check if a champ was already selected in client
 	api.get("/lol-champ-select/v1/session").then((data) => {
 		if(!data) return;
-		if(data.actions[0][0].completed === false) freezer.get().set("champselect", true);
+		var action = data.actions[0].find((el) => data.localPlayerCellId === el.actorCellId);
+		if(action.completed === false) freezer.get().set("champselect", true);
 		var champions = freezer.get().championsinfo;
-		var champion = Object.keys(champions).find((el) => champions[el].key == data.actions[0][0].championId);
+		var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 		console.log(champion)
+		if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
 		freezer.emit('champion:choose', champion);
-		freezer.get().tab.set("active", "local");
 	});
 });
 

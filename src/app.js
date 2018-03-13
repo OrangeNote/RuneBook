@@ -332,7 +332,7 @@ freezer.on("autochamp:disable", () => {
 });
 
 const LCUConnector = require('lcu-connector');
-const connector = new LCUConnector();
+const connector = new LCUConnector('');
 const api = require('./lcu-api');
 
 connector.on('connect', (data) => {

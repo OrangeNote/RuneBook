@@ -1,22 +1,23 @@
 <settings-panel>
   <div class="ui modal">
     <div class="content">
+      <div class="ui bottom attached label">
+        RuneBook ({require('electron-is-dev') === true ? "DEV" : "v" + require('electron').remote.app.getVersion()})
+        <span style="float: right;"><a href="https://github.com/OrangeNote/RuneBook/issues" style="color: #555555;"><i class="bug icon"></i></a></span>
+      </div>
       <div class="ui form">
         <div class="grouped fields">
           <h4 class="ui horizontal divider header">
             <i class="cog icon"></i>Settings
           </h4>
-          <div class="field">
+          <!-- <div class="field">
             <div class="ui toggle checkbox">
               <input type="checkbox" name="public">
               <label>Checkbox label</label>
             </div>
-          </div>
+          </div> -->
           <div class="field">
-            <div class="ui toggle checkbox">
-              <input type="checkbox" name="asd">
-              <label>Checkbox label</label>
-            </div>
+            <div class="centered">There are no available options yet.</div>
           </div>
           <h4 class="ui horizontal divider header">
             <i class="red fire icon"></i>Advanced
@@ -24,7 +25,7 @@
           <div class="inline field">
             <label>Local rune pages file: </label>
             <input type="file" id="choosefile" name="choosefile" style="display: none;" onchange={ handleChooseFile }>
-            <div class="ui action input" onclick="$('#choosefile').click();" data-tooltip={ opts.configfile.cwd } data-position="bottom right" data-inverted="">
+            <div class="ui action input" onclick="$('#choosefile').click();" data-tooltip={ opts.configfile.cwd } data-position="bottom center" data-inverted="">
               <input type="text" id="displaypath" placeholder="Choose .json file..." value={ opts.configfile.name } readonly>
               <button class="ui icon button">
                 <i class="open folder icon"></i>

@@ -50,7 +50,7 @@ function exctractPage(html, champion, rec, callback, pageType) {
 		}
 		else runecount++;
 		
-		pages[pages.length - 1].selectedPerkIds[runecount % 6] = rune;
+		pages[pages.length - 1].selectedPerkIds[runecount % 6] = parseInt(rune);
 	});
 
 	if(rec) {

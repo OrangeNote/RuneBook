@@ -15,8 +15,8 @@ let win
 var latestv = null;
 
 function createWindow () {
-  let minWidth = 768
-  let minHeight = 768
+  let minWidth = 784
+  let minHeight = 827
 
   let mainWindowState = windowStateKeeper({
     defaultWidth: minWidth,
@@ -32,7 +32,7 @@ function createWindow () {
     x: mainWindowState.x,
     y: mainWindowState.y,
     maximizable: false,
-    useContentSize: true
+    useContentSize: false
   }
 
   if (process.platform == 'darwin') {

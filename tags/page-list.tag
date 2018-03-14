@@ -54,9 +54,9 @@
 
   <script>
 
-		this.on('updated', function() {
-			$('.tooltip').popup()
-		});
+    this.on('updated', function() {
+      $('.tooltip').popup()
+    });
 
     findTooltip(page, index) {
       if(!opts.tooltips.rune) return;

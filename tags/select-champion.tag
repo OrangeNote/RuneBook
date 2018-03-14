@@ -31,9 +31,9 @@
           </div>
 
           <div class="column middle aligned">
-            <div class="ui checkbox">
+            <div class="ui toggle checkbox" id="autochamp">
               <input type="checkbox" tabindex="0" class="hidden">
-              <label>Auto select <i class="help circle icon" id="toot"></i></label>
+              <label id="autochamp-label">Auto select <i class="question circle icon"></i></label>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
     </div>
   </div>
   
-  <div class="ui popup" style="width: 250px;">Automatically chooses champion when you're in champion select</div>
+  <div class="ui popup" style="width: 250px;">When you're in champion select, automatically update RuneBook with your champion pick.</div>
 
   <style>
     .tiny-ring {
@@ -68,12 +68,16 @@
     freezer.on("version:set", (version) => {
       this.version = version;
 
-      $("#toot").popup({
+      $("#autochamp-label").popup({
         position: "bottom right",
-        popup: '.ui.popup'
+        popup: '.ui.popup',
+        delay: {
+          show: 800,
+          hide: 0
+        }
       });
 
-      $('.ui.checkbox')
+      $('#autochamp')
         .checkbox({
           onChecked: () => {
             freezer.emit("autochamp:enable");

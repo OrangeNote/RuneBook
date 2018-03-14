@@ -11,9 +11,8 @@
       <i class="frown outline icon"></i>
       <div class="content">
         Couldn't find rune pages for this champion.
-        <div class="sub header">No pages found or service temporarily unavailable.<br>
-        If the error persists, please
-        <a href="https://github.com/OrangeNote/RuneBook/issues">send an issue on GitHub.</a>
+        <div class="sub header">
+          No pages found or service temporarily unavailable.<br>
         </div>
       </div>
     </virtual>
@@ -23,13 +22,13 @@
     <div class="item" each={ page, key in opts.current.champ_data.pages }>
       <div class="right floated content" data-key={ key }>
         
-        <div class={ opts.lastuploadedpage.page == key && opts.lastuploadedpage.champion == opts.current.champion && opts.lastuploadedpage.loading ? "ui icon button loading" : (opts.connection.page && opts.connection.page.isEditable && opts.connection.summonerLevel >= 15 ? "ui icon button" : "ui icon button disabled") } data-key={key} onclick={ uploadPage }>
+        <div class={ opts.lastuploadedpage.page == key && opts.lastuploadedpage.champion == opts.current.champion && opts.lastuploadedpage.loading ? "ui icon button loading" : (opts.connection.page && opts.connection.page.isEditable && opts.connection.summonerLevel >= 15 ? "ui icon button" : "ui icon button disabled") } data-key={key} onclick={ uploadPage } data-tooltip="Upload this page to the client" data-position="left center" data-inverted="">
           <i class={ opts.lastuploadedpage.page == key && opts.lastuploadedpage.champion == opts.current.champion ? (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon") : "upload icon" } data-key={key}></i>
         </div>
         
-        <div if={ opts.plugins.local[opts.tab.active] } class="ui icon button" onclick={ setFav } data-key={key}>
+        <!-- <div if={ opts.plugins.local[opts.tab.active] } class="ui icon button" onclick={ setFav } data-key={key}>
           <i class={ key == opts.current.champ_data.fav ? "heart icon" : "heart outline icon" } data-key={key}></i>
-        </div>
+        </div> -->
         
         <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={"Sync from " + page.bookmark.remote.name} data-position="left center" data-inverted="" onclick={ syncBookmark }>
           <i class={ opts.lastsyncedpage.page == key && opts.lastsyncedpage.champion == opts.current.champion ? (opts.lastsyncedpage.loading ? "sync alternate icon loading" : "checkmark icon") : "sync alternate icon" } data-key={key}></i>
@@ -39,7 +38,7 @@
           <i class={page.bookmark ? "unlink icon" : "trash icon"} data-key={key}></i>
         </div>
 
-        <div if={ opts.plugins.remote[opts.tab.active] } class="ui icon button" data-key={key} onclick={ bookmarkPage }>
+        <div if={ opts.plugins.remote[opts.tab.active] } class="ui icon button" data-key={key} onclick={ bookmarkPage } data-tooltip="Bookmark this page as local" data-position="left center" data-inverted="">
           <i class={opts.lastbookmarkedpage.page == key && opts.lastbookmarkedpage.champion == opts.current.champion ? "checkmark icon" : "bookmark icon"} data-key={key}></i>
         </div>
       </div>

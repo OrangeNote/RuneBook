@@ -11,7 +11,7 @@
 				<div class="item">
 					<div class="right floated content" data-key={ key }>
 
-						<button class={ (opts.current.champion && opts.connection.page && opts.plugins.local[opts.tab.active]) ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage }>
+						<button class={ (opts.current.champion && opts.connection.page && opts.plugins.local[opts.tab.active]) ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage } data-tooltip="Import this page as local" data-position="left center" data-inverted="">
 							<i class="download icon"></i>
 						</button>
 					</div>

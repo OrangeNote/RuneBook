@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="ui image">
-        <div each={ index in [0,1,2,3,4,5] } class="ui circular icon button" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
-        data-tooltip={findTooltip(page, index)} data-position="right center">
+        <div each={ index in [0,1,2,3,4,5] } class="ui circular icon button tooltip" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
+        data-html={findTooltip(page, index)}>
           <img draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{page.selectedPerkIds[index] || "qm"}.png>
         </div>
       </div>
@@ -54,10 +54,14 @@
 
   <script>
 
+		this.on('updated', function() {
+			$('.tooltip').popup()
+		});
+
     findTooltip(page, index) {
       if(!opts.tooltips.rune) return;
       var tooltip = opts.tooltips.rune.find((el) => el.id === page.selectedPerkIds[index]);
-      return tooltip.name;
+      return '<b>' + tooltip.name + '</b><br>' + tooltip.longDesc;
     }
 
     var shell = require('electron').shell;

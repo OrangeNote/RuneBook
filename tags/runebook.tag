@@ -2,13 +2,10 @@
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
+          RuneBook
           <update-button updateready={updateready}></update-button>
-          &nbsp;RuneBook
-          <div>
-            <!-- <connection-status session={session}></connection-status> -->
-            <i class="link cog icon" style="position: absolute; top: 32%; right: 1%;" onclick="$('.ui.modal').modal('show')"></i>
-            <settings-panel configfile={configfile}></settings-panel>
-          </div>
+          
+          <settings-panel configfile={configfile}></settings-panel>
       </div>
     </div>
   </header>

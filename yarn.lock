@@ -885,6 +885,10 @@ deep-assign@^1.0.0:
   dependencies:
     is-obj "^1.0.0"
 
+deep-equal@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+
 deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
@@ -1230,6 +1234,14 @@ electron-updater@^2.20.1:
     lodash.isequal "^4.5.0"
     semver "^5.5.0"
     source-map-support "^0.5.2"
+
+electron-window-state@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/electron-window-state/-/electron-window-state-4.1.1.tgz#6b34fdc31b38514dfec8b7c8f7b5d4addb67632d"
+  dependencies:
+    deep-equal "^1.0.1"
+    jsonfile "^2.2.3"
+    mkdirp "^0.5.1"
 
 electron@^1.6.6:
   version "1.7.10"
@@ -2455,7 +2467,7 @@ json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
-jsonfile@^2.1.0:
+jsonfile@^2.1.0, jsonfile@^2.2.3:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
   optionalDependencies:

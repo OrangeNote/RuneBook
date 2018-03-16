@@ -3,8 +3,17 @@
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
           RuneBook
+
           <update-button updateready={updateready}></update-button>
+
+          <div style="position: absolute; top: 27%; right: 6%; -webkit-app-region: no-drag;">
+            <i class="link window minimize small icon" onclick={ minimize }></i>
+          </div>
           
+          <div style="position: absolute; top: 27%; right: 1%; -webkit-app-region: no-drag;">
+            <i class="link close small icon" onclick={ close }></i>
+          </div>
+
           <settings-panel configfile={configfile}></settings-panel>
       </div>
     </div>
@@ -27,6 +36,18 @@
   </style>
 
   <script>
+    var remote;
+    this.on("mount", () => {
+      remote = require('electron').remote;
+    })
+
+    close() {
+      remote.getCurrentWindow().close();
+    }
+
+    minimize() {
+      remote.getCurrentWindow().minimize();
+    }
 
     this.current = opts.current;
     this.lastuploadedpage = opts.lastuploadedpage;

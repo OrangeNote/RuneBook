@@ -4,6 +4,7 @@ const path = require('path')
 const url = require('url')
 const request = require('request')
 const isDev = require('electron-is-dev')
+const windowStateKeeper = require("electron-window-state")
 
 require('electron-debug')({enabled: true});
 
@@ -15,24 +16,33 @@ var latestv = null;
 
 function createWindow () {
 
+  let width = 768
+  let height = 768
+  let minWidth = 768
+  let minHeight = 576
+
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: width,
+    defaultHeight: height
+  })
+
   var options = {
     title: 'RuneBook',
-    width: 768,
-    height: 768,
-    minWidth: 768,
-    minHeight: 768,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    minWidth: minWidth,
+    minHeight: minHeight,
     maximizable: false,
-    useContentSize: true
-  }
-
-  if (process.platform == 'darwin') {
-    options.frame = false
-    options.titleBarStyle =  "hiddenInset"
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    frame: false,
+    useContentSize: false
   }
 
   // Create the browser window.
   win = new BrowserWindow(options)
 
+  mainWindowState.manage(win)
   win.setResizable(true);
   win.setFullScreenable(false);
   win.setMenu(null);
@@ -66,7 +76,7 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
   win.webContents.on("did-finish-load", () => {
-    if(isDev) return;
+    //if(isDev) return;
     if (process.platform !== 'darwin') {
       autoUpdater.checkForUpdates();
     }

@@ -76,7 +76,7 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
   win.webContents.on("did-finish-load", () => {
-    //if(isDev) return;
+    if(isDev) return;
     if (process.platform !== 'darwin') {
       autoUpdater.checkForUpdates();
     }

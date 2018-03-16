@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="ui image">
-        <div each={ index in [0,1,2,3,4,5] } class="ui circular icon button tooltip" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
+        <div each={ index in [0,1,2,3,4,5] } class="ui circular icon button tooltip page-list-tooltip" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
         data-html={findTooltip(page, index)}>
           <img draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{page.selectedPerkIds[index] || "qm"}.png>
         </div>
@@ -55,7 +55,7 @@
   <script>
 
 		this.on('updated', function() {
-			$('.tooltip').popup()
+      if (process.platform != 'darwin') $('.page-list-tooltip').popup()
 		});
 
     findTooltip(page, index) {

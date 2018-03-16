@@ -2,27 +2,20 @@
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
+          RuneBook
           <update-button updateready={updateready}></update-button>
-          &nbsp;RuneBook
-          <div>
-            <!-- <connection-status session={session}></connection-status> -->
-            <i class="link cog icon" style="position: absolute; top: 32%; right: 1%;" onclick="$('.ui.modal').modal('show')"></i>
-            <settings-panel configfile={configfile}></settings-panel>
-          </div>
+          
+          <settings-panel configfile={configfile}></settings-panel>
       </div>
     </div>
   </header>
 
-  <main>
-    <select-champion champion={current.champion} autochamp={autochamp} champselect={champselect}></select-champion>
-    <chapters-segment current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins} lastbookmarkedpage={lastbookmarkedpage} lastsyncedpage={lastsyncedpage} tooltips={tooltips}></chapters-segment>
-  </main>
-  
-  <footer>
-    <div style="margin-bottom: 20px">
-      <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins} tooltips={tooltips}></current-page>
-    </div>
-  </footer>
+  <select-champion champion={current.champion} autochamp={autochamp} champselect={champselect}></select-champion>
+
+  <chapters-segment style="flex: 1; display: flex; flex-direction: column;" current={current} lastuploadedpage={lastuploadedpage} session={session} connection={connection} tab={tab} plugins={plugins} lastbookmarkedpage={lastbookmarkedpage} lastsyncedpage={lastsyncedpage} tooltips={tooltips}></chapters-segment>
+  <div style="margin-bottom: 20px;">
+    <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins} tooltips={tooltips}></current-page>
+  </div>
 
   <style>
     runebook {
@@ -31,9 +24,6 @@
       flex-direction: column;
     }
 
-    main {
-      flex: 1;
-    }
   </style>
 
   <script>

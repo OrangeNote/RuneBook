@@ -285,12 +285,12 @@ function updateConnectionData() {
 		}
 		freezer.get().connection.set("summonerLevel", summoner.summonerLevel);
 	});
-
-	api.get("/lol-perks/v1/perks").then((data) => {
-		if(!data) return;
-		freezer.get().tooltips.set("rune", data);
-	});
 }
+
+freezer.on('/lol-perks/v1/perks:Update', (data) => {
+	if(!data) return;
+	freezer.get().tooltips.set("rune", data);
+});
 
 freezer.on('/lol-perks/v1/currentpage:Update', handleCurrentPageUpdate);
 
@@ -300,7 +300,12 @@ freezer.on('/lol-champ-select/v1/session:Delete', () => {
 
 freezer.on('/lol-champ-select/v1/session:Update', (data) => {
 	console.log(data);
-	var action = data.actions[0].find((el) => data.localPlayerCellId === el.actorCellId);
+	var action = null;
+	for(var i = 0; i < data.actions.length; i++) {
+		action = data.actions[i].find((el) => data.localPlayerCellId === el.actorCellId && el.type === "pick")
+		if(action) break;
+	}
+	if(!action) return;
 	if(action.completed === false) freezer.get().set("champselect", true);
 	else freezer.get().set("champselect", false);
 	if(freezer.get().autochamp === false) return;
@@ -317,7 +322,12 @@ freezer.on("autochamp:enable", () => {
 	// Check if a champ was already selected in client
 	api.get("/lol-champ-select/v1/session").then((data) => {
 		if(!data) return;
-		var action = data.actions[0].find((el) => data.localPlayerCellId === el.actorCellId);
+		var action = null;
+		for(var i = 0; i < data.actions.length; i++) {
+			action = data.actions[i].find((el) => data.localPlayerCellId === el.actorCellId && el.type === "pick")
+			if(action) break;
+		}
+		if(!action) return;
 		if(action.completed === false) freezer.get().set("champselect", true);
 		var champions = freezer.get().championsinfo;
 		var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);

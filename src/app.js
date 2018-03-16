@@ -285,6 +285,11 @@ function updateConnectionData() {
 		}
 		freezer.get().connection.set("summonerLevel", summoner.summonerLevel);
 	});
+
+	api.get("/lol-perks/v1/perks").then((data) => {		
+		if(!data) return;		
+		freezer.get().tooltips.set("rune", data);		
+	});
 }
 
 freezer.on('/lol-perks/v1/perks:Update', (data) => {

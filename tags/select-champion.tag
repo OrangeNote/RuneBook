@@ -103,7 +103,7 @@
           duration: 0,
           searchDelay: 0,
           showNoResults: false,
-          maxResults: 14,
+          maxResults: 10,
           fullTextSearch: true,
           selectFirstResult: true,
           searchFields: ['title', 'info'],

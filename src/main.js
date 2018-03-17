@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain, shell} = require('electron')
+const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron')
 const {autoUpdater} = require("electron-updater")
 const path = require('path')
 const url = require('url')
@@ -77,27 +77,22 @@ app.on('ready', function() {
   createWindow();
   win.webContents.on("did-finish-load", () => {
     if(isDev) return;
-    if (process.platform !== 'darwin') {
-      autoUpdater.checkForUpdates();
-    }
-    else {
-      request({
-        url: 'https://api.github.com/repos/OrangeNote/RuneBook/releases/latest',
-        headers: {
-          'User-Agent': 'request'
+    request({
+      url: 'https://api.github.com/repos/OrangeNote/RuneBook/releases/latest',
+      headers: {
+        'User-Agent': 'request'
+      }
+    },
+    function (error, response, data) {
+      if(!error && response && response.statusCode == 200) {
+        data = JSON.parse(data);
+        latestv = data.tag_name.substring(1);
+        if(latestv !== app.getVersion()) {
+          win.webContents.send('update:ready');
         }
-      },
-      function (error, response, data) {
-        if(!error && response && response.statusCode == 200) {
-          data = JSON.parse(data);
-          latestv = data.tag_name.substring(1);
-          if(latestv !== app.getVersion()) {
-            win.webContents.send('update:ready');
-          }
-        }
-        else throw Error("github api error");
-      })
-    }
+      }
+      else throw Error("github api error");
+    })
   });
 })
 
@@ -122,16 +117,23 @@ app.on('activate', () => {
 // code. You can also put them in separate files and require them here.
 
 // when the update has been downloaded and is ready to be installed, notify the BrowserWindow
-autoUpdater.on('update-downloaded', (info) => {
-  win.webContents.send('update:ready');
+autoUpdater.on('update-downloaded', () => {
+  win.webContents.send('update:downloaded');
+  dialog.showMessageBox({
+    title: 'Install update',
+    message: 'Update downloaded, RuneBook will be quit for update...'
+  }, () => {
+    setImmediate(() => autoUpdater.quitAndInstall())
+  })
 });
 
 // when receiving a quitAndInstall signal, quit and install the new version ;)
 ipcMain.on("update:do", (event, arg) => {
   if (process.platform !== 'darwin') {
-    autoUpdater.quitAndInstall();
+    autoUpdater.checkForUpdatesAndNotify();
   }
   else {
+    win.webContents.send('update:downloaded');
     shell.openExternal(`https://github.com/OrangeNote/RuneBook/releases/download/v${latestv}/RuneBook-${latestv}-mac.zip`)
   }
 })

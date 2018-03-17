@@ -17,7 +17,8 @@
             </div>
           </div> -->
           <div class="field">
-            <div class="centered">There are no available options yet.</div>
+            <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }>Download update</div>
+            <span if={ !opts.updateready }>RuneBook is up to date.</span>
           </div>
           <h4 class="ui horizontal divider header">
             <i class="red fire icon"></i>Advanced
@@ -47,6 +48,10 @@
       });
     });
 
+    freezer.on("update:downloaded", () => {
+      $(".update-button").removeClass("loading");
+    });
+
     handleChooseFile(evt) {
       evt.preventUpdate = true;
 
@@ -56,6 +61,15 @@
         freezer.emit("configfile:change", evt.target.files[0].path);
       }
     }
+
+    doUpdate(evt) {
+    evt.preventUpdate = true;
+
+    $(".update-button").addClass("loading")
+    $(".update-button").addClass("disabled")
+
+    freezer.emit('update:do');
+  }
 
   </script>
 

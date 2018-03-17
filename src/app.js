@@ -10,8 +10,12 @@ var request = require('request');
 
 var {ipcRenderer} = require('electron');
 ipcRenderer.on('update:ready', (event, arg) => {
-	console.log("UPDATE RECEIVED FROM MAIN PROCESS")
+	console.log("github new latest found")
 	freezer.get().set("updateready", true);
+});
+ipcRenderer.on('update:downloaded', (event, arg) => {
+	console.log("update downloaded")
+	freezer.emit("update:downloaded");
 });
 
 var path = require('path');

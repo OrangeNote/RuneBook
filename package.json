@@ -17,7 +17,8 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mw -p always",
     "dist:mac": "electron-builder --mac",
-    "dist:win": "electron-builder --win"
+    "dist:win": "electron-builder --win",
+    "dist:all": "electron-builder -mw"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",

@@ -26,7 +26,7 @@
     <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins} tooltips={tooltips}></current-page>
   </div>
 
-  <settings-panel configfile={configfile}></settings-panel>
+  <settings-panel configfile={configfile} updateready={updateready}></settings-panel>
   <changelog-modal></changelog-modal>
 
   <style>

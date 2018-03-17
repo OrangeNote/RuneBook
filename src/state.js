@@ -59,7 +59,9 @@ var state = {
 
 	tooltips: {
 		rune: null
-	}
+	},
+
+	showchangelog: false
 };
 
 module.exports = new Freezer(state);

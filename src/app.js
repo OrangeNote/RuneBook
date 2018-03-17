@@ -31,6 +31,15 @@ freezer.on("update:do", () => {
 	ipcRenderer.send('update:do');
 });
 
+freezer.on("changelog:ready", () => {
+	var appVersion = require('electron').remote.app.getVersion();
+	console.log(appVersion, settings.get("changelogversion"))
+	if(settings.get("changelogversion") != appVersion) {
+		freezer.get().set("showchangelog", true);
+		settings.set("changelogversion", appVersion);
+	}
+});
+
 request('https://ddragon.leagueoflegends.com/api/versions.json', function (error, response, data) {
 	if(!error && response && response.statusCode == 200) {
 		freezer.emit("version:set", JSON.parse(data)[0]);

@@ -1,7 +1,7 @@
 <update-button>
 
   <div if={ !opts.updateready }>
-    <i class="link cog small icon" style="position: absolute; top: 37%; right: 11%; -webkit-app-region: no-drag;" onclick="$('.ui.modal').modal('show')"></i>
+    <i class="link cog small icon" style="position: absolute; top: 37%; right: 11%; -webkit-app-region: no-drag;" onclick="$('.settings-modal').modal('show')"></i>
   </div>
 
   <div if={ opts.updateready } style="position: absolute; top: 25%; right: 11%; -webkit-app-region: no-drag;">

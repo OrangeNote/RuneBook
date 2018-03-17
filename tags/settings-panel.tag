@@ -1,8 +1,8 @@
 <settings-panel>
-  <div class="ui modal">
+  <div class="ui modal settings-modal">
     <div class="content">
       <div class="ui bottom attached label">
-        RuneBook ({require('electron-is-dev') === true ? "DEV" : "v" + require('electron').remote.app.getVersion()})
+        RuneBook <a style="text-decoration: underline;" onclick="$('.changelog-modal').modal('show')">{ require('electron-is-dev') === true ? "DEV" : require('electron').remote.app.getVersion(); }</a>
         <span style="float: right;"><a href="https://github.com/OrangeNote/RuneBook/issues" style="color: #555555;"><i class="bug icon"></i></a></span>
       </div>
       <div class="ui form">
@@ -40,9 +40,8 @@
 
   <script>
     this.on('mount', () => {
-      $('.ui.modal').modal({
+      $('.settings-modal').modal({
         duration: 200,
-        centered: false,
         autofocus: false,
         inverted: true,
       });

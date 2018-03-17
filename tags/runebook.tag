@@ -1,4 +1,5 @@
 <runebook>
+  
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">
@@ -14,7 +15,6 @@
             <i class="link close small icon" onclick={ close }></i>
           </div>
 
-          <settings-panel configfile={configfile}></settings-panel>
       </div>
     </div>
   </header>
@@ -25,6 +25,9 @@
   <div style="margin-bottom: 20px;">
     <current-page connection={connection} session={session} current={current} tab={tab} plugins={plugins} tooltips={tooltips}></current-page>
   </div>
+
+  <settings-panel configfile={configfile}></settings-panel>
+  <changelog-modal></changelog-modal>
 
   <style>
     runebook {
@@ -39,6 +42,13 @@
     var remote;
     this.on("mount", () => {
       remote = require('electron').remote;
+    })
+
+    this.on("updated", () => {
+      if(freezer.get().showchangelog) {
+        $(".changelog-modal").modal("show");
+      }
+      freezer.get().set("showchangelog", false);
     })
 
     close() {

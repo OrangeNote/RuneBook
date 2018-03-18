@@ -6,8 +6,11 @@
       What's new in { require('electron-is-dev') === true ? "DEV" : require('electron').remote.app.getVersion(); }
     </div>
     <div class="scrolling content">
+      <img class="ui fluid rounded image" src="./img/changelog_banner.png">
+      <i>Thanks to TheKillerey for the banner</i>
       <h3>Greetings, Summoner!</h3>
       <p>Thanks to everyone who contributed on <a href="https://github.com/OrangeNote/RuneBook/network">GitHub</a> and to the supporting community on <a href="https://discord.gg/hN4kP7n">Discord</a>! You made this update possible, you rock!</p>
+      <p>Here it is a list of notable changes:</p>
       <h4 class="ui header">New sources for rune pages
         <div class="sub header">Thanks to Keyzou, passzivsurmo and Jainish</div></h4>
       <ul>
@@ -37,11 +40,12 @@
         <li>Window can now be resized</li>
         <li>Window position and size will be remembered after you close the app</li>
         <li>All buttons now have a brief description</li>
-        <li>No more double window header and custom window control buttons</li>
+        <li>No more double window header</li>
+        <li>Added custom window control buttons</li>
         <li> ...and more</li>
       </ul>
       <p>That's all! And as always: <i>“The runes decide my path.”</i></p>
-      <h4 class="ui header right floated">OrangeNote, 2018-03-17</h4>
+      <h4 class="ui header right floated">OrangeNote, 2018-03-18</h4>
     </div>
   </div>
 
@@ -51,7 +55,6 @@
       $('.changelog-modal').modal({
         duration: 200,
         autofocus: false,
-        inverted: true,
       });
 
       freezer.emit("changelog:ready");

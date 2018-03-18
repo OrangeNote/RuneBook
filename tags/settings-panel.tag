@@ -17,6 +17,7 @@
             </div>
           </div> -->
           <div class="field">
+            <span if={ opts.updateready }>New version available!</span>
             <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }>Download update</div>
             <span if={ !opts.updateready }>RuneBook is up to date.</span>
           </div>

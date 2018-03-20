@@ -3,7 +3,9 @@ var freezer = require('./state');
 
 freezer.get().configfile.set({
 	name: settings.get("config.name") + settings.get("config.ext"),
-	cwd: settings.get("config.cwd")
+	cwd: settings.get("config.cwd"),
+	leaguepath: settings.get("leaguepath"),
+	pathdiscovery: settings.get("pathdiscovery")
 });
 
 var request = require('request');
@@ -29,6 +31,17 @@ freezer.on("configfile:change", (newPath) => {
 			ext: path.extname(newPath)
 		}
 	});
+});
+
+freezer.on("pathdiscovery:switch", (val) => {
+	freezer.get().configfile.set("pathdiscovery", val);
+	settings.set("pathdiscovery", val);
+});
+
+freezer.on("leaguepath:change", (leaguepath) => {
+	leaguepath = path.join(path.dirname(path.normalize(leaguepath)), (process.platform == 'darwin' ? 'LeagueClient.app' : 'LeagueClient.exe'));
+	freezer.get().configfile.set("leaguepath", leaguepath);
+	settings.set("leaguepath", leaguepath);
 });
 
 freezer.on("update:do", () => {
@@ -352,7 +365,9 @@ freezer.on("autochamp:disable", () => {
 });
 
 const LCUConnector = require('lcu-connector');
-const connector = new LCUConnector('');
+console.log("config leaguepath", freezer.get().configfile.leaguepath)
+console.log("config pathdiscovery", freezer.get().configfile.pathdiscovery)
+const connector = new LCUConnector(freezer.get().configfile.pathdiscovery ? undefined : freezer.get().configfile.leaguepath);
 const api = require('./lcu-api');
 
 connector.on('connect', (data) => {

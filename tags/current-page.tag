@@ -6,6 +6,7 @@
 			<h4 class="ui center aligned header" if={ !opts.connection.page }>
 				Current page is not available.
 				<div class="sub header">Please log in to the League Client to access your rune pages.</div>
+				<div class="sub header">If the error persists, go to Settings and manually set your League Client installation path.</div>
 			</h4>
 			<div if={ opts.connection.page } class="ui middle aligned relaxed divided list">
 				<div class="item">

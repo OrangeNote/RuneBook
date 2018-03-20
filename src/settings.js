@@ -8,7 +8,9 @@ settings = new Store({
 			cwd: require('electron').remote.app.getPath('userData'),
 			ext: ".json"
 		},
-		changelogversion: "0.0.0"
+		changelogversion: "0.0.0",
+		leaguepath: 'C:\\Riot Games\\League of Legends\\LeagueClient.exe',
+		pathdiscovery: true
 	}
 });
 

@@ -6,6 +6,11 @@
       What's new in { require('electron-is-dev') === true ? "DEV" : require('electron').remote.app.getVersion(); }
     </div>
     <div class="scrolling content">
+      <div class="ui warning message">
+        <h4 class="ui header"><i class="warning icon"></i> 1.5.1 "Current page is not available" fix</h4>
+        If RuneBook doesn't automatically recognize your League Client or you have multiple installations (i.e. PBE client), you can now manually specify the installation path in the settings panel. You need to indicate the absolute path to <code>LeagueClient{ process.platform == "darwin" ? ".app" : ".exe" }</code>
+      </div>
+      <hr>
       <img class="ui fluid rounded image" src="./img/changelog_banner.png">
       <i>Thanks to TheKillerey for the banner</i>
       <h3>Greetings, Summoner!</h3>

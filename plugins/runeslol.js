@@ -59,7 +59,7 @@ var perksMap = {
 	"Unflinching":8242,
 	"Demolish":8446,
 	"Font of Life":8463,
-        "Chrysalis":8472,
+	"Chrysalis":8472,
 	"Conditioning":8429,
 	"Overgrowth":8451,
 	"Revitalize":8453,

@@ -22,7 +22,7 @@ function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 	$("img[src^='//statics.koreanbuilds.net/perks/']", slots).each(function(index) {
 		if(index % 8 == 0) {
 			pages.push({
-				"name": champion + " " + role + " BC "+ $('#circle-big').text(),
+				"name": champObj.name + " " + role + " BC "+ $('#circle-big').text(),
 				"primaryStyleId": -1,
 				"selectedPerkIds": [0, 0, 0, 0, 0, 0],
 				"subStyleId": -1,
@@ -63,8 +63,8 @@ function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 		console.log("summs length", summs.length)
 		if(summs.length == 0) return callback(pages);
 		summs.forEach(function(value) {
-			console.log(url + "/champion/" + champion + "/" + role + "/" + champObj.version.replace(/\.(?:[0-9]*)$/, '') + '/'+ value)
-			request.get(url + "/champion/" + champion + "/" + role + "/" + champObj.version.replace(/\.(?:[0-9]*)$/, '') + '/' + value, (error, response, _html) => {
+			console.log(url + "/champion/" + champObj.name + "/" + role + "/" + champObj.version.replace(/\.(?:[0-9]*)$/, '') + '/'+ value)
+			request.get(url + "/champion/" + champObj.name + "/" + role + "/" + champObj.version.replace(/\.(?:[0-9]*)$/, '') + '/' + value, (error, response, _html) => {
 				if(!error && response.statusCode == 200) {
 					var newPages = extractPage(_html, champObj, champion, role, false);
 					pages = pages.concat(newPages);
@@ -98,7 +98,7 @@ function _getPages(champion, callback) {
 				callback(res)
 			} else {
 				roles.forEach((role) => {
-					var champUrl = url + "/champion/" + champion + "/" + role + "/" + champ.version.replace(/\.(?:[0-9]*)$/, '') + '/-1';
+					var champUrl = url + "/champion/" + champ.name + "/" + role + "/" + champ.version.replace(/\.(?:[0-9]*)$/, '') + '/-1';
 					request.get(champUrl, (error, response, html) => {
 						if(!error && response.statusCode == 200) {
 							extractPage(html, champ, champion, role, true, (pages) => {

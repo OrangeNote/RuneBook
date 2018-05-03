@@ -75,7 +75,7 @@ var perksMap = {
 	"Overgrowth":8451,
 	"Revitalize":8453,
 	"Second Wind":8444,
-	"Unsealed Spellbook":8326,
+	"Unsealed Spellbook":8360,
 	"Glacial Augment":8351,
 	"Kleptomancy":8359,
 	"Hextech Flashtraption":8306,

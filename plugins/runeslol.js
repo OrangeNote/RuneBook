@@ -77,7 +77,10 @@ var perksMap = {
 	"Approach Velocity":8410,
 	"Celestial Body":8339,
 	"Bone Plating":8473,
-	"Time Warp Tonic":8352
+	"Time Warp Tonic":8352,
+	"Hail of Blades":9923,
+	"Ultimate Hunter":8106,
+	"Nimbus Cloak":8275
 };
 
 function extractPage(html, pageName, pageUrl) {

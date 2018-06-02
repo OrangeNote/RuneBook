@@ -1,0 +1,18 @@
+{
+  "settings.title": "Configuración",
+  "settings.client_path": "Ruta de instalación del cliente de League of Legends",
+  "champion.name": "Campeón",
+  "champion.autopick.tooltip": "Cuando estás en selección de campeón, actualiza automáticamente RuneBook con el campeón que has seleccionado.",
+  "champion.autopick": "Selección auto.",
+  "settings.pathdiscovery.help": "Detección automática está activa. Desactívala para establecer una ruta manualmente.",
+  "settings.pathdiscovery": "Detección automática de ruta de instalación (recomendado)",
+  "settings.restart.warning": "Debes reiniciar RuneBook para aplicar este cambio",
+  "settings.updates": "Actualizaciones",
+  "settings.newversion": "¡Nueva versión disponible!",
+  "settings.downloadupdate": "Descargar actualización",
+  "settings.uptodate": "RuneBook está actualizado.",
+  "settings.advanced": "Avanzado",
+  "settings.localrunefile": "Archivo local de página de runas",
+  "settings.choosefile": "Escoja un archivo .json",
+  "settings.lang": "Idioma"
+}

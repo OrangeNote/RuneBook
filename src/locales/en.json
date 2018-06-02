@@ -1,0 +1,18 @@
+{
+  "settings.title": "Settings",
+  "settings.client_path": "League Client installation path",
+  "champion.name": "Champion name",
+  "champion.autopick.tooltip": "When you're in champion select, automatically update RuneBook with your champion pick.",
+  "champion.autopick": "Auto select",
+  "settings.pathdiscovery.help": "Automatic detection is active. Please disable it if you want to manually set a custom path.",
+  "settings.pathdiscovery": "Automatically detect installation path (recommended)",
+  "settings.restart.warning": "Restart RuneBook to apply this change",
+  "settings.updates": "Updates",
+  "settings.newversion": "New version available!",
+  "settings.downloadupdate": "Download update",
+  "settings.uptodate": "RuneBook is up to date.",
+  "settings.advanced": "Advanced",
+  "settings.localrunefile": "Local rune pages file",
+  "settings.choosefile": "Choose .json file",
+  "settings.lang": "Language"
+}

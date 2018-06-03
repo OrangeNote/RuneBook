@@ -1,17 +1,17 @@
 <chapters-segment>
   <div class="ui container" style="flex: 1; display: flex; flex-direction: column">
     
-    <div class="ui horizontal divider">Chapters</div>
+    <div class="ui horizontal divider"><i1-8n>chapters.title</i1-8n></div>
 
     <div class="ui top attached pointing small borderless menu" style="margin-top: 0;">
       <virtual each={ val, key in opts.plugins.local }>
         <a class={ opts.tab.active == key ? "item active" : "item" } data-tab={key} onclick={ switchTab }>
-          {val.name}
+          { i18n.localise(val.name) }
         </a>
       </virtual>
       <virtual each={ val, key in opts.plugins.remote }>
         <a class={ opts.tab.active == key ? "item active" : "item" } data-tab={key} onclick={ switchTab }>
-          {val.name}
+          { i18n.localise(val.name) }
         </a>
       </virtual>
 
@@ -25,8 +25,8 @@
             <h1 if={ !opts.current.champion } class="ui center aligned icon header">
               <i class="open book icon"></i>
               <div class="content">
-                Welcome to RuneBook!
-                <div class="sub header">Select a champion to start managing your rune pages.</div>
+                <i1-8n>chapters.welcome</i1-8n>
+                <div class="sub header"><i1-8n>chapters.startmessage</i1-8n></div>
               </div>
             </h1>
 

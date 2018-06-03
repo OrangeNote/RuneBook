@@ -20,9 +20,9 @@
               <div class="default text">Champion name...</div>
             </div> -->
 
-            <div class="ui search loading disabled fluid">
+            <div class="ui search loading disabled fluid champion">
               <div class="ui icon input">
-                <input disabled class="prompt" type="text" placeholder="Champion name..." onClick="this.select();">
+                <input disabled class="prompt" type="text" placeholder="{ i18n.localise('champion.name') }..." onClick="this.select();">
                 <i class="search icon"></i>
               </div>
               <div class="results"></div>
@@ -62,7 +62,11 @@
   <script>
 
     freezer.on("champion:choose", (champion) => {
-      $('.ui.search').search("set value", champion);
+      $('.ui.search.champion').search("set value", champion);
+    })
+
+    freezer.on("lang:update", (champion) => {
+      $('.ui.search.champion input').attr('placeholder', i18n.localise('champion.name') + '...');
     })
 
     freezer.on("version:set", (version) => {
@@ -94,7 +98,7 @@
         
         ddres = handleDDRes2(JSON.parse(ddres));
 
-        var search_el = $('.ui.search');
+        var search_el = $('.ui.search.champion');
         search_el.removeClass("loading");
         $('input', search_el).prop("disabled", false);
 
@@ -132,7 +136,7 @@
         }
       });
 
-      $('.ui.search').removeClass("disabled");
+      $('.ui.search.champion').removeClass("disabled");
       $('.ui.dropdown').removeClass("disabled");
     });
 

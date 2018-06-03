@@ -3,16 +3,16 @@
     <virtual if={ opts.plugins.local[opts.tab.active] }>
       <i class="sticky note outline icon"></i>
       <div class="content">
-        You don't seem to have any pages for this champion.
-        <div class="sub header">Click the button below to import from your current page.</div>
+        <i1-8n>pagelist.emptylocalpage</i1-8n>
+        <div class="sub header"><i1-8n>pagelist.emptylocalpage.subheader</i1-8n></div>
       </div>
     </virtual>
     <virtual if={ !opts.plugins.local[opts.tab.active] }>
       <i class="frown outline icon"></i>
       <div class="content">
-        Couldn't find rune pages for this champion.
+        <i1-8n>pagelist.emptyremotepage</i1-8n>
         <div class="sub header">
-          No pages found or service temporarily unavailable.<br>
+          <i1-8n>pagelist.emptyremotepage.subheader</i1-8n><br>
         </div>
       </div>
     </virtual>
@@ -22,7 +22,7 @@
     <div class="item" each={ page, key in opts.current.champ_data.pages }>
       <div class="right floated content" data-key={ key }>
         
-        <div class={ opts.connection.page && opts.connection.page.isEditable && opts.connection.summonerLevel >= 15 ? "ui icon button" : "ui icon button disabled" } data-key={key} onclick={ uploadPage } data-tooltip="Upload this page to the client" data-position="left center" data-inverted="">
+        <div class={ opts.connection.page && opts.connection.page.isEditable && opts.connection.summonerLevel >= 15 ? "ui icon button" : "ui icon button disabled" } data-key={key} onclick={ uploadPage } data-tooltip={ i18n.localise('pagelist.uploadpage') } data-position="left center" data-inverted="">
           <i class={ opts.lastuploadedpage.page == key && opts.lastuploadedpage.champion == opts.current.champion ? (opts.lastuploadedpage.loading ? "notched circle loading icon" : (opts.lastuploadedpage.valid === false ? "warning sign icon" : "checkmark icon")) : "upload icon" } data-key={key}></i>
         </div>
         
@@ -30,7 +30,7 @@
           <i class={ key == opts.current.champ_data.fav ? "heart icon" : "heart outline icon" } data-key={key}></i>
         </div> -->
         
-        <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={"Sync from " + page.bookmark.remote.name} data-position="left center" data-inverted="" onclick={ syncBookmark }>
+        <div if={ opts.plugins.local[opts.tab.active] && page.bookmark } class="ui icon button" data-key={key} data-tooltip={ i18n.localise('pagelist.syncfrom') + page.bookmark.remote.name} data-position="left center" data-inverted="" onclick={ syncBookmark }>
           <i class={ opts.lastsyncedpage.page == key && opts.lastsyncedpage.champion == opts.current.champion ? (opts.lastsyncedpage.loading ? "sync alternate icon loading" : "checkmark icon") : "sync alternate icon" } data-key={key}></i>
         </div>
 
@@ -38,7 +38,7 @@
           <i class={page.bookmark ? "unlink icon" : "trash icon"} data-key={key}></i>
         </div>
 
-        <div if={ opts.plugins.remote[opts.tab.active] } class="ui icon button" data-key={key} onclick={ bookmarkPage } data-tooltip="Bookmark this page as local" data-position="left center" data-inverted="">
+        <div if={ opts.plugins.remote[opts.tab.active] } class="ui icon button" data-key={key} onclick={ bookmarkPage } data-tooltip={ i18n.localise('pagelist.bookmarkpage') } data-position="left center" data-inverted="">
           <i class={opts.lastbookmarkedpage.page == key && opts.lastbookmarkedpage.champion == opts.current.champion ? "checkmark icon" : "bookmark icon"} data-key={key}></i>
         </div>
       </div>

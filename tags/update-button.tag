@@ -7,7 +7,7 @@
   <div if={ opts.updateready } style="position: absolute; top: 25%; right: 11%; -webkit-app-region: no-drag;">
     <div class="ui teal label" style="cursor: pointer;" onclick="$('.settings-modal').modal('show')">
       <i class="link cog icon"></i>
-      <div class="detail">Update available!</div>
+      <div class="detail"><i1-8n>settings.newversion</i1-8n></div>
     </div>
   </div>
 

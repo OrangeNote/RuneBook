@@ -5,7 +5,8 @@ freezer.get().configfile.set({
 	name: settings.get("config.name") + settings.get("config.ext"),
 	cwd: settings.get("config.cwd"),
 	leaguepath: settings.get("leaguepath"),
-	pathdiscovery: settings.get("pathdiscovery")
+	pathdiscovery: settings.get("pathdiscovery"),
+	lang: settings.get("lang")
 });
 
 var request = require('request');
@@ -36,6 +37,11 @@ freezer.on("configfile:change", (newPath) => {
 freezer.on("pathdiscovery:switch", (val) => {
 	freezer.get().configfile.set("pathdiscovery", val);
 	settings.set("pathdiscovery", val);
+});
+
+freezer.on("lang:update", (val) => {
+	freezer.get().configfile.set("lang", val);
+	settings.set("lang", val);
 });
 
 freezer.on("leaguepath:change", (leaguepath) => {

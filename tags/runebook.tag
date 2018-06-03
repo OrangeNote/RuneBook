@@ -67,6 +67,7 @@
     this.plugins = opts.plugins;
     this.lastbookmarkedpage = opts.lastbookmarkedpage;
     this.lastsyncedpage = opts.lastsyncedpage;
+    this.lang = opts.lang;
     this.updateready = opts.updateready;
     this.configfile = opts.configfile;
     this.autochamp = opts.autochamp;
@@ -75,7 +76,7 @@
 
     freezer.on('update', () => {
       this.update(freezer.get());
-  });
+    });
 
   </script>
 </runebook>

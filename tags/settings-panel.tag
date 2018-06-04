@@ -11,6 +11,20 @@
             <i class="cog icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.title</i1-8n>
           </h4>
           <div class="field">
+            <div class="inline field">
+              <label><i1-8n>settings.lang</i1-8n>:</label>
+              <div class="ui selection dropdown lang" onchange={ langUpdate }>
+                <input type="hidden" name="country" ref="lang" value={ opts.configfile.lang }>
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                  <div class="item" data-value="en"><i class="us flag"></i>English</div>
+                  <div class="item" data-value="es"><i class="es flag"></i>Español</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
             <label><i1-8n>settings.client_path</i1-8n>:</label>
             <input type="file" id="choosepath" name="choosepath" disabled={ opts.configfile.pathdiscovery } style="display: none;" onchange={ handleChoosePath } >
             <div class={ opts.configfile.pathdiscovery ? "ui action input disabled" : "ui action input" } onclick="$('#choosepath').click();">
@@ -27,45 +41,27 @@
           </div>
           
           <h4 class="ui horizontal divider header">
-            <i class="red fire icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.advanced</i1-8n>
-          </h4>
-          <div class="ui equal width grid two columns row">
-            <div class="column">
-              <div class="inline field">
-                <label><i1-8n>settings.lang</i1-8n>:</label>
-                <div class="ui selection dropdown fluid lang" onchange={ langUpdate }>
-                  <input type="hidden" name="country" ref="lang" value={ opts.configfile.lang }>
-                  <i class="dropdown icon"></i>
-                  <div class="default text"></div>
-                  <div class="menu">
-                    <div class="item" data-value="en"><i class="us flag"></i>English</div>
-                    <div class="item" data-value="es"><i class="es flag"></i>Español</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="inline field">
-                <label><i1-8n>settings.localrunefile</i1-8n> :</label>
-                <input type="file" id="choosefile" name="choosefile" style="display: none;" onchange={ handleChooseFile }>
-                <div class="ui action input fluid" onclick="$('#choosefile').click();" data-tooltip={ opts.configfile.cwd } data-position="bottom center" data-inverted="">
-                  <input type="text" id="displaypath" placeholder="{ i18n.localise('settings.choosefile') }..." value={ opts.configfile.name } readonly>
-                  <button class="ui icon button">
-                    <i class="open folder icon"></i>
-                  </button>
-                </div>
-                <div class="ui orange basic left pointing label hidden" id="changelabel"><i1-8n>settings.restart.warning</i1-8n></div>
-              </div>
-            </div>
-          </div>
-          
-          <h4 class="ui horizontal divider header">
             <i class="teal arrow alternate circle down outline icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.updates</i1-8n>
           </h4>
           <div class="field">
             <span if={ opts.updateready }><i1-8n>settings.newversion</i1-8n></span>
             <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }><i1-8n>settings.downloadupdate</i1-8n></div>
             <span if={ !opts.updateready }><i1-8n>settings.uptodate</i1-8n></span>
+          </div>
+          
+          <h4 class="ui horizontal divider header">
+            <i class="red fire icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.advanced</i1-8n>
+          </h4>
+          <div class="inline field">
+            <label><i1-8n>settings.localrunefile</i1-8n> :</label>
+            <input type="file" id="choosefile" name="choosefile" style="display: none;" onchange={ handleChooseFile }>
+            <div class="ui action input" onclick="$('#choosefile').click();" data-tooltip={ opts.configfile.cwd } data-position="bottom center" data-inverted="">
+              <input type="text" id="displaypath" placeholder="{ i18n.localise('settings.choosefile') }..." value={ opts.configfile.name } readonly>
+              <button class="ui icon button">
+                <i class="open folder icon"></i>
+              </button>
+            </div>
+            <div class="ui orange basic left pointing label hidden" id="changelabel"><i1-8n>settings.restart.warning</i1-8n></div>
           </div>
         </div>
       </div>

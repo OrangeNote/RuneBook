@@ -57,9 +57,9 @@ freezer.on("changelog:ready", () => {
 	}
 });
 
-request('https://ddragon.leagueoflegends.com/api/versions.json', function (error, response, data) {
+request('https://ddragon.leagueoflegends.com/realms/euw.json', function (error, response, data) {
 	if(!error && response && response.statusCode == 200) {
-		freezer.emit("version:set", JSON.parse(data)[0]);
+		freezer.emit("version:set", JSON.parse(data)["v"]);
 	}
 	else throw Error("Couldn't get ddragon api version");
 });

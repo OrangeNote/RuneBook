@@ -183,6 +183,8 @@ freezer.on('page:delete', (champion, page) => {
 });
 
 freezer.on('page:unlinkbookmark', (champion, page) => {
+	if(freezer.get().lastbookmarkedpage.champion == champion && freezer.get().lastbookmarkedpage.page == page)
+		freezer.get().lastbookmarkedpage.set({page: null, champion: null});
 	var state = freezer.get();
 	plugins[state.tab.active].unlinkBookmark(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {

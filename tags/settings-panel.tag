@@ -18,8 +18,10 @@
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
-                  <div class="item" data-value="en"><i class="us flag"></i>English</div>
+                  <div class="item" data-value="en"><i class="gb flag"></i>English</div>
                   <div class="item" data-value="es"><i class="es flag"></i>Español</div>
+                  <div class="item" data-value="it"><i class="it flag"></i>Italiano</div>
+                  <div class="item" data-value="hu"><i class="hu flag"></i>Magyar</div>
                 </div>
               </div>
             </div>

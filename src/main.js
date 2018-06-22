@@ -43,6 +43,7 @@ function createWindow() {
 
     // Create a copy of the 'normal' options
     let splashOptions = JSON.parse(JSON.stringify(options));
+    splashOptions.transparent = true;
 
     // Create the splash window
     splash = new BrowserWindow(splashOptions);
@@ -73,7 +74,7 @@ function createWindow() {
     }));
 
     win.webContents.on("did-finish-load", () => {
-        splash.close();
+        if(splash) splash.close();
         splash = null;
         win.show();
     });

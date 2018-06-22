@@ -20,8 +20,10 @@
                 <div class="menu">
                   <div class="item" data-value="en"><i class="gb flag"></i>English</div>
                   <div class="item" data-value="es"><i class="es flag"></i>Español</div>
+                  <div class="item" data-value="fr"><i class="fr flag"></i>Français</div>
                   <div class="item" data-value="it"><i class="it flag"></i>Italiano</div>
                   <div class="item" data-value="hu"><i class="hu flag"></i>Magyar</div>
+                  <div class="item" data-value="pt"><i class="pt flag"></i>Português</div>
                 </div>
               </div>
             </div>

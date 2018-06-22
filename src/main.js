@@ -11,6 +11,7 @@ require('electron-debug')({enabled: true});
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let splash;
 
 let latestv = null;
 
@@ -40,6 +41,22 @@ function createWindow() {
         show: false
     };
 
+    // Create a copy of the 'normal' options
+    let splashOptions = JSON.parse(JSON.stringify(options));
+
+    // Create the splash window
+    splash = new BrowserWindow(splashOptions);
+
+    splash.loadURL(url.format({
+        pathname: `${__dirname}/../splashscreen.html`,
+        protocol: "file",
+        slashes: true
+    }));
+
+    splash.webContents.on("did-finish-load", () => {
+        splash.show();
+    });
+
     // Create the browser window.
     win = new BrowserWindow(options);
 
@@ -48,16 +65,18 @@ function createWindow() {
     win.setFullScreenable(false);
     win.setMenu(null);
 
-    win.webContents.on("did-finish-load", () => {
-        win.show();
-    });
-
     // and load the index.html of the app.
     win.loadURL(url.format({
         pathname: `${__dirname}/../index.html`,
         protocol: 'file:',
         slashes: true
     }));
+
+    win.webContents.on("did-finish-load", () => {
+        splash.close();
+        splash = null;
+        win.show();
+    });
 
     // Open the DevTools.
     // win.webContents.openDevTools()

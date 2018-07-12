@@ -5,8 +5,10 @@ freezer.get().configfile.set({
 	name: settings.get("config.name") + settings.get("config.ext"),
 	cwd: settings.get("config.cwd"),
 	leaguepath: settings.get("leaguepath"),
-	pathdiscovery: settings.get("pathdiscovery")
+	pathdiscovery: settings.get("pathdiscovery"),
 });
+
+freezer.get().set("autochamp", settings.get("autochamp"))
 
 var request = require('request');
 
@@ -68,6 +70,7 @@ freezer.on('version:set', (ver) => {
 	request('http://ddragon.leagueoflegends.com/cdn/'+ver+'/data/en_US/champion.json', function(error, response, data) {
 		if(!error && response && response.statusCode == 200){
 			freezer.get().set('championsinfo', JSON.parse(data).data);
+			freezer.emit("championsinfo:set");
 		}
 	});
 });
@@ -345,9 +348,11 @@ freezer.on('/lol-champ-select/v1/session:Update', (data) => {
 
 freezer.on("autochamp:enable", () => {
 	freezer.get().set("autochamp", true);
+	settings.set("autochamp", true);
 
 	// Check if a champ was already selected in client
 	api.get("/lol-champ-select/v1/session").then((data) => {
+		console.log(data)
 		if(!data) return;
 		var action = data.myTeam.find((el) => data.localPlayerCellId === el.cellId);
 		if(!action) return;
@@ -362,6 +367,7 @@ freezer.on("autochamp:enable", () => {
 
 freezer.on("autochamp:disable", () => {
 	freezer.get().set("autochamp", false);
+	settings.set("autochamp", false);
 });
 
 const LCUConnector = require('lcu-connector');

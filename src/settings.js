@@ -10,7 +10,8 @@ settings = new Store({
 		},
 		changelogversion: "0.0.0",
 		leaguepath: 'C:\\Riot Games\\League of Legends\\LeagueClient.exe',
-		pathdiscovery: true
+		pathdiscovery: true,
+		autochamp: false
 	}
 });
 

@@ -65,9 +65,7 @@
       $('.ui.search').search("set value", champion);
     })
 
-    freezer.on("version:set", (version) => {
-      this.version = version;
-
+    freezer.on("championsinfo:set", () => {
       $("#autochamp-label").popup({
         position: "bottom right",
         popup: '.ui.popup',
@@ -87,6 +85,21 @@
           }
         })
       ;
+
+      if(freezer.get().autochamp) {
+        $('#autochamp').checkbox("check");
+      }
+
+      // Force event again, in case api connection is slower than ddragon requests
+      freezer.on("api:connected", () => {
+        if(freezer.get().autochamp) {
+          freezer.emit("autochamp:enable");
+        }
+      })
+    })
+
+    freezer.on("version:set", (version) => {
+      this.version = version;
 
       var request = require(`request`);
       request.get(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`, (error, response, ddres) => {

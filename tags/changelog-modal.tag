@@ -3,7 +3,7 @@
   <div class="ui small modal changelog-modal">
     <i class="close icon"></i>
     <div class="header">
-      What's new in { require('electron-is-dev') === true ? "DEV" : require('electron').remote.app.getVersion(); }
+      <i1-8n>whatsnew.title</i1-8n> { require('electron-is-dev') === true ? "DEV" : require('electron').remote.app.getVersion(); }
     </div>
     <div class="scrolling content">
       <img class="ui fluid rounded image" src="./img/changelog_banner.png">

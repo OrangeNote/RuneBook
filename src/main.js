@@ -10,85 +10,64 @@ require('electron-debug')({enabled: true});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
-let splash;
+let win
 
-let latestv = null;
+var latestv = null;
 
-function createWindow() {
+function createWindow () {
 
-    let width = 768;
-    let height = 768;
-    let minWidth = 768;
-    let minHeight = 576;
+  let width = 760
+  let height = 760
+  let minWidth = 760
+  let minHeight = 560
 
-    let mainWindowState = windowStateKeeper({
-        defaultWidth: width,
-        defaultHeight: height
-    });
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: width,
+    defaultHeight: height
+  })
 
-    let options = {
-        title: 'RuneBook',
-        width: mainWindowState.width,
-        height: mainWindowState.height,
-        minWidth: minWidth,
-        minHeight: minHeight,
-        maximizable: false,
-        x: mainWindowState.x,
-        y: mainWindowState.y,
-        frame: false,
-        useContentSize: false,
-        show: false
-    };
+  var options = {
+    title: 'RuneBook',
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    minWidth: minWidth,
+    minHeight: minHeight,
+    maximizable: false,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    frame: false,
+    useContentSize: false
+  }
 
-    // Create a copy of the 'normal' options
-    let splashOptions = JSON.parse(JSON.stringify(options));
-    splashOptions.transparent = true;
+  // Create the browser window.
+  win = new BrowserWindow(options)
 
-    // Create the splash window
-    splash = new BrowserWindow(splashOptions);
+  mainWindowState.manage(win)
+  win.setResizable(true);
+  win.setFullScreenable(false);
+  win.setMenu(null);
 
-    splash.loadURL(url.format({
-        pathname: `${__dirname}/../splashscreen.html`,
-        protocol: "file",
-        slashes: true
-    }));
+  win.webContents.on("did-finish-load", () => {
 
-    splash.webContents.on("did-finish-load", () => {
-        splash.show();
-    });
+  })
 
-    // Create the browser window.
-    win = new BrowserWindow(options);
+  // and load the index.html of the app.
+  win.loadURL(url.format({
+    pathname: `${__dirname}/../index.html`,
+    protocol: 'file:',
+    slashes: true
+  }))
 
-    mainWindowState.manage(win);
-    win.setResizable(true);
-    win.setFullScreenable(false);
-    win.setMenu(null);
+  // Open the DevTools.
+  // win.webContents.openDevTools()
 
-    // and load the index.html of the app.
-    win.loadURL(url.format({
-        pathname: `${__dirname}/../index.html`,
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    win.webContents.on("did-finish-load", () => {
-        if(splash) splash.close();
-        splash = null;
-        win.show();
-    });
-
-    // Open the DevTools.
-    // win.webContents.openDevTools()
-
-    // Emitted when the window is closed.
-    win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        win = null
-    })
+  // Emitted when the window is closed.
+  win.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null
+  })
 }
 
 // This method will be called when Electron has finished

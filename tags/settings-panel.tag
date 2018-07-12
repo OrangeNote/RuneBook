@@ -7,50 +7,69 @@
       </div>
       <div class="ui form">
         <div class="grouped fields">
-          
           <h4 class="ui horizontal divider header">
-            <i class="cog icon"></i>Settings
+            <i class="cog icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.title</i1-8n>
           </h4>
           <div class="field">
-            <label>Legue Client installation path:</label>
+            <div class="inline field">
+              <label><i1-8n>settings.lang</i1-8n>:</label>
+              <div class="ui selection dropdown lang" onchange={ langUpdate }>
+                <input type="hidden" name="country" ref="lang" value={ opts.configfile.lang }>
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                  <div class="item" data-value="de"><i class="de flag"></i>Deutsch</div>
+                  <div class="item" data-value="en"><i class="gb flag"></i>English</div>
+                  <div class="item" data-value="es"><i class="es flag"></i>Español</div>
+                  <div class="item" data-value="fr"><i class="fr flag"></i>Français</div>
+                  <div class="item" data-value="it"><i class="it flag"></i>Italiano</div>
+                  <div class="item" data-value="hu"><i class="hu flag"></i>Magyar</div>
+                  <div class="item" data-value="pt"><i class="pt flag"></i>Português</div>
+                  <div class="item" data-value="ru"><i class="ru flag"></i>Русский</div>
+                  <div class="item" data-value="tr"><i class="tr flag"></i>Türkçe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label><i1-8n>settings.client_path</i1-8n>:</label>
             <input type="file" id="choosepath" name="choosepath" disabled={ opts.configfile.pathdiscovery } style="display: none;" onchange={ handleChoosePath } >
             <div class={ opts.configfile.pathdiscovery ? "ui action input disabled" : "ui action input" } onclick="$('#choosepath').click();">
-              <input type="text" id="displayleaguepath" value={ opts.configfile.pathdiscovery ? "Automatic detection is active. Please disable it if you want to manually set a custom path." : opts.configfile.leaguepath } readonly>
+              <input type="text" id="displayleaguepath" value={ opts.configfile.pathdiscovery ? i18n.localise('settings.pathdiscovery.help') : opts.configfile.leaguepath } readonly>
               <button class={ opts.configfile.pathdiscovery ? "ui icon button disabled" : "ui icon button" }>
                 <i class="open folder icon"></i>
               </button>
             </div>
-            <div class="ui orange basic top pointing label hidden" id="changeleaguelabel">Restart RuneBook to apply this change</div>
+            <div class="ui orange basic top pointing label hidden" id="changeleaguelabel"><i1-8n>settings.restart.warning</i1-8n></div>
           </div>
           <div class="ui toggle checkbox">
             <input type="checkbox" name="leaguepath" onchange={ togglePathDiscovery } ref="pathdiscovery">
-            <label>Automatically detect installation path (recommended)</label>
+            <label><i1-8n>settings.pathdiscovery</i1-8n></label>
           </div>
           
           <h4 class="ui horizontal divider header">
-            <i class="teal arrow alternate circle down outline icon"></i>Updates
+            <i class="teal arrow alternate circle down outline icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.updates</i1-8n>
           </h4>
           <div class="field">
-            <span if={ opts.updateready }>New version available!</span>
-            <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }>Download update</div>
-            <span if={ !opts.updateready }>RuneBook is up to date.</span>
+            <span if={ opts.updateready }><i1-8n>settings.newversion</i1-8n></span>
+            <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }><i1-8n>settings.downloadupdate</i1-8n></div>
+            <span if={ !opts.updateready }><i1-8n>settings.uptodate</i1-8n></span>
           </div>
           
           <h4 class="ui horizontal divider header">
-            <i class="red fire icon"></i>Advanced
+            <i class="red fire icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.advanced</i1-8n>
           </h4>
           <div class="inline field">
-            <label>Local rune pages file: </label>
+            <label><i1-8n>settings.localrunefile</i1-8n> :</label>
             <input type="file" id="choosefile" name="choosefile" style="display: none;" onchange={ handleChooseFile }>
             <div class="ui action input" onclick="$('#choosefile').click();" data-tooltip={ opts.configfile.cwd } data-position="bottom center" data-inverted="">
-              <input type="text" id="displaypath" placeholder="Choose .json file..." value={ opts.configfile.name } readonly>
+              <input type="text" id="displaypath" placeholder="{ i18n.localise('settings.choosefile') }..." value={ opts.configfile.name } readonly>
               <button class="ui icon button">
                 <i class="open folder icon"></i>
               </button>
             </div>
-            <div class="ui orange basic left pointing label hidden" id="changelabel">Restart RuneBook to apply this change</div>
+            <div class="ui orange basic left pointing label hidden" id="changelabel"><i1-8n>settings.restart.warning</i1-8n></div>
           </div>
-
         </div>
       </div>
     </div>
@@ -64,6 +83,8 @@
         inverted: true,
       });
 
+      i18n.setLanguage(opts.configfile.lang);
+      this.refs.lang.value = opts.configfile.lang;
       this.refs.pathdiscovery.checked = opts.configfile.pathdiscovery;
     });
 
@@ -98,13 +119,19 @@
     }
 
     doUpdate(evt) {
-    evt.preventUpdate = true;
+      evt.preventUpdate = true;
 
-    $(".update-button").addClass("loading")
-    $(".update-button").addClass("disabled")
+      $(".update-button").addClass("loading")
+      $(".update-button").addClass("disabled")
 
-    freezer.emit('update:do');
-  }
+      freezer.emit('update:do');
+    }
+
+    langUpdate() {
+      i18n.setLanguage(this.refs.lang.value);
+      i18n.trigger('lang', this.refs.lang.value);
+      freezer.emit("lang:update", this.refs.lang.value);
+    }
 
   </script>
 

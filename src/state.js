@@ -47,6 +47,8 @@ var state = {
 
 	updateready: false,
 
+	lang: 'en',
+
 	configfile: {
 		name: "config.json",
 		cwd: "[default path]"

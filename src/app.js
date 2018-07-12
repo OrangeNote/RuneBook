@@ -6,6 +6,7 @@ freezer.get().configfile.set({
 	cwd: settings.get("config.cwd"),
 	leaguepath: settings.get("leaguepath"),
 	pathdiscovery: settings.get("pathdiscovery"),
+	lang: settings.get("lang")
 });
 
 freezer.get().set("autochamp", settings.get("autochamp"));
@@ -39,6 +40,11 @@ freezer.on("configfile:change", (newPath) => {
 freezer.on("pathdiscovery:switch", (val) => {
 	freezer.get().configfile.set("pathdiscovery", val);
 	settings.set("pathdiscovery", val);
+});
+
+freezer.on("lang:update", (val) => {
+	freezer.get().configfile.set("lang", val);
+	settings.set("lang", val);
 });
 
 freezer.on("leaguepath:change", (leaguepath) => {
@@ -183,6 +189,8 @@ freezer.on('page:delete', (champion, page) => {
 });
 
 freezer.on('page:unlinkbookmark', (champion, page) => {
+	if(freezer.get().lastbookmarkedpage.champion == champion && freezer.get().lastbookmarkedpage.page == page)
+		freezer.get().lastbookmarkedpage.set({page: null, champion: null});
 	var state = freezer.get();
 	plugins[state.tab.active].unlinkBookmark(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {

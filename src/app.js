@@ -9,6 +9,9 @@ freezer.get().configfile.set({
 	lang: settings.get("lang")
 });
 
+freezer.get().set("autochamp", settings.get("autochamp"));
+freezer.get().tab.set({ active: settings.get("lasttab"), loaded: true });
+
 var request = require('request');
 
 var {ipcRenderer} = require('electron');
@@ -74,6 +77,7 @@ freezer.on('version:set', (ver) => {
 	request('http://ddragon.leagueoflegends.com/cdn/'+ver+'/data/en_US/champion.json', function(error, response, data) {
 		if(!error && response && response.statusCode == 200){
 			freezer.get().set('championsinfo', JSON.parse(data).data);
+			freezer.emit("championsinfo:set");
 		}
 	});
 });
@@ -137,6 +141,8 @@ freezer.on('champion:choose', (champion) => {
 
 freezer.on("tab:switch", (tab) => {
 	freezer.get().tab.set({ active: tab, loaded: true });
+	settings.set("lasttab", tab);
+
 
 	var state = freezer.get();
 
@@ -347,15 +353,17 @@ freezer.on('/lol-champ-select/v1/session:Update', (data) => {
 	var champions = freezer.get().championsinfo;
 	var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 	console.log(champion)
-	if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
+	// if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local"); // Avoid request spamming
 	freezer.emit('champion:choose', champion);
 });
 
 freezer.on("autochamp:enable", () => {
 	freezer.get().set("autochamp", true);
+	settings.set("autochamp", true);
 
 	// Check if a champ was already selected in client
 	api.get("/lol-champ-select/v1/session").then((data) => {
+		console.log(data)
 		if(!data) return;
 		var action = data.myTeam.find((el) => data.localPlayerCellId === el.cellId);
 		if(!action) return;
@@ -363,13 +371,14 @@ freezer.on("autochamp:enable", () => {
 		var champions = freezer.get().championsinfo;
 		var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 		console.log(champion)
-		if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
+		// if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local"); // Avoid request spamming
 		freezer.emit('champion:choose', champion);
 	});
 });
 
 freezer.on("autochamp:disable", () => {
 	freezer.get().set("autochamp", false);
+	settings.set("autochamp", false);
 });
 
 const LCUConnector = require('lcu-connector');

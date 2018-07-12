@@ -1,10 +1,10 @@
-const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron')
-const {autoUpdater} = require("electron-updater")
-const path = require('path')
-const url = require('url')
-const request = require('request')
-const isDev = require('electron-is-dev')
-const windowStateKeeper = require("electron-window-state")
+const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron');
+const {autoUpdater} = require("electron-updater");
+const path = require('path');
+const url = require('url');
+const request = require('request');
+const isDev = require('electron-is-dev');
+const windowStateKeeper = require("electron-window-state");
 
 require('electron-debug')({enabled: true});
 
@@ -73,67 +73,67 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', function() {
-  createWindow();
-  win.webContents.on("did-finish-load", () => {
-    if(isDev) return;
-    request({
-      url: 'https://api.github.com/repos/OrangeNote/RuneBook/releases/latest',
-      headers: {
-        'User-Agent': 'request'
-      }
-    },
-    function (error, response, data) {
-      if(!error && response && response.statusCode == 200) {
-        data = JSON.parse(data);
-        latestv = data.tag_name.substring(1);
-        if(latestv !== app.getVersion()) {
-          win.webContents.send('update:ready');
-        }
-      }
-      else throw Error("github api error");
-    })
-  });
-})
+app.on('ready', function () {
+    createWindow();
+    win.webContents.on("did-finish-load", () => {
+        if (isDev) return;
+        request({
+                url: 'https://api.github.com/repos/OrangeNote/RuneBook/releases/latest',
+                headers: {
+                    'User-Agent': 'request'
+                }
+            },
+            function (error, response, data) {
+                if (!error && response && response.statusCode === 200) {
+                    data = JSON.parse(data);
+                    latestv = data.tag_name.substring(1);
+                    if (latestv !== app.getVersion()) {
+                        win.webContents.send('update:ready');
+                    }
+                }
+                else throw Error("github api error");
+            })
+    });
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+    // On macOS it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+});
 
 app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow();
-  }
-})
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (win === null) {
+        createWindow();
+    }
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
 // when the update has been downloaded and is ready to be installed, notify the BrowserWindow
 autoUpdater.on('update-downloaded', () => {
-  win.webContents.send('update:downloaded');
-  dialog.showMessageBox({
-    title: 'Install update',
-    message: 'Update downloaded, RuneBook will be quit for update...'
-  }, () => {
-    setImmediate(() => autoUpdater.quitAndInstall())
-  })
+    win.webContents.send('update:downloaded');
+    dialog.showMessageBox({
+        title: 'Install update',
+        message: 'Update downloaded, RuneBook will be quit for update...'
+    }, () => {
+        setImmediate(() => autoUpdater.quitAndInstall())
+    })
 });
 
 // when receiving a quitAndInstall signal, quit and install the new version ;)
 ipcMain.on("update:do", (event, arg) => {
-  if (process.platform !== 'darwin') {
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-  else {
-    win.webContents.send('update:downloaded');
-    shell.openExternal(`https://github.com/OrangeNote/RuneBook/releases/download/v${latestv}/RuneBook-${latestv}-mac.zip`)
-  }
-})
+    if (process.platform !== 'darwin') {
+        autoUpdater.checkForUpdatesAndNotify();
+    }
+    else {
+        win.webContents.send('update:downloaded');
+        shell.openExternal(`https://github.com/OrangeNote/RuneBook/releases/download/v${latestv}/RuneBook-${latestv}-mac.zip`)
+    }
+});

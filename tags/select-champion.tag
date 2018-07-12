@@ -20,7 +20,7 @@
               <div class="default text">Champion name...</div>
             </div> -->
 
-            <div class="ui search loading disabled fluid">
+            <div class="ui search loading fluid">
               <div class="ui icon input">
                 <input disabled class="prompt" type="text" placeholder="Champion name..." onClick="this.select();">
                 <i class="search icon"></i>

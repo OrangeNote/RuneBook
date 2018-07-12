@@ -42,6 +42,11 @@ freezer.on("pathdiscovery:switch", (val) => {
 	settings.set("pathdiscovery", val);
 });
 
+freezer.on("lang:update", (val) => {
+	freezer.get().configfile.set("lang", val);
+	settings.set("lang", val);
+});
+
 freezer.on("leaguepath:change", (leaguepath) => {
 	leaguepath = path.join(path.dirname(path.normalize(leaguepath)), (process.platform == 'darwin' ? 'LeagueClient.app' : 'LeagueClient.exe'));
 	freezer.get().configfile.set("leaguepath", leaguepath);
@@ -184,6 +189,8 @@ freezer.on('page:delete', (champion, page) => {
 });
 
 freezer.on('page:unlinkbookmark', (champion, page) => {
+	if(freezer.get().lastbookmarkedpage.champion == champion && freezer.get().lastbookmarkedpage.page == page)
+		freezer.get().lastbookmarkedpage.set({page: null, champion: null});
 	var state = freezer.get();
 	plugins[state.tab.active].unlinkBookmark(champion, page);
 	plugins[state.tab.active].getPages(champion, (res) => {

@@ -20,9 +20,9 @@
               <div class="default text">Champion name...</div>
             </div> -->
 
-            <div class="ui search loading fluid">
+            <div class="ui search loading fluid champion">
               <div class="ui icon input">
-                <input disabled class="prompt" type="text" placeholder="Champion name..." onClick="this.select();">
+                <input disabled class="prompt" type="text" placeholder="{ i18n.localise('champion.name') }..." onClick="this.select();">
                 <i class="search icon"></i>
               </div>
               <div class="results"></div>
@@ -33,7 +33,7 @@
           <div class="column middle aligned">
             <div class="ui toggle checkbox" id="autochamp">
               <input type="checkbox" tabindex="0" class="hidden">
-              <label id="autochamp-label">Auto select <i class="question circle icon"></i></label>
+              <label id="autochamp-label"><i1-8n>champion.autopick</i1-8n> <i class="question circle icon"></i></label>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
     </div>
   </div>
   
-  <div class="ui popup" style="width: 250px;">When you're in champion select, automatically update RuneBook with your champion pick.</div>
+  <div class="ui popup" style="width: 250px;"><i1-8n>champion.autopick.tooltip</i1-8n></div>
 
   <style>
     .tiny-ring {
@@ -62,7 +62,11 @@
   <script>
 
     freezer.on("champion:choose", (champion) => {
-      $('.ui.search').search("set value", champion);
+      $('.ui.search.champion').search("set value", champion);
+    })
+
+    freezer.on("lang:update", (champion) => {
+      $('.ui.search.champion input').attr('placeholder', i18n.localise('champion.name') + '...');
     })
 
     freezer.on("championsinfo:set", () => {
@@ -107,7 +111,7 @@
         
         ddres = handleDDRes2(JSON.parse(ddres));
 
-        var search_el = $('.ui.search');
+        var search_el = $('.ui.search.champion');
         search_el.removeClass("loading");
         $('input', search_el).prop("disabled", false);
 
@@ -145,6 +149,7 @@
         }
       });
 
+      $('.ui.search.champion').removeClass("disabled");
       $('.ui.dropdown').removeClass("disabled");
     });
 

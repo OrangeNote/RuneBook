@@ -17,14 +17,18 @@
   <script>
     
     window.$ = window.jQuery = require('jquery');
+    var riot = require('riot');
   </script>
 
   <script src="./node_modules/semantic-ui-css/semantic.min.js"></script>
+  <script src="./node_modules/riot-i18n/riot-i18n.js"></script>
   <script type="text/javascript">
 
-    var riot = require('riot');
     var freezer = require('./src/state');
     var _ = require('lodash');
+    
+    const locales = require('./src/locales')
+    i18n.dictionary(locales);
 
     require('./src/app');
 

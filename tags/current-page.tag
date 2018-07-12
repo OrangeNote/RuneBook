@@ -1,18 +1,18 @@
 <current-page>
 	
 	<div class="ui container">
-		<div class="ui horizontal divider">Current page</div>
+		<div class="ui horizontal divider"><i1-8n>currentpage.title</i1-8n></div>
 		<div class="ui segment">
 			<h4 class="ui center aligned header" if={ !opts.connection.page }>
-				Current page is not available.
-				<div class="sub header">Please log in to the League Client to access your rune pages.</div>
-				<div class="sub header">If the error persists, go to Settings and manually set your League Client installation path.</div>
+				<i1-8n>currentpage.unavailable</i1-8n>
+				<div class="sub header"><i1-8n>currentpage.unavailable.subheader1</i1-8n></div>
+				<div class="sub header"><i1-8n>currentpage.unavailable.subheader2</i1-8n></div>
 			</h4>
 			<div if={ opts.connection.page } class="ui middle aligned relaxed divided list">
 				<div class="item">
 					<div class="right floated content" data-key={ key }>
 
-						<button class={ (opts.current.champion && opts.connection.page && opts.plugins.local[opts.tab.active]) ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage } data-tooltip="Import this page as local" data-position="left center" data-inverted="">
+						<button class={ (opts.current.champion && opts.connection.page && opts.plugins.local[opts.tab.active]) ? "ui icon button" : "ui icon button disabled"} onclick={ downloadCurrentPage } data-tooltip="{ i18n.localise('currentpage.downloadcurrentpage') }" data-position="left center" data-inverted="">
 							<i class="download icon"></i>
 						</button>
 					</div>

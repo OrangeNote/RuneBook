@@ -10,7 +10,7 @@ console.log("configPath", configPath);
 var store = new Store({cwd: configPath, name: configName});
 
 var plugin = {
-	name: "Local pages",
+	name: "chapters.localpages",
 	local: true,
 	active: true,
 

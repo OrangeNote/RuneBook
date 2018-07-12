@@ -6,6 +6,7 @@ freezer.get().configfile.set({
 	cwd: settings.get("config.cwd"),
 	leaguepath: settings.get("leaguepath"),
 	pathdiscovery: settings.get("pathdiscovery"),
+	lang: settings.get("lang")
 });
 
 freezer.get().set("autochamp", settings.get("autochamp"));

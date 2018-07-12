@@ -8,7 +8,8 @@ freezer.get().configfile.set({
 	pathdiscovery: settings.get("pathdiscovery"),
 });
 
-freezer.get().set("autochamp", settings.get("autochamp"))
+freezer.get().set("autochamp", settings.get("autochamp"));
+freezer.get().tab.set({ active: settings.get("lasttab"), loaded: true });
 
 var request = require('request');
 
@@ -134,6 +135,8 @@ freezer.on('champion:choose', (champion) => {
 
 freezer.on("tab:switch", (tab) => {
 	freezer.get().tab.set({ active: tab, loaded: true });
+	settings.set("lasttab", tab);
+
 
 	var state = freezer.get();
 
@@ -342,7 +345,7 @@ freezer.on('/lol-champ-select/v1/session:Update', (data) => {
 	var champions = freezer.get().championsinfo;
 	var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 	console.log(champion)
-	if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
+	// if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local"); // Avoid request spamming
 	freezer.emit('champion:choose', champion);
 });
 
@@ -360,7 +363,7 @@ freezer.on("autochamp:enable", () => {
 		var champions = freezer.get().championsinfo;
 		var champion = Object.keys(champions).find((el) => champions[el].key == action.championId);
 		console.log(champion)
-		if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local");
+		// if(champion !== freezer.get().current.champion) freezer.get().tab.set("active", "local"); // Avoid request spamming
 		freezer.emit('champion:choose', champion);
 	});
 });

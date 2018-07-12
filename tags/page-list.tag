@@ -57,6 +57,9 @@
 		this.on('updated', function() {
       if (process.platform != 'darwin') $('.page-list-tooltip').popup()
 		});
+    this.on('mount', function() {
+      if (process.platform != 'darwin') $('.page-list-tooltip').popup()
+    });
 
     findTooltip(page, index) {
       if(!opts.tooltips.rune) return;

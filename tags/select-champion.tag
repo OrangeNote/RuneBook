@@ -20,7 +20,7 @@
               <div class="default text">Champion name...</div>
             </div> -->
 
-            <div class="ui search loading disabled fluid champion">
+            <div class="ui search loading fluid champion">
               <div class="ui icon input">
                 <input disabled class="prompt" type="text" placeholder="{ i18n.localise('champion.name') }..." onClick="this.select();">
                 <i class="search icon"></i>
@@ -69,9 +69,7 @@
       $('.ui.search.champion input').attr('placeholder', i18n.localise('champion.name') + '...');
     })
 
-    freezer.on("version:set", (version) => {
-      this.version = version;
-
+    freezer.on("championsinfo:set", () => {
       $("#autochamp-label").popup({
         position: "bottom right",
         popup: '.ui.popup',
@@ -91,6 +89,21 @@
           }
         })
       ;
+
+      if(freezer.get().autochamp) {
+        $('#autochamp').checkbox("check");
+      }
+
+      // Force event again, in case api connection is slower than ddragon requests
+      freezer.on("api:connected", () => {
+        if(freezer.get().autochamp) {
+          freezer.emit("autochamp:enable");
+        }
+      })
+    })
+
+    freezer.on("version:set", (version) => {
+      this.version = version;
 
       var request = require(`request`);
       request.get(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`, (error, response, ddres) => {

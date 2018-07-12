@@ -33,7 +33,7 @@
           <div class="column middle aligned">
             <div class="ui toggle checkbox" id="autochamp">
               <input type="checkbox" tabindex="0" class="hidden">
-              <label id="autochamp-label"><i1-8n>champion.autopick</i1-8n> <i class="question circle icon"></i></label>
+              <label id="autochamp-label"><i1-8n>champion.autopick</i1-8n></label>
             </div>
           </div>
 

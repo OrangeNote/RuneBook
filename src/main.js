@@ -1,4 +1,5 @@
-const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron');
+const electron = require('electron');
+const {app, BrowserWindow, ipcMain, shell, dialog} = electron;
 const {autoUpdater} = require("electron-updater");
 const path = require('path');
 const url = require('url');
@@ -88,7 +89,19 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         win = null
-    })
+    });
+
+    const isOnADisplay = electron.screen.getAllDisplays()
+        .map(display => mainWindowState.x >= display.bounds.x
+            && mainWindowState.x <= display.bounds.x + display.bounds.width
+            && mainWindowState.y >= display.bounds.y
+            && mainWindowState.y <= display.bounds.y + display.bounds.height)
+        .some(display => display)
+    ;
+
+    if (!isOnADisplay) {
+        win.center();
+    }
 }
 
 // This method will be called when Electron has finished
@@ -96,6 +109,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', function () {
     createWindow();
+
     win.webContents.on("did-finish-load", () => {
         if (isDev) return;
         request({

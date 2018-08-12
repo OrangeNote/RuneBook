@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Sembra che tu non abbia pagine per questo campione.",
   "pagelist.emptylocalpage.subheader": "Clicca il pulsante in basso per importare dalla tua pagina corrente.",
   "pagelist.emptyremotepage": "Impossibile trovare delle pagine per questo campione.",
-  "pagelist.emptyremotepage.subheader": "Nessuna pagina trovata o servizio temporaneamente non disponibile."
+  "pagelist.emptyremotepage.subheader": "Nessuna pagina trovata o servizio temporaneamente non disponibile.",
+  "pagelist.confirmdialog": "Sei sicuro di voler eliminare questa pagina?"
 }

@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Parece que não tens nenhuma página para este champion.",
   "pagelist.emptylocalpage.subheader": "Clica no botão abaixo para importar da tua página atual.",
   "pagelist.emptyremotepage": "Não foi possível encontrar nenhuma página para este champion.",
-  "pagelist.emptyremotepage.subheader": "Nenhuma página foi encontrada ou o serviço está temporariamente indisponível."
+  "pagelist.emptyremotepage.subheader": "Nenhuma página foi encontrada ou o serviço está temporariamente indisponível.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

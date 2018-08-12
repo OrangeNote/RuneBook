@@ -86,7 +86,9 @@
 
       var page = $(evt.target).attr("data-key");
       console.log(page)
-      freezer.emit("page:delete", opts.current.champion, page);
+      if(confirm(i18n.localise('pagelist.confirmdialog'))) {
+        freezer.emit("page:delete", opts.current.champion, page);
+      }
     }
 
     unlinkBookmark(evt) {

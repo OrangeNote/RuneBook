@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Ehhez a hőshöz még nincs egy oldalad sem.",
   "pagelist.emptylocalpage.subheader": "Kattints a lentebbi gombra,hogy a jelenleg kiválasztott oldalad betöltsd.",
   "pagelist.emptyremotepage": "Ehhez a hőshöz nem sikerült rúna oldalt találni.",
-  "pagelist.emptyremotepage.subheader": "Nem sikerült oldalt találni, vagy a szolgáltatás átmenetileg nem elérhető."
+  "pagelist.emptyremotepage.subheader": "Nem sikerült oldalt találni, vagy a szolgáltatás átmenetileg nem elérhető.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

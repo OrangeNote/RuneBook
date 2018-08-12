@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Vous n'avez aucune page pour ce champion",
   "pagelist.emptylocalpage.subheader": "Cliquer sur le bouton ci-dessous pour importer depuis votre page actuelle.",
   "pagelist.emptyremotepage": "Pages de runes introuvables pour ce Champion.",
-  "pagelist.emptyremotepage.subheader": "Aucune page n'est trouvable ou service temporairement indisponible."
+  "pagelist.emptyremotepage.subheader": "Aucune page n'est trouvable ou service temporairement indisponible.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

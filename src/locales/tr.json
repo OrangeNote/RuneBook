@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Görünüşe göre bu şampiyon için herhangi bir rün sayfanız bulunmuyor.",
   "pagelist.emptylocalpage.subheader": "Şimdiki sayfanızı aktarmak için aşağıdaki butona tıklayın.",
   "pagelist.emptyremotepage": "Bu şampiyon için rün sayfası bulunamadı.",
-  "pagelist.emptyremotepage.subheader": "Sayfa bulunamadı veya Servis şu anda hizmet vermiyor olabilir."
+  "pagelist.emptyremotepage.subheader": "Sayfa bulunamadı veya Servis şu anda hizmet vermiyor olabilir.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Você não tem nenhuma página para este campeão.",
   "pagelist.emptylocalpage.subheader": "Clique no botão abaixo para importar sua página atual.",
   "pagelist.emptyremotepage": "Não foi possível localizar páginas para este campeão.",
-  "pagelist.emptyremotepage.subheader": "Não há páginas ou o serviço esta temporariamente invalido."
+  "pagelist.emptyremotepage.subheader": "Não há páginas ou o serviço esta temporariamente invalido.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

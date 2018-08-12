@@ -34,5 +34,6 @@
   "pagelist.emptylocalpage": "Кажется что у вас нету страниц для этого чемпиона.",
   "pagelist.emptylocalpage.subheader": "Нажмите на кнопку ниже, чтобы импортировать из клиента вашу текущую страницу.",
   "pagelist.emptyremotepage": "Не было найдено рунных страниц для это чемпиона.",
-  "pagelist.emptyremotepage.subheader": "Страницы не найдены или сервис временно недоступен."
+  "pagelist.emptyremotepage.subheader": "Страницы не найдены или сервис временно недоступен.",
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
 }

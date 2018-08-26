@@ -7,8 +7,8 @@ var stylesMap = {
 	"Precision":8000,
 	"Domination":8100,
 	"Sorcery":8200,
-	"Resolve":8300,
-	"Inspiration":8400
+	"Resolve":8400,
+	"Inspiration":8300
 };
 
 var perksMap = {

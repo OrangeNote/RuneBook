@@ -12,6 +12,8 @@
   "settings.downloadupdate": "Download update",
   "settings.uptodate": "RuneBook is up to date.",
   "settings.advanced": "Advanced",
+  "settings.experimental": "Experimental",
+  "settings.darktheme": "Dark theme",
   "settings.localrunefile": "Local rune pages file",
   "settings.choosefile": "Choose .json file",
   "settings.lang": "Language",

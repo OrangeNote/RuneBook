@@ -15,7 +15,6 @@
   <runebook></runebook>
 
   <script>
-    
     window.$ = window.jQuery = require('jquery');
     var riot = require('riot');
   </script>
@@ -25,6 +24,7 @@
   <script type="text/javascript">
 
     var freezer = require('./src/state');
+
     var _ = require('lodash');
     
     const locales = require('./src/locales')
@@ -44,6 +44,9 @@
     
     riot.mount('runebook', freezer.get());
 
+    if(freezer.get().configfile.darktheme) {
+      $('body').append('<link rel="stylesheet" type="text/css" href="index.css">');
+    }
   </script>
 
 </body>

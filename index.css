@@ -1,0 +1,145 @@
+body {
+	background: #191D24;
+	color: #d8cfbd;
+}
+
+.ui.secondary.pointing.menu {
+	background: #121212;
+	border-bottom: 2px solid #BD9D5E;
+}
+
+.ui.secondary.pointing.menu .header.item {
+	color: #BD9D5E !important;
+}
+
+#autochamp-label span {
+	color: #d8cfbd;
+}
+
+#autochamp-label::before {
+	background: #121212 !important;
+	border: 2px solid #BD9D5E;
+}
+
+.ui.toggle.checkbox.checked #autochamp-label::before {
+	background: #191D24 !important;
+	border: 2px solid #00ACB1;
+}
+
+#autochamp-label::after {
+	background: #d8cfbd !important;
+}
+
+div.ui.icon.input input {
+	background: #121212;
+	color: #d8cfbd;
+}
+
+input::selection {
+	background: #00ACB1;
+	color: #d8cfbd;
+}
+
+.ui.search.fluid.champion .prompt {
+	border: 2px solid #BD9D5E;
+}
+
+.ui.search.fluid.champion.focus .prompt {
+	border: 2px solid #00ACB1;
+}
+
+.results {
+	border: 1px solid #BD9D5E !important;
+}
+
+.results .result {
+	background: #121212;
+}
+
+.results .result.active {
+	background: #191D24 !important;
+}
+
+.results .result:hover {
+	background: #191D24 !important;
+}
+
+.ui.search > .results .result .title {
+	color: #d8cfbd;
+}
+
+.ui.search > .results .result.active .title {
+	color: #d8cfbd;
+}
+
+.ui.horizontal.divider {
+	color: #BD9D5E;
+}
+
+.ui.top.attached.pointing.small.borderless.menu {
+	background: #191D24;
+	border-color: #BD9D5E;
+}
+
+.ui.top.attached.pointing.small.borderless.menu .item {
+	color: #71552B;
+}
+
+.ui.top.attached.pointing.small.borderless.menu .item.active {
+	background: #BD9D5E;
+	color: #121212;
+}
+
+.ui.bottom.attached.tab.segment {
+	background: #191D24;
+	border-color: #BD9D5E;
+}
+
+.ui.active.inverted.dimmer {
+	background: #191D24;
+}
+
+body ::-webkit-scrollbar-thumb {
+    background: #71552B;
+}
+
+body ::-webkit-scrollbar-thumb:window-inactive {
+    background: #71552B;
+}
+
+body ::-webkit-scrollbar-thumb:hover {
+    background: #BD9D5E;
+}
+
+.row .header .icon {
+	color: #00ACB1;
+}
+
+.row .header .content {
+	color: #d8cfbd;
+}
+
+.row .header .content .sub.header {
+	color: #d8cfbd;
+}
+
+.ui.segment {
+	background: #191D24;
+	border: 1px solid #BD9D5E;
+}
+
+.ui.segment .header {
+	color: #d8cfbd;
+}
+
+.ui.segment .header .sub.header {
+	color: #d8cfbd;
+}
+
+.ui.button {
+	background: #71552B;
+}
+
+.ui.button:hover {
+	background: #BD9D5E;
+}

@@ -86,8 +86,15 @@ input::selection {
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item.active {
-	background: #BD9D5E;
-	color: #121212;
+	background: #121212;
+	box-shadow: inset 1px 0px 0px 0px #BD9D5E, inset -1px 0px 0px 0px #BD9D5E;
+	color: #BD9D5E;
+}
+
+.ui.top.attached.pointing.small.borderless.menu .item.active::after {
+	background: #191D24 !important;
+	border-bottom: 2px solid #BD9D5E !important;
+	border-right: 2px solid #BD9D5E !important;
 }
 
 .ui.bottom.attached.tab.segment {
@@ -142,4 +149,17 @@ body ::-webkit-scrollbar-thumb:hover {
 
 .ui.button:hover {
 	background: #BD9D5E;
+}
+
+.ui.popup {
+	background: #121212;
+	color: #d8cfbd;
+	border: 1px solid #71552B;
+}
+
+.ui.popup::before {
+	background: #121212 !important;
+	border-bottom: 1px solid #71552B !important;
+	border-right: 1px solid #71552B !important;
+	box-shadow: none !important;
 }

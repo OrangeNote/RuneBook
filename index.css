@@ -1,6 +1,5 @@
 body {
 	background: #191D24;
-	color: #d8cfbd;
 }
 
 .ui.secondary.pointing.menu {
@@ -72,7 +71,7 @@ input::selection {
 	color: #d8cfbd;
 }
 
-.ui.horizontal.divider {
+runebook .ui.horizontal.divider {
 	color: #BD9D5E;
 }
 
@@ -106,20 +105,21 @@ input::selection {
 	background: #191D24;
 }
 
-body ::-webkit-scrollbar-thumb {
+page-list ::-webkit-scrollbar-thumb {
     background: #71552B;
 }
 
-body ::-webkit-scrollbar-thumb:window-inactive {
+page-list ::-webkit-scrollbar-thumb:window-inactive {
     background: #71552B;
 }
 
-body ::-webkit-scrollbar-thumb:hover {
+page-list ::-webkit-scrollbar-thumb:hover {
     background: #BD9D5E;
 }
 
 .ui.divided.list>.item {
 	border-top: 1px solid #BD9D5E;
+	color: #d8cfbd !important;
 }
 
 .row .header .icon {
@@ -147,11 +147,19 @@ body ::-webkit-scrollbar-thumb:hover {
 	color: #d8cfbd;
 }
 
-.ui.button {
+current-page .ui.button {
 	background: #71552B;
 }
 
-.ui.button:hover {
+page-list .ui.button {
+	background: #71552B;
+}
+
+current-page .ui.button:hover {
+	background: #BD9D5E;
+}
+
+page-list .ui.button:hover {
 	background: #BD9D5E;
 }
 
@@ -175,4 +183,12 @@ body ::-webkit-scrollbar-thumb:hover {
 	border-right: none !important;
 	border-top: 1px solid #71552B !important;
 	box-shadow: none !important;
+}
+
+.ui.dimmer.modals.page.inverted.transition.animating {
+	background: transparent;
+}
+
+.ui.dimmer.modals.page.inverted.transition.visible.active {
+	background: #121212;
 }

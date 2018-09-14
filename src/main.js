@@ -25,9 +25,9 @@ let latestv = null;
 
 function createWindow() {
 
-    let width = 760;
+    let width = 768;
     let height = 760;
-    let minWidth = 760;
+    let minWidth = 768;
     let minHeight = 560;
 
     let mainWindowState = windowStateKeeper({

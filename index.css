@@ -5,7 +5,7 @@ body {
 
 .ui.secondary.pointing.menu {
 	background: #121212;
-	border-bottom: 2px solid #BD9D5E;
+	border-bottom: 1px solid #BD9D5E;
 }
 
 .ui.secondary.pointing.menu .header.item {
@@ -118,6 +118,10 @@ body ::-webkit-scrollbar-thumb:hover {
     background: #BD9D5E;
 }
 
+.ui.divided.list>.item {
+	border-top: 1px solid #BD9D5E;
+}
+
 .row .header .icon {
 	color: #00ACB1;
 }
@@ -161,5 +165,14 @@ body ::-webkit-scrollbar-thumb:hover {
 	background: #121212 !important;
 	border-bottom: 1px solid #71552B !important;
 	border-right: 1px solid #71552B !important;
+	box-shadow: none !important;
+}
+
+.ui.popup.bottom::before {
+	background: #121212 !important;
+	border-left: 1px solid #71552B !important;
+	border-bottom: none !important;
+	border-right: none !important;
+	border-top: 1px solid #71552B !important;
 	box-shadow: none !important;
 }

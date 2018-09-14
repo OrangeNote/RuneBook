@@ -35,5 +35,7 @@
   "pagelist.emptylocalpage.subheader": "Dando clic en el botón inferior, podrás importar tu página actual.",
   "pagelist.emptyremotepage": "No se encontraron páginas para este campeón.",
   "pagelist.emptyremotepage.subheader": "No existen páginas o el servicio no está disponible temporalmente.",
-  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?",
+  "settings.experimental": "Experimental",
+  "settings.darktheme": "Dark theme"
 }

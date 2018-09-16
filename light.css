@@ -47,6 +47,10 @@ input::selection {
 	border: 2px solid #00ACB1;
 }
 
+.search.icon {
+	color: #d8cfbd !important;
+}
+
 .results {
 	border: 1px solid #BD9D5E !important;
 }

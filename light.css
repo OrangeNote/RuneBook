@@ -1,27 +1,27 @@
 body {
-	background: #191D24;
+	background: #ffffff;
 }
 
 .ui.secondary.pointing.menu {
-	background: #121212;
+	background: #ffffff;
 	border-bottom: 1px solid #BD9D5E;
 }
 
 .ui.secondary.pointing.menu .header.item {
-	color: #BD9D5E !important;
+	color: #191D24 !important;
 }
 
 #autochamp-label span {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 #autochamp-label::before {
-	background: #121212 !important;
+	background: #ffffff !important;
 	border: 2px solid #BD9D5E;
 }
 
 .ui.toggle.checkbox.checked #autochamp-label::before {
-	background: #191D24 !important;
+	background: #ffffff !important;
 	border: 2px solid #00ACB1;
 }
 
@@ -30,13 +30,13 @@ body {
 }
 
 div.ui.icon.input input {
-	background: #121212;
-	color: #d8cfbd;
+	background: #ffffff;
+	color: #191D24;
 }
 
 input::selection {
 	background: #00ACB1;
-	color: #d8cfbd;
+	color: #ffffff;
 }
 
 .ui.search.fluid.champion .prompt {
@@ -52,57 +52,57 @@ input::selection {
 }
 
 .results .result {
-	background: #121212;
+	background: #ffffff;
 }
 
 .results .result.active {
-	background: #191D24 !important;
+	background: #f7f7f7 !important;
 }
 
 .results .result:hover {
-	background: #191D24 !important;
+	background: #f7f7f7 !important;
 }
 
 .ui.search > .results .result .title {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 .ui.search > .results .result.active .title {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 runebook .ui.horizontal.divider {
-	color: #BD9D5E;
+	color: #191D24;
 }
 
 .ui.top.attached.pointing.small.borderless.menu {
-	background: #191D24;
+	background: #ffffff;
 	border-color: #BD9D5E;
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item {
-	color: #71552B;
+	color: #191D24;
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item.active {
-	background: #121212;
+	background: #BD9D5E;
 	box-shadow: inset 1px 0px 0px 0px #BD9D5E, inset -1px 0px 0px 0px #BD9D5E;
-	color: #BD9D5E;
+	color: #ffffff;
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item.active::after {
-	background: #191D24 !important;
+	background: #BD9D5E !important;
 	border-bottom: 2px solid #BD9D5E !important;
 	border-right: 2px solid #BD9D5E !important;
 }
 
 .ui.bottom.attached.tab.segment {
-	background: #191D24;
+	background: #ffffff;
 	border-color: #BD9D5E;
 }
 
-.ui.active.inverted.dimmer {
-	background: #191D24;
+chapters-segment .ui.active.inverted.dimmer {
+	background: #ffffff;
 }
 
 page-list ::-webkit-scrollbar-thumb {
@@ -119,76 +119,68 @@ page-list ::-webkit-scrollbar-thumb:hover {
 
 .ui.divided.list>.item {
 	border-top: 1px solid #BD9D5E;
-	color: #d8cfbd !important;
+	color: #191D24 !important;
 }
 
 .row .header .icon {
-	color: #00ACB1;
+	color: #BD9D5E;
 }
 
 .row .header .content {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 .row .header .content .sub.header {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 .ui.segment {
-	background: #191D24;
+	background: #ffffff;
 	border: 1px solid #BD9D5E;
 }
 
 .ui.segment .header {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 .ui.segment .header .sub.header {
-	color: #d8cfbd;
+	color: #191D24;
 }
 
 current-page .ui.button {
-	background: #71552B;
+	background: #BD9D5E;
 }
 
 page-list .ui.button {
-	background: #71552B;
+	background: #BD9D5E;
 }
 
 current-page .ui.button:hover {
-	background: #BD9D5E;
+	background: #C7B185;
 }
 
 page-list .ui.button:hover {
-	background: #BD9D5E;
+	background: #C7B185;
 }
 
 .ui.popup {
-	background: #121212;
-	color: #d8cfbd;
-	border: 1px solid #71552B;
+	background: #ffffff;
+	color: #191D24;
+	border: 1px solid #BD9D5E;
 }
 
 .ui.popup::before {
-	background: #121212 !important;
-	border-bottom: 1px solid #71552B !important;
-	border-right: 1px solid #71552B !important;
+	background: #ffffff !important;
+	border-bottom: 1px solid #BD9D5E !important;
+	border-right: 1px solid #BD9D5E !important;
 	box-shadow: none !important;
 }
 
 .ui.popup.bottom::before {
-	background: #121212 !important;
-	border-left: 1px solid #71552B !important;
+	background: #ffffff !important;
+	border-left: 1px solid #BD9D5E !important;
 	border-bottom: none !important;
 	border-right: none !important;
-	border-top: 1px solid #71552B !important;
+	border-top: 1px solid #BD9D5E !important;
 	box-shadow: none !important;
-}
-
-.ui.dimmer.modals.page.inverted.transition.animating {
-	background: transparent;
-}
-
-.ui.dimmer.modals.page.inverted.transition.visible.active {
-	background: #121212;
 }

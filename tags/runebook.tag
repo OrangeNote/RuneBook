@@ -52,7 +52,12 @@
     })
 
     close() {
-      remote.getCurrentWindow().close();
+      if(remote.process.platform === "darwin") {
+        remote.getCurrentWindow().hide();
+      }
+      else {
+        remote.getCurrentWindow().close();
+      }
     }
 
     minimize() {

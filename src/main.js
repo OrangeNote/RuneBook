@@ -153,6 +153,9 @@ app.on('activate', () => {
     if (win === null) {
         createWindow();
     }
+    else if(process.platform === "darwin") {
+        win.show();
+    }
 });
 
 // In this file you can include the rest of your app's specific main process

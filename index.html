@@ -43,10 +43,6 @@
     require('./tags/changelog-modal.tag');
     
     riot.mount('runebook', freezer.get());
-
-    if(freezer.get().configfile.darktheme) {
-      $('body').append('<link rel="stylesheet" type="text/css" href="light.css">');
-    }
   </script>
 
 </body>

@@ -15,7 +15,6 @@
   <runebook></runebook>
 
   <script>
-    
     window.$ = window.jQuery = require('jquery');
     var riot = require('riot');
   </script>
@@ -25,6 +24,7 @@
   <script type="text/javascript">
 
     var freezer = require('./src/state');
+
     var _ = require('lodash');
     
     const locales = require('./src/locales')
@@ -43,7 +43,6 @@
     require('./tags/changelog-modal.tag');
     
     riot.mount('runebook', freezer.get());
-
   </script>
 
 </body>

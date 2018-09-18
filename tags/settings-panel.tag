@@ -71,6 +71,14 @@
             </div>
             <div class="ui orange basic left pointing label hidden" id="changelabel"><i1-8n>settings.restart.warning</i1-8n></div>
           </div>
+
+           <h4 class="ui horizontal divider header">
+            <i class="yellow flask icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.experimental</i1-8n>
+          </h4>
+          <div class="ui toggle checkbox">
+            <input type="checkbox" name="darktheme" onchange={ toggleDarkTheme } ref="darktheme">
+            <label><i1-8n>settings.darktheme</i1-8n></label>
+          </div>
         </div>
       </div>
     </div>
@@ -87,6 +95,7 @@
       i18n.setLanguage(opts.configfile.lang);
       this.refs.lang.value = opts.configfile.lang;
       this.refs.pathdiscovery.checked = opts.configfile.pathdiscovery;
+      this.refs.darktheme.checked = opts.configfile.darktheme;
     });
 
     freezer.on("update:downloaded", () => {
@@ -117,6 +126,11 @@
       preventUpdate = true;
       $("#changeleaguelabel").removeClass("hidden");
       freezer.emit("pathdiscovery:switch", this.refs.pathdiscovery.checked);
+    }
+
+    toggleDarkTheme(evt) {
+      // evt.preventUpdate = true;
+      freezer.emit("darktheme:switch", this.refs.darktheme.checked);
     }
 
     doUpdate(evt) {

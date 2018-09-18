@@ -35,5 +35,7 @@
   "pagelist.emptylocalpage.subheader": "Klicken Sie auf den unteren Button, um Ihre aktuelle Seite zu speichern.",
   "pagelist.emptyremotepage": "Runenseiten für diesen Champion konnten nicht gefunden werden!",
   "pagelist.emptyremotepage.subheader": "Entweder sind keine Runenseiten vorhanden oder der Service ist derzeit nicht verfügbar.",
-  "pagelist.confirmdialog": "Are you sure you want to delete this page?"
+  "pagelist.confirmdialog": "Are you sure you want to delete this page?",
+  "settings.experimental": "Experimental",
+  "settings.darktheme": "Dark theme"
 }

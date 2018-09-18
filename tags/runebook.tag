@@ -1,5 +1,5 @@
 <runebook>
-  
+  <link rel="stylesheet" type="text/css" href={configfile.darktheme ? "dark.css" : "light.css"}>
   <header style="-webkit-app-region: drag;">
     <div class="ui secondary pointing menu">
       <div class="ui menu header item">

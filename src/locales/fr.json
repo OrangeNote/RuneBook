@@ -35,5 +35,7 @@
   "pagelist.emptylocalpage.subheader": "Cliquer sur le bouton ci-dessous pour importer depuis votre page actuelle.",
   "pagelist.emptyremotepage": "Pages de runes introuvables pour ce Champion.",
   "pagelist.emptyremotepage.subheader": "Aucune page n'est trouvable ou service temporairement indisponible.",
-  "pagelist.confirmdialog": "Êtes-vous sûr de vouloir supprimer cette page?"
+  "pagelist.confirmdialog": "Êtes-vous sûr de vouloir supprimer cette page?",
+  "settings.experimental": "Experimental",
+  "settings.darktheme": "Dark theme"
 }

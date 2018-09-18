@@ -6,6 +6,7 @@ freezer.get().configfile.set({
 	cwd: settings.get("config.cwd"),
 	leaguepath: settings.get("leaguepath"),
 	pathdiscovery: settings.get("pathdiscovery"),
+	darktheme: settings.get("darktheme"),
 	lang: settings.get("lang")
 });
 
@@ -40,6 +41,11 @@ freezer.on("configfile:change", (newPath) => {
 freezer.on("pathdiscovery:switch", (val) => {
 	freezer.get().configfile.set("pathdiscovery", val);
 	settings.set("pathdiscovery", val);
+});
+
+freezer.on("darktheme:switch", (val) => {
+	freezer.get().configfile.set("darktheme", val);
+	settings.set("darktheme", val);
 });
 
 freezer.on("lang:update", (val) => {

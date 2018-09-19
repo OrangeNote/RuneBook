@@ -85,13 +85,13 @@ runebook .ui.horizontal.divider {
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item {
-	color: #71552B;
+	color: #BD9D5E;
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item.active {
 	background: #121212;
 	box-shadow: inset 1px 0px 0px 0px #BD9D5E, inset -1px 0px 0px 0px #BD9D5E;
-	color: #BD9D5E;
+	color: #d8cfbd;
 }
 
 .ui.top.attached.pointing.small.borderless.menu .item.active::after {

@@ -18,6 +18,7 @@
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
+                  <div class="item" data-value="cz"><i class="cz flag"></i>Čeština</div>
                   <div class="item" data-value="de"><i class="de flag"></i>Deutsch</div>
                   <div class="item" data-value="en"><i class="gb flag"></i>English</div>
                   <div class="item" data-value="es"><i class="es flag"></i>Español</div>

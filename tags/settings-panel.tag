@@ -28,6 +28,7 @@
                   <div class="item" data-value="pt"><i class="pt flag"></i>Português</div>
                   <div class="item" data-value="pt_br"><i class="br flag"></i>Português Brasileiro</div>
                   <div class="item" data-value="ru"><i class="ru flag"></i>Русский</div>
+                  <div class="item" data-value="se"><i class="se flag"></i>Svenska</div>
                   <div class="item" data-value="tr"><i class="tr flag"></i>Türkçe</div>
                 </div>
               </div>

@@ -387,6 +387,13 @@ freezer.on("autochamp:disable", () => {
 	settings.set("autochamp", false);
 });
 
+var shell = require('electron').shell;
+//open links externally by default
+$(document).on('click', 'a[href^="http"]', function(event) {
+	event.preventDefault();
+	shell.openExternal(this.href);
+});
+
 const LCUConnector = require('lcu-connector');
 console.log("config leaguepath", freezer.get().configfile.leaguepath)
 console.log("config pathdiscovery", freezer.get().configfile.pathdiscovery)

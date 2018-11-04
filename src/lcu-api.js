@@ -10,6 +10,8 @@ function bind(data) {
 		rejectUnauthorized: false,
 	});
 
+	console.log("WebSocket", ws)
+
 	ws.on('error', (err) => {
 		console.log(err);
 	});

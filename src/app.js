@@ -401,8 +401,10 @@ const connector = new LCUConnector(freezer.get().configfile.pathdiscovery ? unde
 const api = require('./lcu-api');
 
 connector.on('connect', (data) => {
-    console.log("client found");
-    api.bind(data);
+    console.log("client found", data);
+    setTimeout(function() {
+        api.bind(data);
+    }, 5000); // wamp takes a while to initialize
 });
 
 connector.on('disconnect', () => {

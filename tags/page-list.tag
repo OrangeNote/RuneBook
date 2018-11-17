@@ -45,7 +45,7 @@
       <div class="ui image">
         <div each={ index in [0,1,2,3,4,5,6,7,8] } class="ui circular icon button tooltip page-list-tooltip" style="margin: 0; padding: 0; background-color: transparent; cursor: default;"
         data-html={findTooltip(page, index)}>
-          <img draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{page.selectedPerkIds[index] || "qm"}.png>
+          <img draggable="false" class="ui mini circular image" src=./img/runesReforged/perk/{(page.selectedPerkIds[index] && page.selectedPerkIds[index] !== -1) ? page.selectedPerkIds[index] : "qm"}.png>
         </div>
       </div>
       <div class="middle aligned content"><i class={ page.isValid === false ? "red warning sign icon" : "" }></i> {key}</div>

@@ -252,6 +252,12 @@ freezer.on('page:upload', (champion, page) => {
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {
 			console.log("api delete current page", res);
 
+			// stat shards check
+			page_data = freezer.get().current.champ_data.pages[page].toJS();
+			if(!page_data.selectedPerkIds[6] && !page_data.selectedPerkIds[7] && !page_data.selectedPerkIds[8]) {
+				page_data.selectedPerkIds = page_data.selectedPerkIds.concat([5008, 5002, 5003]);
+			}
+
 			api.post("/lol-perks/v1/pages/", page_data).then((res) => {
 				if(!res) {
 					console.log("Error: no response after page upload request.");

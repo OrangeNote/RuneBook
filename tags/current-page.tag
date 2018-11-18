@@ -3,11 +3,11 @@
 	<div class="ui container">
 		<div class="ui horizontal divider"><i1-8n>currentpage.title</i1-8n></div>
 		<div class="ui segment">
-			<div class="ui items">
+			<div class="ui items" if={ !opts.connection.page }>
 				<div class="item">
-					<button class="ui button">Retry</button>
+					<button class="ui button"><i1-8n>currentpage.retry</i1-8n></button>
 					<div class="middle aligned content">
-						<h4 class="ui header" if={ !opts.connection.page }>
+						<h4 class="ui header">
 							<i1-8n>currentpage.unavailable</i1-8n>
 							<div class="sub header"><i1-8n>currentpage.unavailable.subheader1</i1-8n></div>
 							<div class="sub header"><i1-8n>currentpage.unavailable.subheader2</i1-8n></div>

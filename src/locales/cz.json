@@ -37,5 +37,6 @@
   "pagelist.emptyremotepage.subheader": "Nebyly nalezeny stránky nebo je služba dočasně nedostupná.",
   "pagelist.confirmdialog": "Jste si jistý, že chcete odebrat tuto stránku?",
   "settings.experimental": "Experimentální",
-  "settings.darktheme": "Tmavý vzhled"
+  "settings.darktheme": "Tmavý vzhled",
+  "currentpage.retry": "Retry"
 }

@@ -37,5 +37,6 @@
   "pagelist.emptyremotepage.subheader": "Não há páginas ou o serviço esta temporariamente invalido.",
   "pagelist.confirmdialog": "Are you sure you want to delete this page?",
   "settings.experimental": "Experimental",
-  "settings.darktheme": "Dark theme"
+  "settings.darktheme": "Dark theme",
+  "currentpage.retry": "Retry"
 }

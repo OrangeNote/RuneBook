@@ -3,11 +3,18 @@
 	<div class="ui container">
 		<div class="ui horizontal divider"><i1-8n>currentpage.title</i1-8n></div>
 		<div class="ui segment">
-			<h4 class="ui center aligned header" if={ !opts.connection.page }>
-				<i1-8n>currentpage.unavailable</i1-8n>
-				<div class="sub header"><i1-8n>currentpage.unavailable.subheader1</i1-8n></div>
-				<div class="sub header"><i1-8n>currentpage.unavailable.subheader2</i1-8n></div>
-			</h4>
+			<div class="ui items">
+				<div class="item">
+					<button class="ui button">Retry</button>
+					<div class="middle aligned content">
+						<h4 class="ui header" if={ !opts.connection.page }>
+							<i1-8n>currentpage.unavailable</i1-8n>
+							<div class="sub header"><i1-8n>currentpage.unavailable.subheader1</i1-8n></div>
+							<div class="sub header"><i1-8n>currentpage.unavailable.subheader2</i1-8n></div>
+						</h4>
+					</div>
+				</div>
+			</div>
 			<div if={ opts.connection.page } class="ui middle aligned relaxed divided list">
 				<div class="item">
 					<div class="right floated content" data-key={ key }>

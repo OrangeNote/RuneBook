@@ -167,6 +167,22 @@ page-list .ui.button:hover {
 	background: #C7B185;
 }
 
+current-page .ui.button:focus {
+	background: #BD9D5E;
+}
+
+page-list .ui.button:focus {
+	background: #BD9D5E;
+}
+
+current-page .ui.button:active {
+	background: #C7B185;
+}
+
+page-list .ui.button:active {
+	background: #C7B185;
+}
+
 .ui.popup {
 	background: #ffffff;
 	color: #191D24;

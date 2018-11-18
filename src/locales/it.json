@@ -37,5 +37,6 @@
   "pagelist.emptyremotepage.subheader": "Nessuna pagina trovata o servizio temporaneamente non disponibile.",
   "pagelist.confirmdialog": "Sei sicuro di voler eliminare questa pagina?",
   "settings.experimental": "Sperimentale",
-  "settings.darktheme": "Tema scuro"
+  "settings.darktheme": "Tema scuro",
+  "currentpage.retry": "Riprova"
 }

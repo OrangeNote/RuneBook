@@ -182,3 +182,7 @@ ipcMain.on("update:do", (event, arg) => {
         shell.openExternal(`https://github.com/OrangeNote/RuneBook/releases/download/v${latestv}/RuneBook-${latestv}-mac.zip`)
     }
 });
+
+ipcMain.on("content:reload", () => {
+    win.reload();
+});

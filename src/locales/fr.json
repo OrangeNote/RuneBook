@@ -37,5 +37,6 @@
   "pagelist.emptyremotepage.subheader": "Aucune page n'est trouvable ou service temporairement indisponible.",
   "pagelist.confirmdialog": "Êtes-vous sûr de vouloir supprimer cette page?",
   "settings.experimental": "Experimental",
-  "settings.darktheme": "Dark theme"
+  "settings.darktheme": "Dark theme",
+  "currentpage.retry": "Retry"
 }

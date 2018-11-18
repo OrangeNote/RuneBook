@@ -147,6 +147,10 @@ page-list ::-webkit-scrollbar-thumb:hover {
 	color: #d8cfbd;
 }
 
+.middle.aligned.content .ui.header {
+	color: #d8cfbd;
+}
+
 .ui.segment .header .sub.header {
 	color: #d8cfbd;
 }
@@ -164,6 +168,22 @@ current-page .ui.button:hover {
 }
 
 page-list .ui.button:hover {
+	background: #BD9D5E;
+}
+
+current-page .ui.button:focus {
+	background: #71552B;
+}
+
+page-list .ui.button:focus {
+	background: #71552B;
+}
+
+current-page .ui.button:active {
+	background: #BD9D5E;
+}
+
+page-list .ui.button:active {
 	background: #BD9D5E;
 }
 

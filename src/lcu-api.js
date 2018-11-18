@@ -12,6 +12,12 @@ function bind(data) {
 
 	ws.on('error', (err) => {
 		console.log(err);
+		if (err.message.includes('ECONNREFUSED')) {
+			destroy();
+			setTimeout(function () {
+				bind(data);
+			}, 1000);
+		}
 	});
 
 	ws.on('message', (msg) => {
@@ -38,6 +44,7 @@ function bind(data) {
 }
 
 function destroy() {
+	ws.removeEventListener()
 	ws = null;
 }
 

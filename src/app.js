@@ -63,6 +63,10 @@ freezer.on("update:do", () => {
 	ipcRenderer.send('update:do');
 });
 
+freezer.on("content:reload", () => {
+	ipcRenderer.send('content:reload');
+})
+
 freezer.on("changelog:ready", () => {
 	var appVersion = require('electron').remote.app.getVersion();
 	console.log(appVersion, settings.get("changelogversion"))

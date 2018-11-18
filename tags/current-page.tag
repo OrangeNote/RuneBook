@@ -5,7 +5,7 @@
 		<div class="ui segment">
 			<div class="ui items" if={ !opts.connection.page }>
 				<div class="item">
-					<button class="ui button"><i1-8n>currentpage.retry</i1-8n></button>
+					<button class="ui button" onclick={ contentReload }><i1-8n>currentpage.retry</i1-8n></button>
 					<div class="middle aligned content">
 						<h4 class="ui header">
 							<i1-8n>currentpage.unavailable</i1-8n>
@@ -55,6 +55,11 @@
 		downloadCurrentPage(evt) {
 			evt.preventUpdate = true;
 			freezer.emit("currentpage:download");
+		}
+
+		contentReload(evt) {
+			evt.preventUpdate = true;
+			freezer.emit("content:reload");
 		}
 
 	</script>

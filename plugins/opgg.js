@@ -4,15 +4,15 @@ const { upperFirst } = require('lodash');
 
 const url = 'http://www.op.gg/champion/';
 
-const getPerkIdFromImg = $ => (_, elem) =>
-  $(elem)
-    .attr('src')
-    .split('/')
-    .slice(-1)
-    .pop()
-    .split('.')[0];
-
 function extractRunePagesFromElement($, champion, position) {
+  const getPerkIdFromImg = (_, elem) =>
+    $(elem)
+      .attr('src')
+      .split('/')
+      .slice(-1)
+      .pop()
+      .split('.')[0];
+
   return (runePageElement, index) => {
     const stats = $(runePageElement)
       .find('.champion-overview__stats strong')
@@ -23,12 +23,12 @@ function extractRunePagesFromElement($, champion, position) {
 
     const styles = $(runePageElement)
       .find('.champion-overview__data .perk-page .perk-page__item--mark img')
-      .map(getPerkIdFromImg($))
+      .map(getPerkIdFromImg)
       .get();
 
     const selectedPerkIds = $(runePageElement)
       .find('.champion-overview__data .perk-page .perk-page__item--active img')
-      .map(getPerkIdFromImg($))
+      .map(getPerkIdFromImg)
       .get();
 
     return {
@@ -55,6 +55,11 @@ function parsePage($, champion, position) {
   return $("tbody[class*='ChampionKeystoneRune-'] tr")
     .toArray()
     .map(extractRunePagesFromElement($, champion, position));
+}
+
+function parseSinglePage($, champion, position, pageType) {
+  const element = $("tbody[class*='ChampionKeystoneRune-'] tr").get(pageType);
+  return extractRunePagesFromElement($, champion, position)(element, pageType);
 }
 
 function extractPages(html, champion, callback) {
@@ -103,7 +108,7 @@ function _getPages(champion, callback) {
       });
     } else {
       callback(runePages);
-      throw new Error('Rune page not loaded');
+      throw Error('rune page not loaded');
     }
   });
 }
@@ -112,14 +117,27 @@ const plugin = {
   id: 'opgg',
   name: 'OP.GG',
   active: true,
-  bookmarks: false, // todo
-
+  bookmarks: true,
   getPages(champion, callback) {
     _getPages(champion, callback);
+  },
+  syncBookmark(bookmark, callback) {
+    request.get(bookmark.src, (error, response, html) => {
+      if (!error && response.statusCode == 200) {
+        const position = bookmark.src.split('/').pop();
+        callback(
+          parseSinglePage(
+            cheerio.load(html),
+            bookmark.meta.champion,
+            position,
+            bookmark.meta.pageType
+          )
+        );
+      } else {
+        throw Error('rune page not loaded');
+      }
+    });
   }
-  // ...
 };
 
 module.exports = { plugin };
-
-_getPages('Aatrox', response => console.log(JSON.stringify(response)));

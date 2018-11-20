@@ -19,7 +19,7 @@ function extractRunePagesFromElement($, champion, position) {
       .map((i, elem) => $(elem).text())
       .get();
 
-    const name = `${champion} ${upperFirst(position)} PR ${stats[0]} WR ${stats[1]}`;
+    const name = `${champion} ${upperFirst(position)} PR${stats[0]} WR${stats[1]}`;
 
     const styles = $(runePageElement)
       .find('.champion-overview__data .perk-page .perk-page__item--mark img')
@@ -81,17 +81,21 @@ function extractPages(html, champion, callback) {
 
   positions.splice(positions.indexOf(initialPosition), 1);
 
-  positions.forEach((position, index) => {
-    const opggUrl = url + champion + '/statistics/' + position;
-    request.get(opggUrl, (error, response, newHtml) => {
-      if (!error && response.statusCode === 200) {
-        pages = pages.concat(parsePage(cheerio.load(newHtml), champion, position));
-        if (index === positions.length - 1) {
-          callback(pages);
+  if (positions.length) {
+    positions.forEach((position, index) => {
+      const opggUrl = url + champion + '/statistics/' + position;
+      request.get(opggUrl, (error, response, newHtml) => {
+        if (!error && response.statusCode === 200) {
+          pages = pages.concat(parsePage(cheerio.load(newHtml), champion, position));
+          if (index === positions.length - 1) {
+            callback(pages);
+          }
         }
-      }
+      });
     });
-  });
+  } else {
+    callback(pages);
+  }
 }
 
 function _getPages(champion, callback) {

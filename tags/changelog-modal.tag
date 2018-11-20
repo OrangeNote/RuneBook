@@ -8,30 +8,18 @@
     <div class="scrolling content">
       <img class="ui fluid rounded image" src="./img/backdrop.png">
       <h3>Greetings, Summoner!</h3>
-      <p>This community-driven update contains small quality of life improvements. A big thank you <i class="icon blue heart"></i> to contributors on <a href="https://github.com/OrangeNote/RuneBook/network">GitHub</a> and to the community on <a href="https://discord.gg/hN4kP7n">Discord</a> for its suggestions!</p>
-      <p>Here is a list of notable changes:</p>
-      <h4 class="ui header">Localization
-        <div class="sub header">Thanks to everyone who taught RuneBook how to speak:</div></h4>
-      <ul>
-        <li><i class="de flag"></i>Deutsch</li>
-        <li><i class="gb flag"></i>English</li>
-        <li><i class="es flag"></i>Español</li>
-        <li><i class="fr flag"></i>Français</li>
-        <li><i class="it flag"></i>Italiano</li>
-        <li><i class="hu flag"></i>Magyar</li>
-        <li><i class="pt flag"></i>Português</li>
-        <li><i class="ru flag"></i>Русский</li>
-        <li><i class="tr flag"></i>Türkçe</li>
-      </ul>
-      ... and more to come, because you can still submit new languages! Join us on <a href="https://discord.gg/hN4kP7n">Discord</a> and we'll help you adding your favourite language to RuneBook.
-      <h4>Splash screen</h4>
-      <p>When launching RuneBook, a fancy splash screen with the RuneBook logo appears. No more blank windows!</p>
-      <h4>Remember me</h4>
-      <p>Now RuneBook remembers your preference regarding auto select and your last active tab.
-      Also tabs don't reset to "Local pages" when auto select triggers an update.</p>
+      <p>Is it meta? Preseason is here with the new changes to Runes!</p>
+
+      <h4 class="ui header">Stat shards
+        <div class="sub header">statistics are now independent from the runes you choose</div></h4>
+      <p>Support for stat shards has been added. Note: if you have old pages that don't support stat shards, RuneBook will automatically fill the missing slots with a default set of stat shards (Adaptive Force, Armor, Magic Resist) when you upload them to the client. You can customize them in the client afterwards. Also RuneBook will support external sites as soon they will update their pages. Just give me some time to adapt the plugins to the new data. Preseason is here for a reason, the situation will be unstable for a while :)</p>
+      <h4>Even more languages</h4>
+      <p>The number of languages that RuneBook support is always increasing thanks to <a href="https://discordapp.com/invite/hN4kP7n">our community</a>.</p>
+      <h4>Reconnect issues</h4>
+      <p>A button has been added to quickly reload RuneBook in case it doesn't recognize the League client. I have also pushed a small fix for some connection issues, but I still need to investigate on that to be sure I'm covering all the cases.</p>
       <br><hr><br>
-      <p>That's all! RuneBook is pretty much complete for what it has to offer, but it will always accept small contributions like these and it will still be updated to support the latest game patch.</p>
-      <h4 class="ui header right floated">OrangeNote, 2018-06-12</h4>
+      <p>That's all! Remember RuneBook is pretty much complete for what it has to offer, but it will always accept small contributions like these and it will still be updated to support the latest game patch.</p>
+      <h4 class="ui header right floated">OrangeNote, 2018-11-20</h4>
     </div>
   </div>
 

@@ -25,6 +25,7 @@
                   <div class="item" data-value="fr"><i class="fr flag"></i>Français</div>
                   <div class="item" data-value="it"><i class="it flag"></i>Italiano</div>
                   <div class="item" data-value="hu"><i class="hu flag"></i>Magyar</div>
+                  <div class="item" data-value="pl"><i class="pl flag"></i>Polski</div>
                   <div class="item" data-value="pt"><i class="pt flag"></i>Português</div>
                   <div class="item" data-value="pt_br"><i class="br flag"></i>Português Brasileiro</div>
                   <div class="item" data-value="ru"><i class="ru flag"></i>Русский</div>
@@ -49,7 +50,7 @@
             <input type="checkbox" name="leaguepath" onchange={ togglePathDiscovery } ref="pathdiscovery">
             <label><i1-8n>settings.pathdiscovery</i1-8n></label>
           </div>
-          
+
           <h4 class="ui horizontal divider header">
             <i class="teal arrow alternate circle down outline icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.updates</i1-8n>
           </h4>
@@ -58,7 +59,7 @@
             <button if={ opts.updateready } class="ui teal button update-button" onclick={ doUpdate }><i1-8n>settings.downloadupdate</i1-8n></div>
             <span if={ !opts.updateready }><i1-8n>settings.uptodate</i1-8n></span>
           </div>
-          
+
           <h4 class="ui horizontal divider header">
             <i class="red fire icon" style="padding-right:.5em;font-size:1em"></i><i1-8n>settings.advanced</i1-8n>
           </h4>

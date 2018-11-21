@@ -26,10 +26,19 @@ function extractRunePagesFromElement($, champion, position) {
       .map(getPerkIdFromImg)
       .get();
 
-    const selectedPerkIds = $(runePageElement)
+    // normal runes
+    let selectedPerkIds = $(runePageElement)
       .find('.champion-overview__data .perk-page .perk-page__item--active img')
       .map(getPerkIdFromImg)
       .get();
+
+    // stat shards
+    selectedPerkIds = selectedPerkIds.concat(
+      $(runePageElement)
+        .find('.champion-overview__data .fragment__summary img')
+        .map(getPerkIdFromImg)
+        .get()
+    );
 
     return {
       name,

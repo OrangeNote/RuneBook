@@ -25,7 +25,7 @@
   "currentpage.title": "Página atual",
   "currentpage.unavailable": "A página atual não está disponível.",
   "currentpage.unavailable.subheader1": "Por favor, inicia sessão no cliente do League para acederes às tuas páginas de runas.",
-  "currentpage.unavailable.subheader2": "Se o erro persistir, vai ás tuas definições e muda o caminho do cliemte do League manualmente.",
+  "currentpage.unavailable.subheader2": "Se o erro persistir, vai ás tuas definições e muda o caminho do cliente do League manualmente.",
   "currentpage.downloadcurrentpage": "Importar esta página como local",
   "pagelist.uploadpage": "Enviar esta página para o cliente",
   "pagelist.syncfrom": "Sincronizar de ",
@@ -35,8 +35,8 @@
   "pagelist.emptylocalpage.subheader": "Clica no botão abaixo para importar da tua página atual.",
   "pagelist.emptyremotepage": "Não foi possível encontrar nenhuma página para este champion.",
   "pagelist.emptyremotepage.subheader": "Nenhuma página foi encontrada ou o serviço está temporariamente indisponível.",
-  "pagelist.confirmdialog": "Are you sure you want to delete this page?",
+  "pagelist.confirmdialog": "Tens a certeza que queres remover esta página?",
   "settings.experimental": "Experimental",
-  "settings.darktheme": "Dark theme",
-  "currentpage.retry": "Retry"
+  "settings.darktheme": "Tema Escuro",
+  "currentpage.retry": "Tentar de novo"
 }

@@ -76,7 +76,15 @@ var perksMap = {
 	"Time Warp Tonic":8352,
 	"Hail of Blades":9923,
 	"Ultimate Hunter":8106,
-	"Nimbus Cloak":8275
+	"Nimbus Cloak":8275,
+	"Shield Bash":8401,
+
+	"Scaling Health": 5001,
+	"Armor": 5002,
+	"Magic Resist": 5003,
+	"Attack Speed": 5005,
+	"Scaling Cooldown Reduction": 5007,
+	"Adaptive Force": 5008
 };
 
 function exctractPage(html, champion, rec, callback, pageType) {
@@ -89,16 +97,16 @@ function exctractPage(html, champion, rec, callback, pageType) {
 	var role = $(`li[class^='selected-role'] a[href^='/champion/${champion}']`).first();
 
 	$("div[class*='Description__Title']", slots).each(function(index) {
-		if(index % 8 == 0) {
+		if(index % 11 == 0) {
 			pages.push({
-				"name": $(".champion-profile h1").text() + " " + role.text().trim() + (Math.floor(runecount / 6) ? " HW" : " MF"),
+				"name": $(".champion-profile h1").text() + " " + role.text().trim() + (Math.floor(runecount / 9) ? " HW" : " MF"),
 				"primaryStyleId": -1,
 				"selectedPerkIds": [0, 0, 0, 0, 0, 0],
 				"subStyleId": -1,
 				"bookmark": {
 					"src": url + role.attr("href"),
 					"meta": {
-						"pageType": Math.floor(index / 8),
+						"pageType": Math.floor(index / 11),
 						"champion": champion
 					},
 					"remote": { "name": plugin.name, "id": plugin.id }
@@ -107,18 +115,18 @@ function exctractPage(html, champion, rec, callback, pageType) {
 		}
 		var rune = $(this).text();
 		rune = rune.replace(".png", "");
-
-		if(index % 8 == 0) {
+		console.log(rune)
+		if(index % 11 == 0) {
 			pages[pages.length - 1].primaryStyleId = stylesMap[rune];
 			return;
 		}
-		else if(index % 8 == 5) {
+		else if(index % 11 == 5) {
 			pages[pages.length - 1].subStyleId = stylesMap[rune];
 			return;
 		}
 		else runecount++;
 		
-		pages[pages.length - 1].selectedPerkIds[runecount % 6] = perksMap[rune];
+		pages[pages.length - 1].selectedPerkIds[runecount % 9] = perksMap[rune];
 	});
 
 	if(rec) {

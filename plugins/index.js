@@ -1,7 +1,7 @@
 var isDev = require('electron-is-dev');
 
 if (!isDev) {
-  var plugins = ["local", "runeforge", "championgg", "koreanbuilds", "runeslol", "opgg"];
+  var plugins = ["local", "runeforge", "championgg", "koreanbuilds", "runeslol", "opgg", "ugg"];
 
   var __hasProp = {}.hasOwnProperty;
 

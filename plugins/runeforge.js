@@ -91,7 +91,8 @@ var perksMap = {
 	"Time Warp Tonic":8352,
 	"Hail of Blades":9923,
 	"Ultimate Hunter":8106,
-	"Nimbus Cloak":8275
+	"Nimbus Cloak":8275,
+	"Shield Bash":8401
 };
 
 var shardsMap = {
@@ -102,6 +103,7 @@ var shardsMap = {
 	"shard-cdr": 5007,
 	"shard-af": 5008,
 
+	"shard-armor-1": 5002,
 	"shard-hybrid-2-1": 5002,
 	"shard-hybrid": 5002
 };

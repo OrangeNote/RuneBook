@@ -94,6 +94,18 @@ var perksMap = {
 	"Nimbus Cloak":8275
 };
 
+var shardsMap = {
+	"shard-health": 5001,
+	"shard-armor": 5002,
+	"shard-mr": 5003,
+	"shard-as": 5005,
+	"shard-cdr": 5007,
+	"shard-af": 5008,
+
+	"shard-hybrid-2-1": 5002,
+	"shard-hybrid": 5002
+};
+
 function exctractPage(html, pageUrl) {
 	console.log(pageUrl)
 	var $ = cheerio.load(html);
@@ -110,7 +122,7 @@ function exctractPage(html, pageUrl) {
 	var page = {
 			"name": name,
 			"primaryStyleId": -1,
-			"selectedPerkIds": [0, 0, 0, 0, 0, 0],
+			"selectedPerkIds": [0, 0, 0, 0, 0, 0, 0, 0, 0],
 			"subStyleId": -1,
 			"bookmark": { "src": pageUrl, "remote": { "name": plugin.name, "id": plugin.id } }
 		};
@@ -126,6 +138,20 @@ function exctractPage(html, pageUrl) {
 	for(var i = 0; i < data.length; i++) {
 		page.selectedPerkIds[i] = perksMap[data[i]];
 	}
+
+	var shards = [];
+
+	var shardsPath = $("div.stat-shards").first();
+	$("img", shardsPath).each(function() {
+		var shardLink = $(this).attr("src").split("/");
+		var shardName = shardLink[shardLink.length - 1].replace(".svg", "");
+		shards.push(shardsMap[shardName]);
+	});
+
+	page.selectedPerkIds[6] = shards[0];
+	page.selectedPerkIds[7] = shards[1];
+	page.selectedPerkIds[8] = shards[2];
+
 	console.log(page)
 	return page;
 }

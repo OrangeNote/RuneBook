@@ -75,6 +75,39 @@ const getUGGFormattedLolVersion = lolVer =>
     .splice(0, 2)
     .join('_');
 
+function extractPage(champion) {
+  return (item, key) => {
+    const perksData = item[0][u.stats.perks];
+    const statShards = item[0][u.stats.statShards][u.shards.stats].map(str => parseInt(str, 10));
+
+    const primaryStyleId = perksData[u.perks.mainPerk];
+    const subStyleId = perksData[u.perks.subPerk];
+
+    const selectedPerkIds = sortRunes(perksData[u.perks.perks], primaryStyleId, subStyleId).concat(
+      statShards
+    );
+
+    return {
+      name: `${champion} ${u.positionsReversed[key]}`,
+      primaryStyleId,
+      subStyleId,
+      selectedPerkIds,
+      games: perksData[u.perks.games],
+      bookmark: {
+        src: '',
+        meta: {
+          pageType: key,
+          champion
+        },
+        remote: {
+          name: 'U.GG',
+          id: 'ugg'
+        }
+      }
+    };
+  };
+}
+
 async function getDataSource(champion) {
   try {
     const lolVersions = await getJson(riotVersionEndpoint);
@@ -102,6 +135,18 @@ async function getDataSource(champion) {
   }
 }
 
+async function updateBookmark(champion, pageId, callback) {
+  try {
+    const championStats = await getDataSource(champion);
+    const page = extractPage(championStats[pageId], pageId);
+    delete page.games;
+    callback(page);
+  } catch (e) {
+    callback({});
+    throw Error(e);
+  }
+}
+
 async function _getPages(champion, callback) {
   const runePages = { pages: {} };
   const server = u.servers.world;
@@ -110,25 +155,10 @@ async function _getPages(champion, callback) {
   try {
     const championStats = await getDataSource(champion);
 
-    let totalGames = 0;
-    let pages = map(championStats[server][tier], (item, key) => {
-      const perksData = item[0][u.stats.perks];
-      const statShards = item[0][u.stats.statShards][u.shards.stats].map(str => parseInt(str, 10));
-      const primaryStyleId = perksData[u.perks.mainPerk];
-      const subStyleId = perksData[u.perks.subPerk];
-      const selectedPerkIds = sortRunes(perksData[u.perks.perks], primaryStyleId, subStyleId).concat(statShards);
-      const gamesPlayed = perksData[u.perks.games];
+    let pages = map(championStats[server][tier], extractPage(champion));
+    let totalGames = pages.reduce((total, current) => (total += current.games), 0);
 
-      totalGames += gamesPlayed;
-
-      return {
-        name: `${champion} ${u.positionsReversed[key]}`,
-        primaryStyleId,
-        subStyleId,
-        selectedPerkIds,
-        games: perksData[u.perks.games]
-      };
-    }).filter(page => {
+    pages = pages.filter(page => {
       const positionPercentage = page.games / totalGames;
       delete page.games;
       return positionPercentage > 0.1;
@@ -149,9 +179,12 @@ const plugin = {
   id: 'ugg',
   name: 'U.GG',
   active: true,
-  bookmarks: false,
+  bookmarks: true,
   getPages(champion, callback) {
     _getPages(champion, callback);
+  },
+  syncBookmark(bookmark, callback) {
+    updateBookmark(bookmark.meta.champion, bookmark.meta.pageType, callback);
   }
 };
 

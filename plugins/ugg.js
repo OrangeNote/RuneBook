@@ -1,5 +1,5 @@
-const request = require('request');
 const { map } = require('lodash');
+const { getJson, sortRunes } = require('./utils');
 
 // U.GG API consts
 // data[servers][tiers][positions][0][stats][perks/shards]
@@ -62,7 +62,7 @@ const u = {
   }
 };
 
-// KEY CONSTS - UPDATE THESE ACCORDING TO GUIDE (which is not done btw)
+// KEY CONSTS - UPDATE THESE ACCORDING TO GUIDE https://gist.github.com/paolostyle/fe8ce06313d3e53c134a24762b9e519c
 const uGGDataVersion = '1.2';
 const uGGAPIVersion = '1.1';
 
@@ -75,98 +75,74 @@ const getUGGFormattedLolVersion = lolVer =>
     .splice(0, 2)
     .join('_');
 
-// this is actually a goddamn callback hell
-function getDataSource(champion, callback) {
-  request.get(riotVersionEndpoint, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const lolVersions = JSON.parse(body);
+async function getDataSource(champion) {
+  try {
+    const lolVersions = await getJson(riotVersionEndpoint);
+    const uGGStatsVersions = await getJson(uGGDataVersionsEndpoint);
 
-      let lolVersion = lolVersions[0];
-      let lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
+    let lolVersion = lolVersions[0];
+    let lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
 
-      request.get(uGGDataVersionsEndpoint, (error1, response1, body1) => {
-        if (!error1 && response1.statusCode === 200) {
-          const uGGStatsVersions = JSON.parse(body1);
-
-          // it might be too early for u.gg to have stats, in that case use previous patch data
-          if (!uGGStatsVersions[lolVersionUGG]) {
-            lolVersion = lolVersions[1];
-            lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
-          }
-
-          const overviewVersion = uGGStatsVersions[lolVersionUGG].overview;
-
-          request.get(
-            `https://static.u.gg/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`,
-            (error2, response2, body2) => {
-              if (!error2 && response2.statusCode === 200) {
-                const championData = JSON.parse(body2);
-                const championId = championData.data[champion].key;
-
-                request.get(
-                  `https://stats.u.gg/lol/${uGGAPIVersion}/overview/${lolVersionUGG}/ranked_solo_5x5/${championId}/${overviewVersion}.json`,
-                  (error3, response3, body3) => {
-                    if (!error3 && response3.statusCode === 200) {
-                      callback(JSON.parse(body3));
-                    } else {
-                      callback(null);
-                      throw Error('rune page not loaded');
-                    }
-                  }
-                );
-              } else {
-                callback(null);
-                throw Error('rune page not loaded');
-              }
-            }
-          );
-        } else {
-          callback(null);
-          throw Error('rune page not loaded');
-        }
-      });
-    } else {
-      callback(null);
-      throw Error('rune page not loaded');
+    if (!uGGStatsVersions[lolVersionUGG]) {
+      lolVersion = lolVersions[1];
+      lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
     }
-  });
+
+    const overviewVersion = uGGStatsVersions[lolVersionUGG].overview;
+
+    const championDataUrl = `https://static.u.gg/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`;
+    const championData = await getJson(championDataUrl);
+    const championId = championData.data[champion].key;
+
+    const championStatsUrl = `https://stats.u.gg/lol/${uGGAPIVersion}/overview/${lolVersionUGG}/ranked_solo_5x5/${championId}/${overviewVersion}.json`;
+
+    return getJson(championStatsUrl);
+  } catch (e) {
+    throw Error(e);
+  }
 }
 
-function _getPages(champion, callback) {
+async function _getPages(champion, callback) {
   const runePages = { pages: {} };
+  const server = u.servers.world;
+  const tier = u.tiers.platPlus;
 
-  getDataSource(champion, data => {
-    if (data) {
-      const pages = map(data[u.servers.world][u.tiers.platPlus], (item, key) => {
-        const perksData = item[0][u.stats.perks];
-        const statShards = item[0][u.stats.statShards][u.shards.stats].map(str => parseInt(str, 10));
-        const selectedPerkIds = perksData[u.perks.perks].concat(statShards);
+  try {
+    const championStats = await getDataSource(champion);
 
-        return {
-          name: `${champion} ${u.positionsReversed[key]}`,
-          primaryStyleId: perksData[u.perks.mainPerk],
-          subStyleId: perksData[u.perks.subPerk],
-          selectedPerkIds,
-          // usageStats: {
-          //   games: perksData[u.perks.games],
-          //   won: perksData[u.perks.won]
-          // }
-        };
-      });
+    let totalGames = 0;
+    let pages = map(championStats[server][tier], (item, key) => {
+      const perksData = item[0][u.stats.perks];
+      const statShards = item[0][u.stats.statShards][u.shards.stats].map(str => parseInt(str, 10));
+      const primaryStyleId = perksData[u.perks.mainPerk];
+      const subStyleId = perksData[u.perks.subPerk];
+      const selectedPerkIds = sortRunes(perksData[u.perks.perks], primaryStyleId, subStyleId).concat(statShards);
+      const gamesPlayed = perksData[u.perks.games];
 
-      console.log(pages);
+      totalGames += gamesPlayed;
 
-      // todo filter out bad roles
+      return {
+        name: `${champion} ${u.positionsReversed[key]}`,
+        primaryStyleId,
+        subStyleId,
+        selectedPerkIds,
+        games: perksData[u.perks.games]
+      };
+    }).filter(page => {
+      const positionPercentage = page.games / totalGames;
+      delete page.games;
+      return positionPercentage > 0.1;
+    });
 
-      pages.forEach(page => {
-        runePages.pages[page.name] = page;
-      });
-      callback(runePages);
-    } else {
-      callback(runePages);
-      throw Error('rune page not loaded');
-    }
-  });
+    pages.forEach(page => {
+      runePages.pages[page.name] = page;
+    });
+
+    callback(runePages);
+  } catch (e) {
+    callback(runePages);
+    throw Error(e);
+  }
 }
 
 const plugin = {

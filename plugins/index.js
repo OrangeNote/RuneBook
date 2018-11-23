@@ -26,7 +26,7 @@ else {
   collectExports = function(file) {
     var func, include, _results, name;
 
-    if (path.extname(file) === '.js' && file !== 'index.js') {
+    if (path.extname(file) === '.js' && file !== 'index.js' && file !== 'utils.js') {
       include = require('./' + file);
       name = path.basename(file, '.js');
       _results = [];

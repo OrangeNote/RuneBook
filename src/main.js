@@ -166,7 +166,7 @@ autoUpdater.on('update-downloaded', () => {
     win.webContents.send('update:downloaded');
     dialog.showMessageBox({
         title: 'Install update',
-        message: 'Update downloaded, RuneBook will be quit for update...'
+        message: 'Update downloaded, RuneBook will quit for update...'
     }, () => {
         setImmediate(() => autoUpdater.quitAndInstall())
     })

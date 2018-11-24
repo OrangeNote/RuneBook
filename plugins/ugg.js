@@ -69,6 +69,9 @@ const uGGAPIVersion = '1.1';
 const riotVersionEndpoint = 'https://ddragon.leagueoflegends.com/api/versions.json';
 const uGGDataVersionsEndpoint = 'https://u.gg/json/new_ugg_versions/' + uGGDataVersion + '.json';
 
+const server = u.servers.world;
+const tier = u.tiers.platPlus;
+
 const getUGGFormattedLolVersion = lolVer =>
   lolVer
     .split('.')
@@ -138,8 +141,9 @@ async function getDataSource(champion) {
 async function updateBookmark(champion, pageId, callback) {
   try {
     const championStats = await getDataSource(champion);
-    const page = extractPage(championStats[pageId], pageId);
+    const page = extractPage(champion)(championStats[server][tier][pageId], pageId);
     delete page.games;
+    console.log(page);
     callback(page);
   } catch (e) {
     callback({});
@@ -149,8 +153,6 @@ async function updateBookmark(champion, pageId, callback) {
 
 async function _getPages(champion, callback) {
   const runePages = { pages: {} };
-  const server = u.servers.world;
-  const tier = u.tiers.platPlus;
 
   try {
     const championStats = await getDataSource(champion);

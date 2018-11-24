@@ -1,7 +1,7 @@
 var isDev = require('electron-is-dev');
 
 if (!isDev) {
-  var plugins = ["local", "runeforge", "championgg", "koreanbuilds", "runeslol", "opgg"];
+  var plugins = ["local", "runeforge", "championgg", "koreanbuilds", "runeslol", "opgg", "ugg"];
 
   var __hasProp = {}.hasOwnProperty;
 
@@ -26,7 +26,7 @@ else {
   collectExports = function(file) {
     var func, include, _results, name;
 
-    if (path.extname(file) === '.js' && file !== 'index.js') {
+    if (path.extname(file) === '.js' && file !== 'index.js' && file !== 'utils.js') {
       include = require('./' + file);
       name = path.basename(file, '.js');
       _results = [];

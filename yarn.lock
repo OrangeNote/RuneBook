@@ -3759,6 +3759,7 @@ request-promise-core@1.1.1:
 request-promise-native@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/request-promise-native/-/request-promise-native-1.0.5.tgz#5281770f68e0c9719e5163fd3fab482215f4fda5"
+  integrity sha1-UoF3D2jgyXGeUWP9P6tIIhX0/aU=
   dependencies:
     request-promise-core "1.1.1"
     stealthy-require "^1.1.0"

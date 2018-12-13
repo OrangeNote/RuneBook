@@ -35,7 +35,7 @@ function extractRunePagesFromElement($, champion, position) {
     // stat shards
     selectedPerkIds = selectedPerkIds.concat(
       $(runePageElement)
-        .find('.champion-overview__data .fragment__summary img')
+        .find('.champion-overview__data .fragment-page img.active')
         .map(getPerkIdFromImg)
         .get()
     );

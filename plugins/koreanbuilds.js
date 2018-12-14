@@ -16,11 +16,12 @@ function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 
 	var pages = [];
 	var runecount = -1;
-	var slots = $("div[class^=perk-itm]");
+	var slots = $("div[class^=perk-itm], div[class^=statperk]");
 
 
 	$("img[src^='//statics.koreanbuilds.net/perks/']", slots).each(function(index) {
-		if(index % 8 == 0) {
+		console.log(index)
+		if(index % 11 == 0) {
 			pages.push({
 				"name": champObj.name + " " + role + " BC "+ $('#circle-big').text(),
 				"primaryStyleId": -1,
@@ -45,7 +46,7 @@ function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 		var secondary = $('#reforged-secondary .perk-img-c').attr("src");
 		secondary = secondary.replace("//statics.koreanbuilds.net/perk-types/", "");
 		secondary = secondary.replace(".png", "");
-		if(index % 6 == 0) {
+		if(index % 9 == 0) {
 			pages[pages.length - 1].primaryStyleId = stylesMap[primary];
 			pages[pages.length - 1].subStyleId = stylesMap[secondary];
 		}

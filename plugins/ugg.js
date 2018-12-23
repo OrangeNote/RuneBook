@@ -130,7 +130,7 @@ async function getDataSource(champion) {
     const championData = await getJson(championDataUrl);
     const championId = championData.data[champion].key;
 
-    const championStatsUrl = `https://stats.u.gg/lol/${uGGAPIVersion}/overview/${lolVersionUGG}/ranked_solo_5x5/${championId}/${overviewVersion}.json`;
+    const championStatsUrl = `https://stats2.u.gg/lol/${uGGAPIVersion}/overview/${lolVersionUGG}/ranked_solo_5x5/${championId}/${overviewVersion}.json`;
 
     return getJson(championStatsUrl);
   } catch (e) {
@@ -143,7 +143,6 @@ async function updateBookmark(champion, pageId, callback) {
     const championStats = await getDataSource(champion);
     const page = extractPage(champion)(championStats[server][tier][pageId], pageId);
     delete page.games;
-    console.log(page);
     callback(page);
   } catch (e) {
     callback({});

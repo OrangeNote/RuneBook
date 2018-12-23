@@ -63,7 +63,7 @@
 
     findTooltip(page, index) {
       if(!opts.tooltips.rune) return;
-      var tooltip = opts.tooltips.rune.find((el) => el.id === page.selectedPerkIds[index]);
+      var tooltip = opts.tooltips.rune.find((el) => el.id === parseInt(page.selectedPerkIds[index]));
       return '<b>' + tooltip.name + '</b><br>' + tooltip.longDesc;
     }
 

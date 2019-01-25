@@ -93,7 +93,7 @@ freezer.on('version:set', (ver) => {
 });
 
 freezer.on('api:connected', () => {
-	api.get("/lol-login/v1/session").then((res) => {
+	api.get("/lol-summoner/v1/current-summoner").then((res) => {
 		updateConnectionData();
 		if(!res) {
 			console.log("no session response");
@@ -303,12 +303,11 @@ freezer.on('currentpage:download', () => {
 	});
 });
 
-freezer.on('/lol-login/v1/session:Update', (session) => {
+freezer.on('/lol-summoner/v1/current-summoner:Update', (summoner) => {
 	var state = freezer.get();
-	console.log("session", session.connected, session.state);
 
-	state.session.set({ connected: session.connected, state: session.state });
-	if(!session.connected) {
+	state.session.set({ connected: true, state: null });
+	if(!summoner.summonerLevel) {
 		freezer.get().connection.set({ page: null, summonerLevel: 0 });
 	}
 	else {

@@ -126,7 +126,8 @@ async function getDataSource(champion) {
 
     const overviewVersion = uGGStatsVersions[lolVersionUGG].overview;
 
-    const championDataUrl = `https://static.u.gg/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`;
+    const championDataUrl = `https://u.gg/assets/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`;
+
     const championData = await getJson(championDataUrl);
     const championId = championData.data[champion].key;
 

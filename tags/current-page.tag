@@ -33,7 +33,7 @@
 
 					
 					<div class="middle aligned content">
-						<i class={ opts.connection.page ? (!opts.connection.page.isEditable || opts.connection.summonerLevel < 15 ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
+						<i class={ opts.connection.page ? (!opts.connection.page.isEditable || opts.connection.summonerLevel < 10 ? "lock icon" : (opts.connection.page.isValid ? "" : "red warning sign icon")) : "" }></i> {opts.connection.page ? opts.connection.page.name : ""}
 					</div>
 				</div>
 			</div>

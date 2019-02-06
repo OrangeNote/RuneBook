@@ -250,7 +250,7 @@ freezer.on('page:upload', (champion, page) => {
 	page_data.current = true;
 
 	console.log("page.id, page.isEditable", state.connection.page.id, state.connection.page.isEditable);
-	if(state.connection.page.id && state.connection.page.isEditable && state.connection.summonerLevel >= 15) {
+	if(state.connection.page.id && state.connection.page.isEditable && state.connection.summonerLevel >= 10) {
 		freezer.off('/lol-perks/v1/currentpage:Update');
 		freezer.get().lastuploadedpage.set({ champion, page, loading: true });
 		api.del("/lol-perks/v1/pages/" + freezer.get().connection.page.id).then((res) => {

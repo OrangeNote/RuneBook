@@ -35,8 +35,8 @@
   "pagelist.emptylocalpage.subheader": "Clique no botão abaixo para importar sua página atual.",
   "pagelist.emptyremotepage": "Não foi possível localizar páginas para este campeão.",
   "pagelist.emptyremotepage.subheader": "Não há páginas ou o serviço esta temporariamente invalido.",
-  "pagelist.confirmdialog": "Are you sure you want to delete this page?",
+  "pagelist.confirmdialog": "Você tem certeza que deseja apagar esta página?",
   "settings.experimental": "Experimental",
-  "settings.darktheme": "Dark theme",
-  "currentpage.retry": "Retry"
+  "settings.darktheme": "Tema Escuro",
+  "currentpage.retry": "Tente novamente"
 }

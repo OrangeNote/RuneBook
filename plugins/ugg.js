@@ -114,17 +114,11 @@ function extractPage(champion) {
 async function getDataSource(champion) {
   try {
     const lolVersions = await getJson(riotVersionEndpoint);
-    const uGGStatsVersions = await getJson(uGGDataVersionsEndpoint);
 
     let lolVersion = lolVersions[0];
     let lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
 
-    if (!uGGStatsVersions[lolVersionUGG]) {
-      lolVersion = lolVersions[1];
-      lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
-    }
-
-    const overviewVersion = "1.2.5"; // uGGStatsVersions[lolVersionUGG].overview;
+    const overviewVersion = "1.2.5";
     
     const championDataUrl = `https://static.u.gg/assets/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`;
 

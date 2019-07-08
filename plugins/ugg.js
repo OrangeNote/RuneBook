@@ -118,7 +118,7 @@ async function getDataSource(champion) {
     let lolVersion = lolVersions[0];
     let lolVersionUGG = getUGGFormattedLolVersion(lolVersion);
 
-    const overviewVersion = "1.2.5";
+    const overviewVersion = "1.2.6";
     
     const championDataUrl = `https://static.u.gg/assets/lol/riot_static/${lolVersion}/data/en_US/champion/${champion}.json`;
 

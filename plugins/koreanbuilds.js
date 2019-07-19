@@ -11,6 +11,11 @@ var stylesMap = {
 	"8400":8300
 };
 
+var shardsMap = {
+	"5003": 5008,
+	"5008": 5003
+}
+
 function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 	var $ = cheerio.load(html);
 
@@ -40,6 +45,7 @@ function extractPage(html, champObj, champion, role, rec, callback, pageType) {
 		var rune = $(this).attr("src");
 		rune = rune.replace("//statics.koreanbuilds.net/perks/", "");
 		rune = rune.replace(".png", "");
+		rune = shardsMap[rune] ? shardsMap[rune] : rune;
 		var primary = $('#reforged-primary .perk-img-c').attr("src");
 		primary = primary.replace("//statics.koreanbuilds.net/perk-types/", "");
 		primary = primary.replace(".png", "");

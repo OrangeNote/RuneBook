@@ -1,15 +1,5 @@
-![Fiddle demo](https://github.com/OrangeNote/RuneBook/raw/master/docs/swain_demo.png)  
-![Kennen demo](https://github.com/OrangeNote/RuneBook/raw/master/docs/kennen_demo.gif)  
-> *The runes decide my path.* - Ryze, the Rune Mage
-
-Greetings, Summoner!
-RuneBook is ready to use and constantly updated. Please try the app and let me know what you think: any feedback is welcome!
-
-# Download
-You can find the [latest release here](https://github.com/OrangeNote/RuneBook/releases/latest).  
-
-# Minisite
-Features, downloads, and other resources can be found [at the minisite](https://orangenote.github.io/RuneBook)
+# This repo is now read-only
+You can fork this project to continue the development of RuneBook. The original author no longer maintains the app.
 
 # Acknowledgements
 Thanks to...

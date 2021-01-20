@@ -1,5 +1,5 @@
 # This repo is now read-only
-You can fork this project to continue the development of RuneBook. The original author no longer maintains the app.
+The original author no longer maintains the app. An updated fork of this repo [can be found here](https://github.com/Soundofdarkness/RuneBook). Credits to [@Soundofdarkness](https://github.com/Soundofdarkness) and [@Rerago](https://github.com/Rerago) among [other contributors](https://github.com/Soundofdarkness/RuneBook/graphs/contributors) for keeping this project alive.
 
 # Acknowledgements
 Thanks to...
